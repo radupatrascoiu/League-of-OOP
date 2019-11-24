@@ -8,19 +8,21 @@ public class GameInput {
     private int numberOfLines = 0;
     private int numberOfColumns = 0;
     private final char[][] map;
+    private final char[][] moves;
     private int numberOfHeroes;
     private List<Character> heroes;
-    private List<Direction> heroesPositions;
+    private List<LocationHistory> locationHistories;
     private int numberOfRounds;
 
-    public GameInput(int numberOfLines, int numberOfColumns, char[][] map, int numberOfHeroes, List<Character> heroes, List<Direction> heroesPositions, int numberOfRounds) {
+    public GameInput(int numberOfLines, int numberOfColumns, char[][] map, int numberOfHeroes, List<Character> heroes, List<LocationHistory> locationHistories, int numberOfRounds, char[][] moves) {
         this.numberOfLines = numberOfLines;
         this.numberOfColumns = numberOfColumns;
         this.map = map;
         this.numberOfHeroes = numberOfHeroes;
         this.heroes = heroes;
-        this.heroesPositions = heroesPositions;
+        this.locationHistories = locationHistories;
         this.numberOfRounds = numberOfRounds;
+        this.moves = moves;
     }
 
     public int getNumberOfLines() {
@@ -43,12 +45,16 @@ public class GameInput {
         return heroes;
     }
 
-    public List<Direction> getHeroesPositions() {
-        return heroesPositions;
+    public List<LocationHistory> getLocationHistories() {
+        return locationHistories;
     }
 
     public int getNumberOfRounds() {
         return numberOfRounds;
+    }
+
+    public char[][] getMoves() {
+        return moves;
     }
 
     @Override
@@ -57,9 +63,10 @@ public class GameInput {
                 "numberOfLines=" + numberOfLines +
                 ", numberOfColumns=" + numberOfColumns +
                 ", map=" + Arrays.toString(map) +
+                ", moves=" + Arrays.toString(moves) +
                 ", numberOfHeroes=" + numberOfHeroes +
                 ", heroes=" + heroes +
-                ", heroesPositions=" + heroesPositions +
+                ", locationHistories=" + locationHistories +
                 ", numberOfRounds=" + numberOfRounds +
                 '}';
     }

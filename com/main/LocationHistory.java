@@ -1,21 +1,12 @@
 package com.main;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Direction {
+public class LocationHistory {
     private int x;
     private int y;
-    private List<Character> direction;
 
-    public Direction(int x, int y) {
+    public LocationHistory(int x, int y) {
         this.x = x;
         this.y = y;
-        direction = new ArrayList<>();
-    }
-
-    public List<Character> getDirection() {
-        return direction;
     }
 
     public int getX() {
@@ -36,7 +27,7 @@ public class Direction {
 
     @Override
     public String toString() {
-        return "Direction{" +
+        return "LocationHistory{" +
                 "x=" + x +
                 ", y=" + y +
                 '}';
