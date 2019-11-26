@@ -13,10 +13,12 @@ public class Wizard extends Hero {
     private int hp;
     private Drain drainAttack;
     private Deflect deflectAttack;
+    private int damageReceived;
 
     public Wizard(LocationHistory locationHistory) {
         super(locationHistory);
         this.hp = Constants.WIZARD_HP;
+        this.damageReceived = 0;
     }
 
     @Override
@@ -44,6 +46,22 @@ public class Wizard extends Hero {
     @Override
     public int getHp() {
         return this.hp;
+    }
+
+    @Override
+    public void increaseDamage(int damageReceived) {
+        this.damageReceived += damageReceived;
+    }
+
+    @Override
+    public void calculateHp() {
+        this.hp -= this.damageReceived;
+        System.out.println("Hp ramas = " + this.hp);
+    }
+
+    @Override
+    public void setDamageReceived(int damageReceived) {
+        this.damageReceived = damageReceived;
     }
 
     @Override
@@ -85,7 +103,7 @@ public class Wizard extends Hero {
 
     @Override
     public void accept(Skill skill) {
-
+        skill.visit(this);
     }
 
     @Override
@@ -95,5 +113,10 @@ public class Wizard extends Hero {
                 ", location: x = " + getLocationHistory().getX() +
                 ", y = " + getLocationHistory().getY() +
                 '}';
+    }
+
+    @Override
+    public String displayRace() {
+        return "W";
     }
 }

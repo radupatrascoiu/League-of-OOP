@@ -11,10 +11,12 @@ import skills.Skill;
 public class Fireblast implements Skill {
     private int baseDamage;
     private int baseDamagePerLevel;
+    private Pyromancer pyromancer;
 
     public Fireblast(Pyromancer pyromancer) {
+        this.pyromancer = pyromancer;
         this.baseDamagePerLevel = Constants.FIREBLAST_DAMAGE_PER_LEVER *
-                pyromancer.getLevel();
+                this.pyromancer.getLevel();
         this.baseDamage = Constants.FIREBLAST_BASE_DAMAGE +
                 this.baseDamagePerLevel;
 
@@ -30,21 +32,33 @@ public class Fireblast implements Skill {
 
     @Override
     public void visit(Pyromancer pyromancer) {
-
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.pyromancer.getLandModifier());
+        int totalDamage = Math.round(levelLandDamage *
+                Constants.FIREBLAST_VS_PYROMANCER_MODIFIER);
     }
 
     @Override
     public void visit(Knight knight) {
-
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.pyromancer.getLandModifier());
+        int totalDamage = Math.round(levelLandDamage *
+                Constants.FIREBLAST_VS_KNIGHT_MODIFIER);
     }
 
     @Override
     public void visit(Wizard wizard) {
-
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.pyromancer.getLandModifier());
+        int totalDamage = Math.round(levelLandDamage *
+                Constants.FIREBLAST_VS_WIZARD_MODIFIER);
     }
 
     @Override
     public void visit(Rogue rogue) {
-
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.pyromancer.getLandModifier());
+        int totalDamage = Math.round(levelLandDamage *
+                Constants.FIREBLAST_VS_ROGUE_MODIFIER);
     }
 }

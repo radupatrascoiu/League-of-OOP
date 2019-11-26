@@ -13,10 +13,12 @@ public class Pyromancer extends Hero {
     private int hp;
     private Fireblast fireblastAttack;
     private Ignite igniteAttack;
+    private int damageReceived;
 
     public Pyromancer(LocationHistory locationHistory) {
         super(locationHistory);
         this.hp = Constants.PYROMANCER_HP;
+        this.damageReceived = 0;
     }
 
     @Override
@@ -42,8 +44,24 @@ public class Pyromancer extends Hero {
     }
 
     @Override
+    public void increaseDamage(int damageReceived) {
+        this.damageReceived += damageReceived;
+    }
+
+    @Override
+    public void calculateHp() {
+        this.hp -= this.damageReceived;
+        System.out.println("Hp ramas = " + this.hp);
+    }
+
+    @Override
     public int getHp() {
         return this.hp;
+    }
+
+    @Override
+    public void setDamageReceived(int damageReceived) {
+        this.damageReceived = damageReceived;
     }
 
     @Override
@@ -85,7 +103,7 @@ public class Pyromancer extends Hero {
 
     @Override
     public void accept(Skill skill) {
-
+        skill.visit(this);
     }
 
     @Override
@@ -95,5 +113,10 @@ public class Pyromancer extends Hero {
                 ", location: x = " + getLocationHistory().getX() +
                 ", y = " + getLocationHistory().getY() +
                 '}';
+    }
+
+    @Override
+    public String displayRace() {
+        return "P";
     }
 }

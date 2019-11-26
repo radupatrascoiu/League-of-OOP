@@ -2,16 +2,19 @@ package main;
 
 
 
+import fileio.implementations.FileWriter;
 import heroes.Hero;
 import heroes.HeroFactory;
 import map.MapSingleton;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 	    GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
 	    GameInput gameInput = gameInputLoader.load();
         int numberOfLines =  gameInput.getNumberOfLines(); // numar linii harte
@@ -27,7 +30,7 @@ public class Main {
         System.out.println(numberOfLines + " " + numberOfColumns);
 
         for(char i = 0; i < numberOfLines; ++i) {
-            System.out.println(map.getMap()[i]);
+            System.out.println(MapSingleton.getInstance().getMap()[i]);
         }
 
         System.out.println(numberOfHeroes);
@@ -63,16 +66,52 @@ public class Main {
 //            System.out.println(gameInfo.getMoves()[i]);
 //        }
 
+
         for(char i = 0; i < numberOfRounds; ++i) {
             for(char j = 0; j < numberOfHeroes; ++j) {
                 heroesList.get(j).move(moves[i][j]);
 //                System.out.println("Runda " + (int)i + ", "+ heroesList.get(j));
             }
+
+            for(char j = 0; j < numberOfHeroes - 1; ++j) {
+                if(GameLogic.existsConflict(heroesList.get(j), heroesList.get(j+1))) {
+//                    System.out.println("Lupta la runda " + (int)i + " intre " + heroesList.get(j) + " si " + heroesList.get(j+1));
+                    heroesList.get(j).play();
+                    heroesList.get(j+1).play();
+
+                }
+            }
+
+            for(char j = 0; j < numberOfHeroes; ++j) {
+                heroesList.get(j).calculateHp();
+                heroesList.get(j).setDamageReceived(0);
+            }
         }
 
-        for(Hero hero : heroesList) {
-            System.out.println(hero);
+
+        FileWriter fileWriter = new FileWriter(args[1]);
+        for(int i = 0; i < numberOfHeroes; ++i) {
+
+            fileWriter.writeWord(heroesList.get(i).displayRace());
+            fileWriter.writeWord(" ");
+            fileWriter.writeInt(heroesList.get(i).getLevel());
+            fileWriter.writeWord(" ");
+            fileWriter.writeInt(heroesList.get(i).getXp());
+            fileWriter.writeWord(" ");
+            fileWriter.writeInt(heroesList.get(i).getHp());
+            fileWriter.writeWord(" ");
+            fileWriter.writeInt(heroesList.get(i).getLocationHistory().getX());
+            fileWriter.writeWord(" ");
+            fileWriter.writeInt(heroesList.get(i).getLocationHistory().getY());
+            fileWriter.writeNewLine();
         }
+        fileWriter.writeNewLine();
+
+        fileWriter.close();
+
+        
+
+
 
 
 

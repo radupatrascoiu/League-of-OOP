@@ -10,12 +10,14 @@ public abstract class Hero {
     private int level;
     private int hp;
     private LocationHistory locationHistory;
+    private int damageReceived;
 
     public Hero(LocationHistory locationHistory) {
         this.xp = Constants.INITIAL_XP;
         this.level = Constants.INITIAL_LEVEL;
         this.locationHistory = locationHistory;
         this.hp = 0;
+        this.damageReceived = 0;
     }
 
     public abstract void play(); // fac actiunea specifica jucatorului; imi dau seama ce visitor sa apelez
@@ -73,6 +75,12 @@ public abstract class Hero {
     public void levelUp() {
     }
 
+    public abstract void increaseDamage(int damageReceived);
+
+    public abstract void calculateHp();
+
+    public abstract void setDamageReceived(int damageReceived);
+
     public void increaseXp(Hero hero) {
         // this.hero va fi eroul care va castiga batalia
         this.xp += Math.max(0, Constants.XP_FORMULA_1 -
@@ -89,4 +97,6 @@ public abstract class Hero {
                 ", locationHistory=" + locationHistory +
                 '}';
     }
+
+    public abstract String displayRace();
 }

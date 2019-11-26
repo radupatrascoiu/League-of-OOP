@@ -8,10 +8,12 @@ import skills.Skill;
 public class Slam implements Skill {
     private int baseDamage;
     private int baseDamagePerLevel;
+    private Knight knight;
 
     public Slam(Knight knight) {
+        this.knight = knight;
         this.baseDamagePerLevel = Constants.SLAM_BASE_DAMAGE_PER_LEVEL *
-                knight.getLevel();
+                this.knight.getLevel();
         this.baseDamage = Constants.SLAM_BASE_DAMAGE +
                 this.baseDamagePerLevel;
 
@@ -33,21 +35,41 @@ public class Slam implements Skill {
 
     @Override
     public void visit(Pyromancer pyromancer) {
-
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.knight.getLandModifier());
+        int totalDamage = Math.round(levelLandDamage *
+                Constants.SLAM_VS_PYROMANCER_MODIFIER);
     }
 
     @Override
     public void visit(Knight knight) {
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.knight.getLandModifier());
+        int totalDamage = Math.round(levelLandDamage *
+                Constants.SLAM_VS_KNIGHT_MODIFIER);
+        System.out.println("Slam Damage total dat = " + totalDamage);
+        knight.increaseDamage(totalDamage);
 
     }
 
     @Override
     public void visit(Wizard wizard) {
-
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.knight.getLandModifier());
+        int totalDamage = Math.round(levelLandDamage *
+                Constants.SLAM_VS_WIZARD_MODIFIER);
     }
 
     @Override
     public void visit(Rogue rogue) {
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.knight.getLandModifier());
+        int totalDamage = Math.round(levelLandDamage *
+                Constants.SLAM_VS_ROGUE_MODIFIER);
+    }
 
+    @Override
+    public String toString() {
+        return "Slam";
     }
 }

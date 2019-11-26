@@ -13,10 +13,12 @@ public class Knight extends Hero {
     private int hp;
     private Execute executeAttack;
     private Slam slamAttack;
+    private int damageReceived;
 
     public Knight(LocationHistory locationHistory) {
         super(locationHistory);
         this.hp = Constants.KNIGHT_HP;
+        this.damageReceived = 0;
     }
 
     @Override
@@ -80,6 +82,11 @@ public class Knight extends Hero {
         //TODO
         //TODO
         //TODO
+//        System.out.println("Knight ataca");
+        this.executeAttack = new Execute(this);
+        this.slamAttack = new Slam(this);
+        accept(this.executeAttack);
+        accept(this.slamAttack);
 
     }
 
@@ -88,7 +95,25 @@ public class Knight extends Hero {
 
     @Override
     public void accept(Skill skill) {
+        System.out.println("Accept skillul " + skill);
         skill.visit(this);
+    }
+
+
+    @Override
+    public void increaseDamage(int damageReceived) {
+        this.damageReceived += damageReceived;
+    }
+
+    @Override
+    public void calculateHp() {
+        this.hp -= this.damageReceived;
+        System.out.println("Hp ramas = " + this.hp);
+    }
+
+    @Override
+    public void setDamageReceived(int damageReceived) {
+        this.damageReceived = damageReceived;
     }
 
     @Override
@@ -98,5 +123,10 @@ public class Knight extends Hero {
                 ", location: x = " + getLocationHistory().getX() +
                 ", y = " + getLocationHistory().getY() +
                 '}';
+    }
+
+    @Override
+    public String displayRace() {
+        return "K";
     }
 }

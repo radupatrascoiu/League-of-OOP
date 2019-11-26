@@ -13,10 +13,12 @@ public class Rogue extends Hero {
     private int hp;
     private Backstab backstabAttack;
     private Paralysis paralysisAttack;
+    private int damageReceived;
 
     public Rogue(LocationHistory locationHistory) {
         super(locationHistory);
         this.hp = Constants.ROGUE_HP;
+        this.damageReceived = 0;
     }
 
     @Override
@@ -43,7 +45,29 @@ public class Rogue extends Hero {
 
     @Override
     public int getHp() {
-        return this.getHp();
+//        return this.getHp();
+        //TODO
+        //TODO
+        //TODO
+        //TODO
+
+        return 0;
+    }
+
+    @Override
+    public void increaseDamage(int damageReceived) {
+        this.damageReceived += damageReceived;
+    }
+
+    @Override
+    public void calculateHp() {
+        this.hp -= this.damageReceived;
+        System.out.println("Hp ramas = " + this.hp);
+    }
+
+    @Override
+    public void setDamageReceived(int damageReceived) {
+        this.damageReceived = damageReceived;
     }
 
     @Override
@@ -85,7 +109,7 @@ public class Rogue extends Hero {
 
     @Override
     public void accept(Skill skill) {
-
+        skill.visit(this);
     }
 
     @Override
@@ -95,5 +119,10 @@ public class Rogue extends Hero {
                 ", location: x = " + getLocationHistory().getX() +
                 ", y = " + getLocationHistory().getY() +
                 '}';
+    }
+
+    @Override
+    public String displayRace() {
+        return "R";
     }
 }
