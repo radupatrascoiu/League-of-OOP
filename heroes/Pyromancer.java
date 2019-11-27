@@ -7,6 +7,7 @@ import map.MapSingleton;
 import skills.PyromancerSkills.Fireblast;
 import skills.PyromancerSkills.Ignite;
 import skills.Skill;
+import skills.Effects;
 
 public class Pyromancer extends Hero {
 
@@ -14,11 +15,32 @@ public class Pyromancer extends Hero {
     private Fireblast fireblastAttack;
     private Ignite igniteAttack;
     private int damageReceived;
+    private int priority;
 
     public Pyromancer(LocationHistory locationHistory) {
         super(locationHistory);
         this.hp = Constants.PYROMANCER_HP;
         this.damageReceived = 0;
+        this.priority = Constants.PYROMANCER_PRIORITY;
+    }
+
+    @Override
+    public int getDamageReceived() {
+        return damageReceived;
+    }
+
+    @Override
+    public void setDamageReceived(int damageReceived) {
+        this.damageReceived = damageReceived;
+    }
+
+    @Override
+    public Effects getEffects() {
+        return super.getEffects();
+    }
+
+    public int getPriority() {
+        return priority;
     }
 
     @Override
@@ -36,22 +58,40 @@ public class Pyromancer extends Hero {
     }
 
     @Override
-    public void play() {
+    public void play(Hero hero) {
         //TODO
         //TODO
         //TODO
-
+        System.out.println("Pyromancer ataca...");
+        this.fireblastAttack = new Fireblast(this);
+        this.igniteAttack = new Ignite(this);
+        hero.accept(this.fireblastAttack);
+        hero.accept(this.igniteAttack);
     }
 
+
+
+
     @Override
-    public void increaseDamage(int damageReceived) {
-        this.damageReceived += damageReceived;
+    public void increaseDamage(int totalDmageReceived, Hero hero) { // trebuie sa retin cat damage da
+//        System.out.println("Damage Pyromancer total vechi = " + this.getEffects().getTotalDamage());
+//        this.getEffects().setTotalDamage(this.getEffects().getTotalDamage() + totalDamageReceived);
+//        this.getEffects().setLevelLandDamage(this.getEffects().getLevelLandDamage() + levelLandDamageReceived);
+//        System.out.println("Damage Pyromancer total nou = " + this.getEffects().getTotalDamage());
+        this.damageReceived += totalDmageReceived;
+        System.out.println("Pyromancer - daune suferite = " + this.damageReceived);
+
     }
 
     @Override
     public void calculateHp() {
-        this.hp -= this.damageReceived;
-        System.out.println("Hp ramas = " + this.hp);
+        this.hp -= damageReceived;
+//        System.out.println("Damage total primit de Pyromancer este = " + this.getEffects().getTotalDamage());
+        System.out.println("Pyromancer hp ramas = " + this.hp);
+//        if(this.hp < 0) {
+//            System.out.println("mort");
+//            super.getAttacker().levelUp(this);
+//        }
     }
 
     @Override
@@ -60,36 +100,39 @@ public class Pyromancer extends Hero {
     }
 
     @Override
-    public void setDamageReceived(int damageReceived) {
-        this.damageReceived = damageReceived;
-    }
+    public void levelUp(Hero loser) { // ??????????????
 
-    @Override
-    public void levelUp() {
-        int xpLevelUp = Constants.XP + super.getLevel() * Constants.XP_MULTIPLICATOR;
-        int futureLevel = super.getLevel();
+        super.increaseXp(loser);
+        System.out.println(this.getXp());
 
-        if(xpLevelUp >= Constants.XP_LEVEL_1) {
-            futureLevel++;
-            this.hp += Constants.PYROMANCER_HP_INCREASE_PER_LEVEL;
+//        int xpLevelUp = Constants.XP + super.getLevel() * Constants.XP_MULTIPLICATOR;
+        int xpLevelUp = this.getXp() + super.getLevel() * Constants.XP_MULTIPLICATOR;
+
+        if(this.getXp() >= Constants.XP_LEVEL_1) {
+            setLevel(1);
+            this.hp = this.getMaxHp();
+
         }
 
-        if(xpLevelUp >= Constants.XP_LEVEL_2) {
-            futureLevel++;
-            this.hp += Constants.PYROMANCER_HP_INCREASE_PER_LEVEL;
+        if(this.getXp() >= Constants.XP_LEVEL_2) {
+            setLevel(2);
+            this.hp = this.getMaxHp();
+
         }
 
-        if(xpLevelUp >= Constants.XP_LEVEL_3) {
-            futureLevel++;
-            this.hp += Constants.PYROMANCER_HP_INCREASE_PER_LEVEL;
+        if(this.getXp() >= Constants.XP_LEVEL_3) {
+            setLevel(3);
+            this.hp = this.getMaxHp();
+
         }
 
-        if(xpLevelUp >= Constants.XP_LEVEL_4) {
-            futureLevel++;
-            this.hp += Constants.PYROMANCER_HP_INCREASE_PER_LEVEL;
+        if(this.getXp() >= Constants.XP_LEVEL_4) {
+            setLevel(4);
+            this.hp = this.getMaxHp();
         }
 
-        super.setLevel(futureLevel);
+        System.out.println("level actual = " + getLevel());
+
     }
 
     @Override
@@ -98,11 +141,12 @@ public class Pyromancer extends Hero {
             return Constants.VOLCANIC_MODIFIER;
         }
 
-        return 1;
+        return 1f;
     }
 
     @Override
     public void accept(Skill skill) {
+//        System.out.println("Pyromancer accepta skillul " + skill);
         skill.visit(this);
     }
 

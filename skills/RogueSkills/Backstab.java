@@ -55,4 +55,9 @@ public class Backstab implements Skill {
     public void visit(Rogue rogue) {
 
     }
+
+    @Override
+    public String toString() {
+        return "Backstab";
+    }
 }

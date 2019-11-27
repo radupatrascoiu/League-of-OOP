@@ -39,6 +39,12 @@ public class Slam implements Skill {
                 this.knight.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
                 Constants.SLAM_VS_PYROMANCER_MODIFIER);
+        System.out.println("Slam Damage total dat = " + totalDamage);
+        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+        pyromancer.increaseDamage(totalDamage, this.knight);
+
     }
 
     @Override
@@ -48,7 +54,10 @@ public class Slam implements Skill {
         int totalDamage = Math.round(levelLandDamage *
                 Constants.SLAM_VS_KNIGHT_MODIFIER);
         System.out.println("Slam Damage total dat = " + totalDamage);
-        knight.increaseDamage(totalDamage);
+        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+        knight.increaseDamage(totalDamage, this.knight);
 
     }
 
@@ -58,6 +67,13 @@ public class Slam implements Skill {
                 this.knight.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
                 Constants.SLAM_VS_WIZARD_MODIFIER);
+        System.out.println("Slam Damage total dat = " + totalDamage);
+//        knight.increaseDamage(totalDamage);
+        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        System.out.println("Slam Damage fara Race = " + levelLandDamage);
+        this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+        wizard.increaseDamage(totalDamage, this.knight);
     }
 
     @Override

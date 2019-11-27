@@ -33,12 +33,17 @@ public class Execute implements Skill {
     }
 
     @Override
-    public void visit(Pyromancer pyromancer) {
+    public void visit(Pyromancer pyromancer) { // trebuie sa retin cat damage da //TODO
         // trebuie sa fac cumva sa vad cat e damage ul cu Race !!! --> poate sa schimb in int
         int levelLandDamage = Math.round(this.baseDamage *
                 this.knight.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
                 Constants.EXECUTE_VS_PYROMANCER_MODIFIER);
+        System.out.println("Execute Damage total dat = " + totalDamage);
+        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+        pyromancer.increaseDamage(totalDamage, this.knight);
 
     }
 
@@ -49,7 +54,12 @@ public class Execute implements Skill {
         int totalDamage = Math.round(levelLandDamage *
                 Constants.EXECUTE_VS_KNIGHT_MODIFIER);
         System.out.println("Execute Damage total dat = " + totalDamage);
-        knight.increaseDamage(totalDamage);
+//        knight.increaseDamage(totalDamage);
+        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+        knight.increaseDamage(totalDamage, this.knight);
+
     }
 
     @Override
@@ -58,6 +68,13 @@ public class Execute implements Skill {
                 this.knight.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
                 Constants.EXECUTE_VS_WIZARD_MODIFIER);
+        System.out.println("Execute Damage total dat = " + totalDamage);
+//        knight.increaseDamage(totalDamage);
+        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        System.out.println("Execute Damage fara Race = " + levelLandDamage);
+        this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+        wizard.increaseDamage(totalDamage, this.knight);
     }
 
     @Override

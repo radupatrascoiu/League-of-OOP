@@ -68,23 +68,35 @@ public class Main {
 
 
         for(char i = 0; i < numberOfRounds; ++i) {
+
+            System.out.println("---------- Runda " + (int)i + " ----------");
             for(char j = 0; j < numberOfHeroes; ++j) {
                 heroesList.get(j).move(moves[i][j]);
 //                System.out.println("Runda " + (int)i + ", "+ heroesList.get(j));
             }
 
-            for(char j = 0; j < numberOfHeroes - 1; ++j) {
-                if(GameLogic.existsConflict(heroesList.get(j), heroesList.get(j+1))) {
-//                    System.out.println("Lupta la runda " + (int)i + " intre " + heroesList.get(j) + " si " + heroesList.get(j+1));
-                    heroesList.get(j).play();
-                    heroesList.get(j+1).play();
-
+            for(char j = 0; j < numberOfHeroes; ++j) {
+                for(char k = 0; k < numberOfColumns; ++k) {
+                    if(GameLogic.existsConflict(heroesList.get(j), heroesList.get(k)) && j != k) {
+                        if(heroesList.get(j).getHp() < 0 || heroesList.get(k).getHp() < 0) {
+                            continue; // daca un jucator e mort, mergi mai departe
+                        }
+                        if(heroesList.get(j).getPriority() >= heroesList.get(k).getPriority()) {
+                            heroesList.get(j).play(heroesList.get(k));
+                            heroesList.get(k).play(heroesList.get(j));
+                        } else {
+                            heroesList.get(k).play(heroesList.get(j));
+                            heroesList.get(j).play(heroesList.get(k));
+                        }
+                    }
                 }
             }
 
             for(char j = 0; j < numberOfHeroes; ++j) {
                 heroesList.get(j).calculateHp();
                 heroesList.get(j).setDamageReceived(0);
+                heroesList.get(j).getEffects().setTotalDamage(0);
+                heroesList.get(j).getEffects().setLevelLandDamage(0);
             }
         }
 
@@ -94,15 +106,19 @@ public class Main {
 
             fileWriter.writeWord(heroesList.get(i).displayRace());
             fileWriter.writeWord(" ");
-            fileWriter.writeInt(heroesList.get(i).getLevel());
-            fileWriter.writeWord(" ");
-            fileWriter.writeInt(heroesList.get(i).getXp());
-            fileWriter.writeWord(" ");
-            fileWriter.writeInt(heroesList.get(i).getHp());
-            fileWriter.writeWord(" ");
-            fileWriter.writeInt(heroesList.get(i).getLocationHistory().getX());
-            fileWriter.writeWord(" ");
-            fileWriter.writeInt(heroesList.get(i).getLocationHistory().getY());
+            if(heroesList.get(i).getHp() <= 0) {
+                fileWriter.writeWord("dead");
+            } else {
+                fileWriter.writeInt(heroesList.get(i).getLevel());
+                fileWriter.writeWord(" ");
+                fileWriter.writeInt(heroesList.get(i).getXp());
+                fileWriter.writeWord(" ");
+                fileWriter.writeInt(heroesList.get(i).getHp());
+                fileWriter.writeWord(" ");
+                fileWriter.writeInt(heroesList.get(i).getLocationHistory().getX());
+                fileWriter.writeWord(" ");
+                fileWriter.writeInt(heroesList.get(i).getLocationHistory().getY());
+            }
             fileWriter.writeNewLine();
         }
         fileWriter.writeNewLine();

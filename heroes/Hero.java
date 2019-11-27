@@ -3,6 +3,7 @@ package heroes;
 
 import common.Constants;
 import main.LocationHistory;
+import skills.Effects;
 import skills.Skill;
 
 public abstract class Hero {
@@ -10,17 +11,46 @@ public abstract class Hero {
     private int level;
     private int hp;
     private LocationHistory locationHistory;
+    private int priority;
+    private Effects effects;
     private int damageReceived;
+    private Hero attacker;
+
+    public Hero getAttacker() {
+        return attacker;
+    }
+
+    public void setAttacker(Hero attacker) {
+        this.attacker = attacker;
+    }
 
     public Hero(LocationHistory locationHistory) {
         this.xp = Constants.INITIAL_XP;
         this.level = Constants.INITIAL_LEVEL;
         this.locationHistory = locationHistory;
         this.hp = 0;
+        this.priority = 100;
+        effects = new Effects();
         this.damageReceived = 0;
     }
 
-    public abstract void play(); // fac actiunea specifica jucatorului; imi dau seama ce visitor sa apelez
+    public int getDamageReceived() {
+        return damageReceived;
+    }
+
+    public void setDamageReceived(int damageReceived) {
+        this.damageReceived = damageReceived;
+    }
+
+    public Effects getEffects() {
+        return effects;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public abstract void play(Hero hero); // fac actiunea specifica jucatorului; imi dau seama ce visitor sa apelez
 
     public LocationHistory getLocationHistory() {
         return locationHistory;
@@ -72,19 +102,18 @@ public abstract class Hero {
         return 0;
     }
 
-    public void levelUp() {
-    }
+    public abstract void levelUp(Hero loser);
 
-    public abstract void increaseDamage(int damageReceived);
+    public abstract void increaseDamage(int damageReceived, Hero hero);
 
     public abstract void calculateHp();
 
-    public abstract void setDamageReceived(int damageReceived);
+//    public abstract void setDamageReceived(int damageReceived);
 
     public void increaseXp(Hero hero) {
         // this.hero va fi eroul care va castiga batalia
         this.xp += Math.max(0, Constants.XP_FORMULA_1 -
-                (this.xp - hero.getXp()) * Constants.XP_FORMULA_2_);
+                (this.xp - hero.getXp()) * Constants.XP_FORMULA_2);
     }
 
     public abstract void accept(Skill skill);

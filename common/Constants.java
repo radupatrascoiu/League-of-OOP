@@ -18,7 +18,7 @@ public class Constants {
     public static final int ROGUE_HP = 600;
     public static final int ROGUE_HP_INCREASE_PER_LEVEL = 40;
     public static final int XP_FORMULA_1 = 200;
-    public static final int XP_FORMULA_2_= 40;
+    public static final int XP_FORMULA_2= 40;
     public static final int FIREBLAST_BASE_DAMAGE = 350;
     public static final int FIREBLAST_DAMAGE_PER_LEVER = 50;
     public static final int IGNITE_BASE_DAMAGE = 150;
@@ -32,7 +32,7 @@ public class Constants {
     public static final int SLAM_BASE_DAMAGE_PER_LEVEL = 40;
     public static final float DRAIN_PERCENTAGE = 0.2f;
     public static final float DRAIN_PERCENTAGE_PER_LEVEL = 0.05f;
-    public static final float DRAIN_PERCENTAGEE_FORMULA = 0.03f;
+    public static final float DRAIN_PERCENTAGEE_FORMULA = 0.3f;
     public static final float DEFLECT_PERCENTAGE = 0.35f;
     public static final float DEFLECT_PERCENTAGE_PER_LEVEL = 0.02f;
     public static final int BACKSTAB_BASE_DAMAGE = 200;
@@ -59,6 +59,16 @@ public class Constants {
     public static final float SLAM_VS_KNIGHT_MODIFIER = 1.2f;
     public static final float SLAM_VS_PYROMANCER_MODIFIER = 0.9f;
     public static final float SLAM_VS_WIZARD_MODIFIER = 1.05f;
+    public static final float DEFLECT_VS_PYROMANCER_MODIFIER = 1.3f;
+    public static final float DRAIN_VS_PYROMANCER_MODIFIER = 0.9f;
+    public static final float DRAIN_VS_WIZARD_MODIFIER = 1.05f;
+    public static final float DEFLECT_VS_KNIGHT_MODIFIER = 1.4f;
+    public static final float DRAIN_VS_KNIGHT_MODIFIER = 1.2f;
+    public static final int WIZARD_PRIORITY = 0;
+    public static final int KNIGHT_PRIORITY = 1;
+    public static final int PYROMANCER_PRIORITY = 2;
+    public static final int ROGUE_PRIORITY = 3;
+
 
 
 

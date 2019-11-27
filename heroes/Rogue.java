@@ -1,24 +1,46 @@
 package heroes;
 
 import common.Constants;
-import heroes.Hero;
 import main.LocationHistory;
 import map.MapSingleton;
 import skills.RogueSkills.Backstab;
 import skills.RogueSkills.Paralysis;
 import skills.Skill;
+import skills.Effects;
 
 public class Rogue extends Hero {
 
     private int hp;
     private Backstab backstabAttack;
     private Paralysis paralysisAttack;
+    private int priority;
     private int damageReceived;
+
 
     public Rogue(LocationHistory locationHistory) {
         super(locationHistory);
         this.hp = Constants.ROGUE_HP;
+        this.priority = Constants.ROGUE_PRIORITY;
         this.damageReceived = 0;
+    }
+
+    @Override
+    public int getDamageReceived() {
+        return damageReceived;
+    }
+
+    @Override
+    public void setDamageReceived(int damageReceived) {
+        this.damageReceived = damageReceived;
+    }
+
+    @Override
+    public Effects getEffects() {
+        return super.getEffects();
+    }
+
+    public int getPriority() {
+        return priority;
     }
 
     @Override
@@ -30,7 +52,7 @@ public class Rogue extends Hero {
     }
 
     @Override
-    public void play() {
+    public void play(Hero hero) {
         //TODO
         //TODO
         //TODO
@@ -55,47 +77,56 @@ public class Rogue extends Hero {
     }
 
     @Override
-    public void increaseDamage(int damageReceived) {
+    public void increaseDamage(int damageReceived, Hero hero) {
+//        this.getEffects().setTotalDamage(this.getEffects().getTotalDamage() + totalDamageReceived);
+//        this.getEffects().setLevelLandDamage(this.getEffects().getLevelLandDamage() + levelLandDamageReceived);
         this.damageReceived += damageReceived;
+        System.out.println("Rogue hp ramas = " + this.hp);
+//        if(this.hp < 0) {
+//            System.out.println("mort");
+//            super.getAttacker().levelUp(this);
+//        }
     }
 
     @Override
     public void calculateHp() {
-        this.hp -= this.damageReceived;
-        System.out.println("Hp ramas = " + this.hp);
+        this.hp -= damageReceived;
     }
 
-    @Override
-    public void setDamageReceived(int damageReceived) {
-        this.damageReceived = damageReceived;
-    }
 
     @Override
-    public void levelUp() {
-        int xpLevelUp = Constants.XP + super.getLevel() * Constants.XP_MULTIPLICATOR;
-        int futureLevel = super.getLevel();
+    public void levelUp(Hero loser) {
+        super.increaseXp(loser);
+        System.out.println(this.getXp());
 
-        if(xpLevelUp >= Constants.XP_LEVEL_1) {
-            futureLevel++;
-            this.hp += Constants.ROGUE_HP_INCREASE_PER_LEVEL;
+//        int xpLevelUp = Constants.XP + super.getLevel() * Constants.XP_MULTIPLICATOR;
+        int xpLevelUp = this.getXp() + super.getLevel() * Constants.XP_MULTIPLICATOR;
+        System.out.println("da" + xpLevelUp);
+
+        if(this.getXp() >= Constants.XP_LEVEL_1) {
+            setLevel(1);
+            this.hp = this.getMaxHp();
+
         }
 
-        if(xpLevelUp >= Constants.XP_LEVEL_2) {
-            futureLevel++;
-            this.hp += Constants.ROGUE_HP_INCREASE_PER_LEVEL;
+        if(this.getXp() >= Constants.XP_LEVEL_2) {
+            setLevel(2);
+            this.hp = this.getMaxHp();
+
         }
 
-        if(xpLevelUp >= Constants.XP_LEVEL_3) {
-            futureLevel++;
-            this.hp += Constants.ROGUE_HP_INCREASE_PER_LEVEL;
+        if(this.getXp() >= Constants.XP_LEVEL_3) {
+            setLevel(3);
+            this.hp = this.getMaxHp();
+
         }
 
-        if(xpLevelUp >= Constants.XP_LEVEL_4) {
-            futureLevel++;
-            this.hp += Constants.ROGUE_HP_INCREASE_PER_LEVEL;
+        if(this.getXp() >= Constants.XP_LEVEL_4) {
+            setLevel(4);
+            this.hp = this.getMaxHp();
         }
 
-        super.setLevel(futureLevel);
+        System.out.println("level actual = " + getLevel());
     }
 
     @Override
