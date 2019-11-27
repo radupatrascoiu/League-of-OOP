@@ -89,6 +89,7 @@ public class Paralysis implements Skill {
         int totalDamage = Math.round(levelLandDamage *
                 Constants.PARALYSIS_VS_WIZARD_MODIFIER);
         System.out.println("Paralysis Damage total dat = " + totalDamage);
+        System.out.println("Paralysis Damage fara Race = " + levelLandDamage);
         this.rogue.getEffects().setLevelLandDamage(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage);
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);

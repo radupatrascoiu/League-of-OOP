@@ -54,19 +54,6 @@ public class Main {
             System.out.println(moves[i]);
         }
 
-//        System.out.println("START");
-//        System.out.println();
-//        GameInfo gameInfo = GameInfo.getInstance();
-//        gameInfo.init(gameInputLoader);
-//        for(char i = 0; i < numberOfLines; ++i) {
-//            System.out.println(gameInfo.getMap()[i]);
-//        }
-//
-//        for(char i = 0; i < moves.length; ++i) {
-//            System.out.println(gameInfo.getMoves()[i]);
-//        }
-
-
         for(char i = 0; i < numberOfRounds; ++i) {
 
             System.out.println("---------- Runda " + (int)i + " ----------");
@@ -84,6 +71,9 @@ public class Main {
                     heroesList.get(j).getBuff().setTime(heroesList.get(j).getBuff().getTime() - 1);
                     System.out.println(heroesList.get(j).toString() + heroesList.get(j).getHp());
                     heroesList.get(j).setHp(heroesList.get(j).getHp() - heroesList.get(j).getBuff().getDamageOverTime());
+                    if(heroesList.get(j).getHp() <= 0) {
+                        heroesList.get(j).setDeathOvertime(true);
+                    }
                     System.out.println(heroesList.get(j).toString() + heroesList.get(j).getHp());
                 }
             }
@@ -107,7 +97,9 @@ public class Main {
             }
 
             for(char j = 0; j < numberOfHeroes; ++j) {
-                heroesList.get(j).calculateHp();
+                if(!heroesList.get(j).isDeathOvertime()) {
+                    heroesList.get(j).calculateHp();
+                }
                 heroesList.get(j).setDamageReceived(0);
                 heroesList.get(j).getEffects().setTotalDamage(0);
                 heroesList.get(j).getEffects().setLevelLandDamage(0);

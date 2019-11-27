@@ -87,8 +87,8 @@ public class Backstab implements Skill {
 
     @Override
     public void visit(Wizard wizard) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.rogue.getLandModifier());
+        System.out.println(this.baseDamage);
+
         if(this.rogue.getLandModifier() != 1) {
             if(this.rogue.getEffects().getNumberHits() % 3 == 0) {
                 this.rogue.getEffects().setNumberHits(this.rogue.getEffects()
@@ -97,10 +97,14 @@ public class Backstab implements Skill {
             }
         }
 
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.rogue.getLandModifier() * criticalDamage);
+
         int totalDamage = Math.round(levelLandDamage *
                 Constants.BACKSTAB_VS_WIZARD_MODIFIER);
         totalDamage = Math.round(totalDamage * criticalDamage);
         System.out.println("Backstab Damage total dat = " + totalDamage);
+        System.out.println("Backstab Damage fara Race = " + levelLandDamage);
         this.rogue.getEffects().setLevelLandDamage(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage);
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);

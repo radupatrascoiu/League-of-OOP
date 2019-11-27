@@ -19,6 +19,7 @@ public abstract class Hero {
     protected Hero attacker;
     protected Buff buff;
     protected Stun stun;
+    protected boolean deathOvertime;
 
     public Hero getAttacker() {
         return attacker;
@@ -38,6 +39,15 @@ public abstract class Hero {
         this.damageReceived = 0;
         buff = new Buff();
         stun = new Stun(false, 0);
+        deathOvertime = false;
+    }
+
+    public boolean isDeathOvertime() {
+        return deathOvertime;
+    }
+
+    public void setDeathOvertime(boolean deathOvertime) {
+        this.deathOvertime = deathOvertime;
     }
 
     public void setHp(int hp) {
