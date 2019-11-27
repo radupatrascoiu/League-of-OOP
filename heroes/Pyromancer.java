@@ -11,11 +11,8 @@ import skills.Effects;
 
 public class Pyromancer extends Hero {
 
-    private int hp;
     private Fireblast fireblastAttack;
     private Ignite igniteAttack;
-    private int damageReceived;
-    private int priority;
 
     public Pyromancer(LocationHistory locationHistory) {
         super(locationHistory);
@@ -24,32 +21,6 @@ public class Pyromancer extends Hero {
         this.priority = Constants.PYROMANCER_PRIORITY;
     }
 
-    @Override
-    public int getDamageReceived() {
-        return damageReceived;
-    }
-
-    @Override
-    public void setDamageReceived(int damageReceived) {
-        this.damageReceived = damageReceived;
-    }
-
-    @Override
-    public Effects getEffects() {
-        return super.getEffects();
-    }
-
-    public int getPriority() {
-        return priority;
-    }
-
-    @Override
-    public int getDamageWithoutRaceModifiers() {
-        return super.getDamageWithoutRaceModifiers();
-        //TODO
-        //TODO
-        //TODO
-    }
 
     @Override
     public int getMaxHp() {
@@ -62,6 +33,10 @@ public class Pyromancer extends Hero {
         //TODO
         //TODO
         //TODO
+        if(this.getHp() <= 0 || hero.getHp() <= 0) {
+            System.out.println("Este mort");
+            return;
+        }
         System.out.println("Pyromancer ataca...");
         this.fireblastAttack = new Fireblast(this);
         this.igniteAttack = new Ignite(this);
@@ -70,68 +45,11 @@ public class Pyromancer extends Hero {
     }
 
 
-
-
     @Override
-    public void increaseDamage(int totalDmageReceived, Hero hero) { // trebuie sa retin cat damage da
-//        System.out.println("Damage Pyromancer total vechi = " + this.getEffects().getTotalDamage());
-//        this.getEffects().setTotalDamage(this.getEffects().getTotalDamage() + totalDamageReceived);
-//        this.getEffects().setLevelLandDamage(this.getEffects().getLevelLandDamage() + levelLandDamageReceived);
-//        System.out.println("Damage Pyromancer total nou = " + this.getEffects().getTotalDamage());
+    public void increaseDamage(int totalDmageReceived, Hero hero) {
+        super.setAttacker(hero);
         this.damageReceived += totalDmageReceived;
         System.out.println("Pyromancer - daune suferite = " + this.damageReceived);
-
-    }
-
-    @Override
-    public void calculateHp() {
-        this.hp -= damageReceived;
-//        System.out.println("Damage total primit de Pyromancer este = " + this.getEffects().getTotalDamage());
-        System.out.println("Pyromancer hp ramas = " + this.hp);
-//        if(this.hp < 0) {
-//            System.out.println("mort");
-//            super.getAttacker().levelUp(this);
-//        }
-    }
-
-    @Override
-    public int getHp() {
-        return this.hp;
-    }
-
-    @Override
-    public void levelUp(Hero loser) { // ??????????????
-
-        super.increaseXp(loser);
-        System.out.println(this.getXp());
-
-//        int xpLevelUp = Constants.XP + super.getLevel() * Constants.XP_MULTIPLICATOR;
-        int xpLevelUp = this.getXp() + super.getLevel() * Constants.XP_MULTIPLICATOR;
-
-        if(this.getXp() >= Constants.XP_LEVEL_1) {
-            setLevel(1);
-            this.hp = this.getMaxHp();
-
-        }
-
-        if(this.getXp() >= Constants.XP_LEVEL_2) {
-            setLevel(2);
-            this.hp = this.getMaxHp();
-
-        }
-
-        if(this.getXp() >= Constants.XP_LEVEL_3) {
-            setLevel(3);
-            this.hp = this.getMaxHp();
-
-        }
-
-        if(this.getXp() >= Constants.XP_LEVEL_4) {
-            setLevel(4);
-            this.hp = this.getMaxHp();
-        }
-
-        System.out.println("level actual = " + getLevel());
 
     }
 

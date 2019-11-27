@@ -71,16 +71,30 @@ public class Main {
 
             System.out.println("---------- Runda " + (int)i + " ----------");
             for(char j = 0; j < numberOfHeroes; ++j) {
-                heroesList.get(j).move(moves[i][j]);
-//                System.out.println("Runda " + (int)i + ", "+ heroesList.get(j));
+                if(heroesList.get(j).getStun().isStun()) {
+                    heroesList.get(j).getStun().setTime(heroesList.get(j).getStun().getTime() - 1);
+                    if(heroesList.get(j).getStun().getTime() == 0) {
+                        heroesList.get(j).getStun().setStun(false);
+                    }
+                } else {
+                    heroesList.get(j).move(moves[i][j]);
+                }
+
+                if(heroesList.get(j).getBuff().getTime() != 0) {
+                    heroesList.get(j).getBuff().setTime(heroesList.get(j).getBuff().getTime() - 1);
+                    System.out.println(heroesList.get(j).toString() + heroesList.get(j).getHp());
+                    heroesList.get(j).setHp(heroesList.get(j).getHp() - heroesList.get(j).getBuff().getDamageOverTime());
+                    System.out.println(heroesList.get(j).toString() + heroesList.get(j).getHp());
+                }
             }
 
-            for(char j = 0; j < numberOfHeroes; ++j) {
-                for(char k = 0; k < numberOfColumns; ++k) {
+            for(int j = 0; j < numberOfHeroes; ++j) {
+                for(int k = j+1; k < numberOfHeroes; ++k) {
+
                     if(GameLogic.existsConflict(heroesList.get(j), heroesList.get(k)) && j != k) {
-                        if(heroesList.get(j).getHp() < 0 || heroesList.get(k).getHp() < 0) {
-                            continue; // daca un jucator e mort, mergi mai departe
-                        }
+//                        if(heroesList.get(j).getHp() < 0 || heroesList.get(k).getHp() < 0) {
+//                            continue; // daca un jucator e mort, mergi mai departe
+//                        }
                         if(heroesList.get(j).getPriority() >= heroesList.get(k).getPriority()) {
                             heroesList.get(j).play(heroesList.get(k));
                             heroesList.get(k).play(heroesList.get(j));

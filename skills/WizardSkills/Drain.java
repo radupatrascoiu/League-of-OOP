@@ -86,7 +86,19 @@ public class Drain implements Skill {
 
     @Override
     public void visit(Rogue rogue) {
+        int levelLandDamage = Math.round(this.percentage * this.baseDamage *
+                this.wizard.getLandModifier());
 
+        this.percentage *= Constants.DRAIN_VS_ROGUE_MODIFIER;
+        // se calculeaza din nou, pentru race modifier
+        this.baseDamage = Math.round(this.baseDamage * this.percentage * this.wizard.getLandModifier());
+        int totalDamage = (int)this.baseDamage;
+        System.out.println("Drain Damage total dat = " + totalDamage);
+        this.wizard.getEffects().setLevelLandDamage(this.wizard.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        this.wizard.getEffects().setTotalDamage(this.wizard.getEffects().
+                getTotalDamage() + totalDamage);
+        rogue.increaseDamage(totalDamage, this.wizard);
     }
 
     @Override

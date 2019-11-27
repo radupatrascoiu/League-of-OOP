@@ -50,7 +50,6 @@ public class Ignite implements Skill {
 
     @Override
     public void visit(Pyromancer pyromancer) {
-        //TODO DAMAGE OVERTIME !!!!!!!!!!
         int levelLandDamage = Math.round(this.baseDamage *
                 this.pyromancer.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
@@ -61,12 +60,17 @@ public class Ignite implements Skill {
                 getEffects().getLevelLandDamage() + levelLandDamage);
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
                 getEffects().getTotalDamage() + totalDamage);
+
+        pyromancer.getBuff().setDamageOverTime(Constants.IGNITE_OVERTIME_DAMAGE
+                + this.pyromancer.getLevel() *
+                Constants.IGNITE_OVERTIME_DAMAGE_PER_LEVEL);
+        pyromancer.getBuff().setTime(2);
+
         pyromancer.increaseDamage(totalDamage, this.pyromancer);
     }
 
     @Override
     public void visit(Knight knight) {
-        //TODO DAMAGE OVERTIME !!!!!!!!!!
         int levelLandDamage = Math.round(this.baseDamage *
                 this.pyromancer.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
@@ -77,13 +81,18 @@ public class Ignite implements Skill {
                 getEffects().getLevelLandDamage() + levelLandDamage);
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
                 getEffects().getTotalDamage() + totalDamage);
+
+        knight.getBuff().setDamageOverTime(Constants.IGNITE_OVERTIME_DAMAGE
+                + this.pyromancer.getLevel() *
+                Constants.IGNITE_OVERTIME_DAMAGE_PER_LEVEL);
+        knight.getBuff().setTime(2);
+
         knight.increaseDamage(totalDamage, this.pyromancer);
 
     }
 
     @Override
     public void visit(Wizard wizard) {
-        //TODO DAMAGE OVERTIME !!!!!!!!!!
         int levelLandDamage = Math.round(this.baseDamage *
                 this.pyromancer.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
@@ -95,17 +104,33 @@ public class Ignite implements Skill {
                 getEffects().getTotalDamage() + totalDamage);
         System.out.println("damage fara race: " + levelLandDamage);
 
+        wizard.getBuff().setDamageOverTime(Constants.IGNITE_OVERTIME_DAMAGE
+                + this.pyromancer.getLevel() *
+                Constants.IGNITE_OVERTIME_DAMAGE_PER_LEVEL);
+        wizard.getBuff().setTime(2);
+
         wizard.increaseDamage(totalDamage, this.pyromancer);
 
     }
 
     @Override
     public void visit(Rogue rogue) {
-        //TODO DAMAGE OVERTIME !!!!!!!!!!
         int levelLandDamage = Math.round(this.baseDamage *
                 this.pyromancer.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
                 Constants.IGNITE_VS_ROGUE_MODIFIER);
+        System.out.println("Ignite Damage total dat = " + totalDamage);
+        this.pyromancer.getEffects().setLevelLandDamage(this.pyromancer.
+                getEffects().getLevelLandDamage() + levelLandDamage);
+        this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
+                getEffects().getTotalDamage() + totalDamage);
+
+        rogue.getBuff().setDamageOverTime(Math.round( (Constants.IGNITE_OVERTIME_DAMAGE
+                + this.pyromancer.getLevel() *
+                Constants.IGNITE_OVERTIME_DAMAGE_PER_LEVEL) * Constants.IGNITE_VS_ROGUE_MODIFIER));
+        rogue.getBuff().setTime(2);
+
+        rogue.increaseDamage(totalDamage, this.pyromancer);
     }
 
     @Override

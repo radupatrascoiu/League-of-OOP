@@ -82,6 +82,11 @@ public class Slam implements Skill {
                 this.knight.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
                 Constants.SLAM_VS_ROGUE_MODIFIER);
+        System.out.println("Slam Damage total dat = " + totalDamage);
+        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+        rogue.increaseDamage(totalDamage, this.knight);
     }
 
     @Override

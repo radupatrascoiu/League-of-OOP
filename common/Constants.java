@@ -1,5 +1,7 @@
 package common;
 
+import java.security.PublicKey;
+
 public class Constants {
     public static final int XP = 250;
     public static final int XP_MULTIPLICATOR = 50;
@@ -64,6 +66,16 @@ public class Constants {
     public static final float DRAIN_VS_WIZARD_MODIFIER = 1.05f;
     public static final float DEFLECT_VS_KNIGHT_MODIFIER = 1.4f;
     public static final float DRAIN_VS_KNIGHT_MODIFIER = 1.2f;
+    public static final float BACKSTAB_VS_ROGUE_MODIFIER = 1.2f;
+    public static final float BACKSTAB_VS_KNIGHT_MODIFIER = 0.9f;
+    public static final float BACKSTAB_VS_PYROMANCER_MODIFIER = 1.25f;
+    public static final float BACKSTAB_VS_WIZARD_MODIFIER = 1.25f;
+    public static final float PARALYSIS_VS_ROGUE_MODIFIER = 0.9f;
+    public static final float PARALYSIS_VS_KNIGHT_MODIFIER = 0.8f;
+    public static final float PARALYSIS_VS_PYROMANCER_MODIFIER = 1.2f;
+    public static final float PARALYSIS_VS_WIZARD_MODIFIER = 1.25f;
+    public static final float DEFLECT_VS_ROGUE_MODIFIER = 1.2f;
+    public static final float DRAIN_VS_ROGUE_MODIFIER = 0.8f;
     public static final int WIZARD_PRIORITY = 0;
     public static final int KNIGHT_PRIORITY = 1;
     public static final int PYROMANCER_PRIORITY = 2;

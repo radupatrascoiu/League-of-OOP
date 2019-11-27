@@ -40,7 +40,7 @@ public class Deflect implements Skill {
 //        System.out.println(this.baseDamage);
         int totalDamage = Math.round( levelLandDamage *
                 Constants.DEFLECT_VS_PYROMANCER_MODIFIER);
-        System.out.println("Deflect Damage total dat = " + totalDamage); // nu am aproximare bunaaaaaaaa
+        System.out.println("Deflect Damage total dat = " + totalDamage);
         this.wizard.getEffects().setLevelLandDamage(this.wizard.getEffects().
                 getLevelLandDamage() + levelLandDamage);
         this.wizard.getEffects().setTotalDamage(this.wizard.getEffects().
@@ -55,7 +55,7 @@ public class Deflect implements Skill {
 //        System.out.println(this.baseDamage);
         int totalDamage = Math.round( levelLandDamage *
                 Constants.DEFLECT_VS_KNIGHT_MODIFIER);
-        System.out.println("Deflect Damage total dat = " + totalDamage); // nu am aproximare bunaaaaaaaa
+        System.out.println("Deflect Damage total dat = " + totalDamage);
         this.wizard.getEffects().setLevelLandDamage(this.wizard.getEffects().
                 getLevelLandDamage() + levelLandDamage);
         this.wizard.getEffects().setTotalDamage(this.wizard.getEffects().
@@ -71,7 +71,17 @@ public class Deflect implements Skill {
 
     @Override
     public void visit(Rogue rogue) {
-
+        int levelLandDamage = Math.round(this.baseDamage *
+                this.wizard.getLandModifier());
+//        System.out.println(this.baseDamage);
+        int totalDamage = Math.round( levelLandDamage *
+                Constants.DEFLECT_VS_ROGUE_MODIFIER);
+        System.out.println("Deflect Damage total dat = " + totalDamage);
+        this.wizard.getEffects().setLevelLandDamage(this.wizard.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        this.wizard.getEffects().setTotalDamage(this.wizard.getEffects().
+                getTotalDamage() + totalDamage);
+        rogue.increaseDamage(totalDamage, this.wizard);
     }
 
     @Override

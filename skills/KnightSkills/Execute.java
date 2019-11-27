@@ -33,8 +33,7 @@ public class Execute implements Skill {
     }
 
     @Override
-    public void visit(Pyromancer pyromancer) { // trebuie sa retin cat damage da //TODO
-        // trebuie sa fac cumva sa vad cat e damage ul cu Race !!! --> poate sa schimb in int
+    public void visit(Pyromancer pyromancer) {
         int levelLandDamage = Math.round(this.baseDamage *
                 this.knight.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
@@ -83,6 +82,11 @@ public class Execute implements Skill {
                 this.knight.getLandModifier());
         int totalDamage = Math.round(levelLandDamage *
                 Constants.EXECUTE_VS_ROGUE_MODIFIER);
+        System.out.println("Execute Damage total dat = " + totalDamage);
+        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+        rogue.increaseDamage(totalDamage, this.knight);
     }
 
     @Override

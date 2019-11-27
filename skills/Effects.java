@@ -2,13 +2,23 @@ package skills;
 
 public class Effects {
     private int levelLandDamage;
-    private int criticalDamage;
+    private float criticalDamage;
+    private int numberHits;
     private int totalDamage;
 
     public Effects() {
         this.levelLandDamage = 0;
         this.totalDamage = 0;
-        this.criticalDamage = 0;
+        this.criticalDamage = 1.5f;
+        this.numberHits = 0;
+    }
+
+    public int getNumberHits() {
+        return numberHits;
+    }
+
+    public void setNumberHits(int numberHits) {
+        this.numberHits = numberHits;
     }
 
     public int getLevelLandDamage() {
@@ -19,7 +29,7 @@ public class Effects {
         this.levelLandDamage = levelLandDamage;
     }
 
-    public int getCriticalDamage() {
+    public float getCriticalDamage() {
         return criticalDamage;
     }
 
