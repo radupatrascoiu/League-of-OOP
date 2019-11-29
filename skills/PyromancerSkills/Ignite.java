@@ -22,8 +22,6 @@ public class Ignite implements Skill {
         this.baseDamage = Constants.IGNITE_BASE_DAMAGE +
                 this.baseDamagePerLevel;
 
-        //TODO ?????? overtime-ul
-
         this.damageOvertimePerLevel =
                 Constants.IGNITE_OVERTIME_DAMAGE_PER_LEVEL *
                         this.pyromancer.getLevel();
@@ -32,32 +30,16 @@ public class Ignite implements Skill {
 
     }
 
-    public int getBaseDamage() {
-        return baseDamage;
-    }
-
-    public int getBaseDamagePerLevel() {
-        return baseDamagePerLevel;
-    }
-
-    public int getDamageOvertime() {
-        return damageOvertime;
-    }
-
-    public int getDamageOvertimePerLevel() {
-        return damageOvertimePerLevel;
-    }
-
     @Override
     public void visit(Pyromancer pyromancer) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.pyromancer.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.pyromancer.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.IGNITE_VS_PYROMANCER_MODIFIER);
         System.out.println("Fireblast Damage total dat = " + totalDamage);
 //        pyromancer.increaseDamage(totalDamage);
-        this.pyromancer.getEffects().setLevelLandDamage(this.pyromancer.
-                getEffects().getLevelLandDamage() + levelLandDamage);
+        this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
+                getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
                 getEffects().getTotalDamage() + totalDamage);
 
@@ -71,14 +53,13 @@ public class Ignite implements Skill {
 
     @Override
     public void visit(Knight knight) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.pyromancer.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.pyromancer.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.IGNITE_VS_KNIGHT_MODIFIER);
         System.out.println("Ignite Damage total dat = " + totalDamage);
-//        knight.increaseDamage(totalDamage);
-        this.pyromancer.getEffects().setLevelLandDamage(this.pyromancer.
-                getEffects().getLevelLandDamage() + levelLandDamage);
+        this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
+                getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
                 getEffects().getTotalDamage() + totalDamage);
 
@@ -93,13 +74,13 @@ public class Ignite implements Skill {
 
     @Override
     public void visit(Wizard wizard) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.pyromancer.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.pyromancer.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.IGNITE_VS_WIZARD_MODIFIER);
         System.out.println("Ignite Damage total dat = " + totalDamage);
-        this.pyromancer.getEffects().setLevelLandDamage(this.pyromancer.
-                getEffects().getLevelLandDamage() + levelLandDamage);
+        this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
+                getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
                 getEffects().getTotalDamage() + totalDamage);
         System.out.println("damage fara race: " + levelLandDamage);
@@ -115,17 +96,17 @@ public class Ignite implements Skill {
 
     @Override
     public void visit(Rogue rogue) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.pyromancer.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.pyromancer.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.IGNITE_VS_ROGUE_MODIFIER);
         System.out.println("Ignite Damage total dat = " + totalDamage);
-        this.pyromancer.getEffects().setLevelLandDamage(this.pyromancer.
-                getEffects().getLevelLandDamage() + levelLandDamage);
+        this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
+                getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
                 getEffects().getTotalDamage() + totalDamage);
 
-        rogue.getBuff().setDamageOverTime(Math.round( (Constants.IGNITE_OVERTIME_DAMAGE
+        rogue.getBuff().setDamageOverTime(Math.round((Constants.IGNITE_OVERTIME_DAMAGE
                 + this.pyromancer.getLevel() *
                 Constants.IGNITE_OVERTIME_DAMAGE_PER_LEVEL) * Constants.IGNITE_VS_ROGUE_MODIFIER));
         rogue.getBuff().setTime(2);

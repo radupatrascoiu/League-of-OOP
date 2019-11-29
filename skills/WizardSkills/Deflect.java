@@ -21,18 +21,6 @@ public class Deflect implements Skill {
                 opponentHero.getEffects().getLevelLandDamage());
     }
 
-    public float getBaseDamage() {
-        return baseDamage;
-    }
-
-    public float getPercentage() {
-        return percentage;
-    }
-
-    public float getPercentagePerLevel() {
-        return percentagePerLevel;
-    }
-
     @Override
     public void visit(Pyromancer pyromancer) {
         int levelLandDamage = Math.round(this.baseDamage *

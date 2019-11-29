@@ -19,28 +19,17 @@ public class Paralysis implements Skill {
                 rogue.getLevel();
         this.baseDamage = Constants.PARALYSIS_BASE_DAMAGE +
                 this.baseDamegePerLevel;
-        //TODO: STUN && OVERTIME
-        //TODO
-        //TODO
-    }
-
-    public int getBaseDamage() {
-        return baseDamage;
-    }
-
-    public int getBaseDamegePerLevel() {
-        return baseDamegePerLevel;
     }
 
     @Override
     public void visit(Pyromancer pyromancer) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.rogue.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.rogue.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.PARALYSIS_VS_PYROMANCER_MODIFIER);
         System.out.println("Paralysis Damage total dat = " + totalDamage);
-        this.rogue.getEffects().setLevelLandDamage(this.rogue.getEffects().
-                getLevelLandDamage() + levelLandDamage);
+        this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
+                getLevelLandDamage() + levelLandDamage));
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
 
         if(this.rogue.getLandModifier() == 'W') {
@@ -59,13 +48,13 @@ public class Paralysis implements Skill {
 
     @Override
     public void visit(Knight knight) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.rogue.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.rogue.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.PARALYSIS_VS_KNIGHT_MODIFIER);
         System.out.println("Paralysis Damage total dat = " + totalDamage);
-        this.rogue.getEffects().setLevelLandDamage(this.rogue.getEffects().
-                getLevelLandDamage() + levelLandDamage);
+        this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
+                getLevelLandDamage() + levelLandDamage));
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
 
         if(this.rogue.getLandModifier() == 'W') {
@@ -84,14 +73,14 @@ public class Paralysis implements Skill {
 
     @Override
     public void visit(Wizard wizard) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.rogue.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.rogue.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.PARALYSIS_VS_WIZARD_MODIFIER);
         System.out.println("Paralysis Damage total dat = " + totalDamage);
         System.out.println("Paralysis Damage fara Race = " + levelLandDamage);
-        this.rogue.getEffects().setLevelLandDamage(this.rogue.getEffects().
-                getLevelLandDamage() + levelLandDamage);
+        this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
+                getLevelLandDamage() + levelLandDamage));
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
 
         if(this.rogue.getLandModifier() == 'W') {
@@ -110,13 +99,13 @@ public class Paralysis implements Skill {
 
     @Override
     public void visit(Rogue rogue) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.rogue.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.rogue.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.PARALYSIS_VS_ROGUE_MODIFIER);
         System.out.println("Paralysis Damage total dat = " + totalDamage);
-        this.rogue.getEffects().setLevelLandDamage(this.rogue.getEffects().
-                getLevelLandDamage() + levelLandDamage);
+        this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
+                getLevelLandDamage() + levelLandDamage));
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
 
         if(this.rogue.getLandModifier() == 'W') {

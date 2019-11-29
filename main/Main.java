@@ -29,7 +29,7 @@ public class Main {
 
         System.out.println(numberOfLines + " " + numberOfColumns);
 
-        for(char i = 0; i < numberOfLines; ++i) {
+        for(int i = 0; i < numberOfLines; ++i) {
             System.out.println(MapSingleton.getInstance().getMap()[i]);
         }
 
@@ -50,20 +50,20 @@ public class Main {
         System.out.println(numberOfRounds);
 
 
-        for(char i = 0; i < moves.length; ++i) {
+        for(int i = 0; i < moves.length; ++i) {
             System.out.println(moves[i]);
         }
 
-        for(char i = 0; i < numberOfRounds; ++i) {
+        for(int i = 0; i < numberOfRounds; ++i) {
 
             System.out.println("---------- Runda " + (int)i + " ----------");
-            for(char j = 0; j < numberOfHeroes; ++j) {
+            for(int  j = 0; j < numberOfHeroes; ++j) {
                 if(heroesList.get(j).getStun().isStun()) {
                     heroesList.get(j).getStun().setTime(heroesList.get(j).getStun().getTime() - 1);
                     if(heroesList.get(j).getStun().getTime() == 0) {
                         heroesList.get(j).getStun().setStun(false);
                     }
-                } else {
+                } else if(heroesList.get(j).getHp() > 0){
                     heroesList.get(j).move(moves[i][j]);
                 }
 
@@ -85,6 +85,7 @@ public class Main {
 //                        if(heroesList.get(j).getHp() < 0 || heroesList.get(k).getHp() < 0) {
 //                            continue; // daca un jucator e mort, mergi mai departe
 //                        }
+                        System.out.println(heroesList.get(j).toString());
                         if(heroesList.get(j).getPriority() >= heroesList.get(k).getPriority()) {
                             heroesList.get(j).play(heroesList.get(k));
                             heroesList.get(k).play(heroesList.get(j));
@@ -92,17 +93,42 @@ public class Main {
                             heroesList.get(k).play(heroesList.get(j));
                             heroesList.get(j).play(heroesList.get(k));
                         }
+
+//                        heroesList.get(j).calculateHp();
+//                        heroesList.get(k).calculateHp();
+//
+//                        if (heroesList.get(j).getHp() < 0 || heroesList.get(k).getHp() < 0) {
+//                            if (heroesList.get(j).getHp() < 0){
+//                                heroesList.get(j).setDamageReceived(0);
+//                            } else if (heroesList.get(k).getHp() < 0) {
+//                                heroesList.get(k).setDamageReceived(0);
+//                            }
+//                        }
                     }
                 }
             }
 
-            for(char j = 0; j < numberOfHeroes; ++j) {
-                if(!heroesList.get(j).isDeathOvertime()) {
+            for(int j = 0; j < numberOfHeroes; ++j) {
+
+                if(!heroesList.get(j).isDeathOvertime() || heroesList.get(j).getHp() > 0) {
                     heroesList.get(j).calculateHp();
+                } else {
+                    continue;
                 }
                 heroesList.get(j).setDamageReceived(0);
+
                 heroesList.get(j).getEffects().setTotalDamage(0);
                 heroesList.get(j).getEffects().setLevelLandDamage(0);
+            }
+
+            System.out.println("--------------------------------------------------------------------------------");
+            for(int j = 0; j < numberOfHeroes; ++j) {
+                System.out.println(heroesList.get(j).displayRace() +
+                        " " + heroesList.get(j).getLevel() +
+                        " " + heroesList.get(j).getXp() + " " +
+                        heroesList.get(j).getHp() + " " +
+                        heroesList.get(j).getLocationHistory().getX() +
+                        " " + heroesList.get(j).getLocationHistory().getY());
             }
         }
 

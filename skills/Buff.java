@@ -24,4 +24,12 @@ public class Buff {
     public void setTime(int time) {
         this.time = time;
     }
+
+    @Override
+    public String toString() {
+        return "Buff{" +
+                "damageOverTime=" + damageOverTime +
+                ", time=" + time +
+                '}';
+    }
 }

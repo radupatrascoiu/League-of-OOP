@@ -19,73 +19,75 @@ public class Slam implements Skill {
 
     }
 
-    public int getBaseDamage() {
-        return baseDamage;
-    }
-
-    public int getBaseDamagePerLevel() {
-        return baseDamagePerLevel;
-    }
-
-    public void stun(Hero hero) {
-        //TODO
-        //TODO
-        //TODO
-    }
-
     @Override
     public void visit(Pyromancer pyromancer) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.knight.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.knight.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.SLAM_VS_PYROMANCER_MODIFIER);
         System.out.println("Slam Damage total dat = " + totalDamage);
-        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
-                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage));
         this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+
+        pyromancer.getStun().setStun(true);
+        pyromancer.getStun().setTime(1);
+
         pyromancer.increaseDamage(totalDamage, this.knight);
 
     }
 
     @Override
     public void visit(Knight knight) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.knight.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.knight.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.SLAM_VS_KNIGHT_MODIFIER);
         System.out.println("Slam Damage total dat = " + totalDamage);
-        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
-                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage));
         this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+
+        knight.getStun().setStun(true);
+        knight.getStun().setTime(1);
+
         knight.increaseDamage(totalDamage, this.knight);
 
     }
 
     @Override
     public void visit(Wizard wizard) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.knight.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.knight.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.SLAM_VS_WIZARD_MODIFIER);
         System.out.println("Slam Damage total dat = " + totalDamage);
 //        knight.increaseDamage(totalDamage);
-        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
-                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage));
         System.out.println("Slam Damage fara Race = " + levelLandDamage);
         this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+
+        wizard.getStun().setStun(true);
+        wizard.getStun().setTime(1);
+
         wizard.increaseDamage(totalDamage, this.knight);
     }
 
     @Override
     public void visit(Rogue rogue) {
-        int levelLandDamage = Math.round(this.baseDamage *
-                this.knight.getLandModifier());
+        float levelLandDamage = this.baseDamage *
+                this.knight.getLandModifier();
         int totalDamage = Math.round(levelLandDamage *
                 Constants.SLAM_VS_ROGUE_MODIFIER);
         System.out.println("Slam Damage total dat = " + totalDamage);
-        this.knight.getEffects().setLevelLandDamage(this.knight.getEffects().
-                getLevelLandDamage() + levelLandDamage);
+        this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage));
         this.knight.getEffects().setTotalDamage(this.knight.getEffects().getTotalDamage() + totalDamage);
+
+        rogue.getStun().setStun(true);
+        rogue.getStun().setTime(1);
+
         rogue.increaseDamage(totalDamage, this.knight);
     }
 

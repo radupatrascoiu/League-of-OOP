@@ -8,6 +8,8 @@ import skills.Effects;
 import skills.Skill;
 import skills.Stun;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 public abstract class Hero {
     protected int xp;
     protected int level;
@@ -136,6 +138,7 @@ public abstract class Hero {
         System.out.println("XP = " + xpLevelUp);
 
         if(xpLevelUp >= Constants.XP_LEVEL_1) {
+            this.setDamageReceived(0);
             setLevel(1);
             if(this.hp <= 0) {
                 return;
@@ -145,6 +148,8 @@ public abstract class Hero {
         }
 
         if(xpLevelUp >= Constants.XP_LEVEL_2) {
+            this.setDamageReceived(0);
+
             setLevel(2);
             if(this.hp <= 0) {
                 return;
@@ -154,6 +159,8 @@ public abstract class Hero {
         }
 
         if(xpLevelUp >= Constants.XP_LEVEL_3) {
+            this.setDamageReceived(0);
+
             setLevel(3);
             if(this.hp <= 0) {
                 return;
@@ -163,11 +170,16 @@ public abstract class Hero {
         }
 
         if(xpLevelUp >= Constants.XP_LEVEL_4) {
+            this.setDamageReceived(0);
+
             setLevel(4);
             if(this.hp <= 0) {
                 return;
             }
             this.hp = this.getMaxHp();
+            System.out.println(this.hp);
+            System.out.println(this.getBuff());
+            System.out.println("?????????????????????????????????????????????????");
         }
 
         System.out.println("level actual = " + getLevel());
@@ -178,13 +190,13 @@ public abstract class Hero {
 
     public void calculateHp() {
         this.hp -= damageReceived;
+
         if(this.hp <= 0) {
             System.out.println("Creste XP");
             if(this.getAttacker() != null) {
                 this.getAttacker().levelUp(this);
                 this.setAttacker(null);
             }
-
         }
     }
 
