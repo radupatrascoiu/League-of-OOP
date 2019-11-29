@@ -15,110 +15,126 @@ public class Backstab implements Skill {
     private Rogue rogue;
     private float criticalDamage;
 
-    public Backstab(Rogue rogue) {
+    public Backstab(final Rogue rogue) {
         this.rogue = rogue;
-        this.baseDamagePerLevel = Constants.BACKSTAB_BASE_DAMAGE_PER_LEVEL *
-                rogue.getLevel();
-        this.baseDamage = Constants.BACKSTAB_BASE_DAMAGE +
-                this.baseDamagePerLevel;
+        this.baseDamagePerLevel = Constants.BACKSTAB_BASE_DAMAGE_PER_LEVEL
+                * rogue.getLevel();
+        this.baseDamage = Constants.BACKSTAB_BASE_DAMAGE
+                + this.baseDamagePerLevel;
         this.numberOfHits = 0;
         this.criticalDamage = 1;
 
     }
 
+    /**
+     * @param pyromancer
+     */
     @Override
-    public void visit(Pyromancer pyromancer) {
-        float levelLandDamage = this.baseDamage *
-                this.rogue.getLandModifier();
+    public void visit(final Pyromancer pyromancer) {
+        float levelLandDamage = this.baseDamage
+                * this.rogue.getLandModifier();
 
-        if(this.rogue.getLandModifier() != 1) {
-            if(this.rogue.getEffects().getNumberHits() % 3 == 0) {
+        if (this.rogue.getLandModifier() != 1) {
+            if (this.rogue.getEffects().getNumberHits()
+                    % Constants.CRITICAL_DIVIDER == 0) {
                 this.rogue.getEffects().setNumberHits(this.rogue.getEffects()
                         .getNumberHits() + 1);
                 criticalDamage = this.rogue.getEffects().getCriticalDamage();
             }
         }
 
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.BACKSTAB_VS_PYROMANCER_MODIFIER * criticalDamage);
-//        totalDamage = totalDamage * criticalDamage;
-        System.out.println("Backstab Damage total dat = " + totalDamage);
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.BACKSTAB_VS_PYROMANCER_MODIFIER * criticalDamage);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
-        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
+        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
+                getTotalDamage() + totalDamage);
         pyromancer.increaseDamage(totalDamage, this.rogue);
     }
 
+    /**
+     * @param knight
+     */
     @Override
-    public void visit(Knight knight) {
-        float levelLandDamage = this.baseDamage *
-                this.rogue.getLandModifier();
-        if(this.rogue.getLandModifier() != 1) {
-            if(this.rogue.getEffects().getNumberHits() % 3 == 0) {
+    public void visit(final Knight knight) {
+        float levelLandDamage = this.baseDamage
+                * this.rogue.getLandModifier();
+        if (this.rogue.getLandModifier() != 1) {
+            if (this.rogue.getEffects().getNumberHits()
+                    % Constants.CRITICAL_DIVIDER == 0) {
                 this.rogue.getEffects().setNumberHits(this.rogue.getEffects()
                         .getNumberHits() + 1);
                 criticalDamage = this.rogue.getEffects().getCriticalDamage();
             }
         }
 
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.BACKSTAB_VS_KNIGHT_MODIFIER);
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.BACKSTAB_VS_KNIGHT_MODIFIER);
         totalDamage = Math.round(totalDamage * criticalDamage);
-        System.out.println("Backstab Damage total dat = " + totalDamage);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
-        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
+        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
+                getTotalDamage() + totalDamage);
         knight.increaseDamage(totalDamage, this.rogue);
     }
 
+    /**
+     * @param wizard
+     */
     @Override
-    public void visit(Wizard wizard) {
+    public void visit(final Wizard wizard) {
         System.out.println(this.baseDamage);
 
-        if(this.rogue.getLandModifier() != 1) {
-            if(this.rogue.getEffects().getNumberHits() % 3 == 0) {
+        if (this.rogue.getLandModifier() != 1) {
+            if (this.rogue.getEffects().getNumberHits() % Constants.CRITICAL_DIVIDER == 0) {
                 this.rogue.getEffects().setNumberHits(this.rogue.getEffects()
                         .getNumberHits() + 1);
                 criticalDamage = this.rogue.getEffects().getCriticalDamage();
             }
         }
 
-        float levelLandDamage = this.baseDamage *
-                this.rogue.getLandModifier() * criticalDamage;
+        float levelLandDamage = this.baseDamage
+                * this.rogue.getLandModifier() * criticalDamage;
 
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.BACKSTAB_VS_WIZARD_MODIFIER);
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.BACKSTAB_VS_WIZARD_MODIFIER);
         totalDamage = Math.round(totalDamage * criticalDamage);
-        System.out.println("Backstab Damage total dat = " + totalDamage);
-        System.out.println("Backstab Damage fara Race = " + levelLandDamage);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
-        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
+        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
+                getTotalDamage() + totalDamage);
         wizard.increaseDamage(totalDamage, this.rogue);
     }
 
+    /**
+     * @param rogueToAttack
+     */
     @Override
-    public void visit(Rogue rogue) {
-        float levelLandDamage = this.baseDamage *
-                this.rogue.getLandModifier();
-        if(this.rogue.getLandModifier() != 1) {
-            if(this.rogue.getEffects().getNumberHits() % 3 == 0) {
+    public void visit(final Rogue rogueToAttack) {
+        float levelLandDamage = this.baseDamage
+                * this.rogue.getLandModifier();
+        if (this.rogue.getLandModifier() != 1) {
+            if (this.rogue.getEffects().getNumberHits()
+                    % Constants.CRITICAL_DIVIDER == 0) {
                 this.rogue.getEffects().setNumberHits(this.rogue.getEffects()
                         .getNumberHits() + 1);
                 criticalDamage = this.rogue.getEffects().getCriticalDamage();
             }
         }
 
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.BACKSTAB_VS_ROGUE_MODIFIER);
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.BACKSTAB_VS_ROGUE_MODIFIER);
         totalDamage = Math.round(totalDamage * criticalDamage);
-        System.out.println("Backstab Damage total dat = " + totalDamage);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
-        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
-        rogue.increaseDamage(totalDamage, this.rogue);
+        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
+                getTotalDamage() + totalDamage);
+        rogueToAttack.increaseDamage(totalDamage, this.rogue);
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "Backstab";

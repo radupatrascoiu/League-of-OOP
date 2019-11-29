@@ -13,31 +13,34 @@ public class Paralysis implements Skill {
     private int baseDamegePerLevel;
     private Rogue rogue;
 
-    public Paralysis(Rogue rogue) {
+    public Paralysis(final Rogue rogue) {
         this.rogue = rogue;
-        this.baseDamegePerLevel = Constants.PARALYSIS_BASE_DAMAGE_PER_LEVEL *
-                rogue.getLevel();
-        this.baseDamage = Constants.PARALYSIS_BASE_DAMAGE +
-                this.baseDamegePerLevel;
+        this.baseDamegePerLevel = Constants.PARALYSIS_BASE_DAMAGE_PER_LEVEL
+                * rogue.getLevel();
+        this.baseDamage = Constants.PARALYSIS_BASE_DAMAGE
+                + this.baseDamegePerLevel;
     }
 
+    /**
+     * @param pyromancer
+     */
     @Override
-    public void visit(Pyromancer pyromancer) {
-        float levelLandDamage = this.baseDamage *
-                this.rogue.getLandModifier();
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.PARALYSIS_VS_PYROMANCER_MODIFIER);
-        System.out.println("Paralysis Damage total dat = " + totalDamage);
+    public void visit(final Pyromancer pyromancer) {
+        float levelLandDamage = this.baseDamage
+                * this.rogue.getLandModifier();
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.PARALYSIS_VS_PYROMANCER_MODIFIER);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
-        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
+        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
+                getTotalDamage() + totalDamage);
 
-        if(this.rogue.getLandModifier() == 'W') {
-            pyromancer.getStun().setTime(6);
-            pyromancer.getBuff().setTime(6);
+        if (this.rogue.getLandModifier() == 'W') {
+            pyromancer.getStun().setTime(Constants.PARALYSIS_OVERTIME_WOODS);
+            pyromancer.getBuff().setTime(Constants.PARALYSIS_OVERTIME_WOODS);
         } else {
-            pyromancer.getStun().setTime(3);
-            pyromancer.getBuff().setTime(3);
+            pyromancer.getStun().setTime(Constants.PARALYSIS_OVERTIME);
+            pyromancer.getBuff().setTime(Constants.PARALYSIS_OVERTIME);
         }
 
         pyromancer.getStun().setStun(true);
@@ -46,23 +49,26 @@ public class Paralysis implements Skill {
         pyromancer.increaseDamage(totalDamage, this.rogue);
     }
 
+    /**
+     * @param knight
+     */
     @Override
-    public void visit(Knight knight) {
-        float levelLandDamage = this.baseDamage *
-                this.rogue.getLandModifier();
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.PARALYSIS_VS_KNIGHT_MODIFIER);
-        System.out.println("Paralysis Damage total dat = " + totalDamage);
+    public void visit(final Knight knight) {
+        float levelLandDamage = this.baseDamage
+                * this.rogue.getLandModifier();
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.PARALYSIS_VS_KNIGHT_MODIFIER);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
-        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
+        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
+                getTotalDamage() + totalDamage);
 
-        if(this.rogue.getLandModifier() == 'W') {
-            knight.getStun().setTime(6);
-            knight.getBuff().setTime(6);
+        if (this.rogue.getLandModifier() == 'W') {
+            knight.getStun().setTime(Constants.PARALYSIS_OVERTIME_WOODS);
+            knight.getBuff().setTime(Constants.PARALYSIS_OVERTIME_WOODS);
         } else {
-            knight.getStun().setTime(3);
-            knight.getBuff().setTime(3);
+            knight.getStun().setTime(Constants.PARALYSIS_OVERTIME);
+            knight.getBuff().setTime(Constants.PARALYSIS_OVERTIME);
         }
 
         knight.getStun().setStun(true);
@@ -71,24 +77,26 @@ public class Paralysis implements Skill {
         knight.increaseDamage(totalDamage, this.rogue);
     }
 
+    /**
+     * @param wizard
+     */
     @Override
-    public void visit(Wizard wizard) {
-        float levelLandDamage = this.baseDamage *
-                this.rogue.getLandModifier();
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.PARALYSIS_VS_WIZARD_MODIFIER);
-        System.out.println("Paralysis Damage total dat = " + totalDamage);
-        System.out.println("Paralysis Damage fara Race = " + levelLandDamage);
-        this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
-                getLevelLandDamage() + levelLandDamage));
-        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
+    public void visit(final Wizard wizard) {
+        float levelLandDamage = this.baseDamage
+                * this.rogue.getLandModifier();
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.PARALYSIS_VS_WIZARD_MODIFIER);
+        this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.
+                getEffects().getLevelLandDamage() + levelLandDamage));
+        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
+                getTotalDamage() + totalDamage);
 
-        if(this.rogue.getLandModifier() == 'W') {
-            wizard.getStun().setTime(6);
-            wizard.getBuff().setTime(6);
+        if (this.rogue.getLandModifier() == 'W') {
+            wizard.getStun().setTime(Constants.PARALYSIS_OVERTIME_WOODS);
+            wizard.getBuff().setTime(Constants.PARALYSIS_OVERTIME_WOODS);
         } else {
-            wizard.getStun().setTime(3);
-            wizard.getBuff().setTime(3);
+            wizard.getStun().setTime(Constants.PARALYSIS_OVERTIME);
+            wizard.getBuff().setTime(Constants.PARALYSIS_OVERTIME);
         }
 
         wizard.getStun().setStun(true);
@@ -97,31 +105,37 @@ public class Paralysis implements Skill {
         wizard.increaseDamage(totalDamage, this.rogue);
     }
 
+    /**
+     * @param rogueToAttack
+     */
     @Override
-    public void visit(Rogue rogue) {
-        float levelLandDamage = this.baseDamage *
-                this.rogue.getLandModifier();
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.PARALYSIS_VS_ROGUE_MODIFIER);
-        System.out.println("Paralysis Damage total dat = " + totalDamage);
+    public void visit(final Rogue rogueToAttack) {
+        float levelLandDamage = this.baseDamage
+                * this.rogue.getLandModifier();
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.PARALYSIS_VS_ROGUE_MODIFIER);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
-        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().getTotalDamage() + totalDamage);
+        this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
+                getTotalDamage() + totalDamage);
 
-        if(this.rogue.getLandModifier() == 'W') {
-            rogue.getStun().setTime(6);
-            rogue.getBuff().setTime(6);
+        if (this.rogue.getLandModifier() == 'W') {
+            rogueToAttack.getStun().setTime(Constants.PARALYSIS_OVERTIME_WOODS);
+            rogueToAttack.getBuff().setTime(Constants.PARALYSIS_OVERTIME_WOODS);
         } else {
-            rogue.getStun().setTime(3);
-            rogue.getBuff().setTime(3);
+            rogueToAttack.getStun().setTime(Constants.PARALYSIS_OVERTIME);
+            rogueToAttack.getBuff().setTime(Constants.PARALYSIS_OVERTIME);
         }
 
-        rogue.getStun().setStun(true);
-        rogue.getBuff().setDamageOverTime(totalDamage);
+        rogueToAttack.getStun().setStun(true);
+        rogueToAttack.getBuff().setDamageOverTime(totalDamage);
 
-        rogue.increaseDamage(totalDamage, this.rogue);
+        rogueToAttack.increaseDamage(totalDamage, this.rogue);
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "Paralysis";

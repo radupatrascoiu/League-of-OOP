@@ -3,13 +3,16 @@ package main;
 
 import heroes.Hero;
 
-public class GameLogic {
+public final class GameLogic {
 
-    public static boolean existsConflict(Hero hero1, Hero hero2) {
-        return (hero1.getLocationHistory().getX() ==
-                hero2.getLocationHistory().getX() &&
-                hero1.getLocationHistory().getY() ==
-                        hero2.getLocationHistory().getY());
+    private GameLogic() {
+    }
+
+    public static boolean existsConflict(final Hero hero1, final Hero hero2) {
+        return (hero1.getLocationHistory().getX()
+                == hero2.getLocationHistory().getX()
+                && hero1.getLocationHistory().getY()
+                == hero2.getLocationHistory().getY());
     }
 
 }

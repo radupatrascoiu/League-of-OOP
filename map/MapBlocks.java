@@ -1,3 +1,3 @@
 package map;
 
-public enum MapBlocks { Land, Volcanic, Desert, Woods}
+public enum MapBlocks { Land, Volcanic, Desert, Woods }

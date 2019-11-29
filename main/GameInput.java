@@ -1,14 +1,10 @@
 package main;
 
-import main.LocationHistory;
-
 import java.util.Arrays;
 import java.util.List;
 
 public class GameInput {
 
-    private int numberOfLines = 0;
-    private int numberOfColumns = 0;
     private final char[][] map;
     private final char[][] moves;
     private int numberOfHeroes;
@@ -16,9 +12,18 @@ public class GameInput {
     private List<LocationHistory> locationHistories;
     private int numberOfRounds;
 
-    public GameInput(int numberOfLines, int numberOfColumns, char[][] map, int numberOfHeroes, List<Character> heroes, List<LocationHistory> locationHistories, int numberOfRounds, char[][] moves) {
-        this.numberOfLines = numberOfLines;
-        this.numberOfColumns = numberOfColumns;
+    /**
+     * @param map
+     * @param numberOfHeroes
+     * @param heroes
+     * @param locationHistories
+     * @param numberOfRounds
+     * @param moves
+     */
+    public GameInput(final char[][] map, final int numberOfHeroes,
+                     final List<Character> heroes,
+                     final List<LocationHistory> locationHistories,
+                     final int numberOfRounds, final char[][] moves) {
         this.map = map;
         this.numberOfHeroes = numberOfHeroes;
         this.heroes = heroes;
@@ -27,49 +32,60 @@ public class GameInput {
         this.moves = moves;
     }
 
-    public int getNumberOfLines() {
-        return numberOfLines;
-    }
-
-    public int getNumberOfColumns() {
-        return numberOfColumns;
-    }
-
+    /**
+     * @return
+     */
     public char[][] getMap() {
         return map;
     }
 
+    /**
+     * @return
+     */
     public int getNumberOfHeroes() {
         return numberOfHeroes;
     }
 
+    /**
+     * @return
+     */
     public List<Character> getHeroes() {
         return heroes;
     }
 
+    /**
+     * @return
+     */
     public List<LocationHistory> getLocationHistories() {
         return locationHistories;
     }
 
+    /**
+     * @return
+     */
     public int getNumberOfRounds() {
         return numberOfRounds;
     }
 
+    /**
+     * @return
+     */
     public char[][] getMoves() {
         return moves;
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
-        return "GameInput{" +
-                "numberOfLines=" + numberOfLines +
-                ", numberOfColumns=" + numberOfColumns +
-                ", map=" + Arrays.toString(map) +
-                ", moves=" + Arrays.toString(moves) +
-                ", numberOfHeroes=" + numberOfHeroes +
-                ", heroes=" + heroes +
-                ", locationHistories=" + locationHistories +
-                ", numberOfRounds=" + numberOfRounds +
-                '}';
+        return "GameInput{"
+                + ", map=" + Arrays.toString(map)
+                + ", moves=" + Arrays.toString(moves)
+                + ", numberOfHeroes=" + numberOfHeroes
+                + ", heroes=" + heroes
+                + ", locationHistories=" + locationHistories
+                + ", numberOfRounds=" + numberOfRounds
+                + '}';
     }
 }

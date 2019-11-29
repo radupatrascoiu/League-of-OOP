@@ -1,13 +1,14 @@
 package map;
 
-public class MapSingleton {
+public final class MapSingleton {
     private static MapSingleton instace = null;
     private char[][] map;
 
-    private MapSingleton() {}
+    private MapSingleton() {
+    }
 
-    public void init(char[][] map) {
-        this.map = map;
+    public void init(final char[][] mapGenerated) {
+        this.map = mapGenerated;
     }
 
     public char[][] getMap() {
@@ -15,7 +16,7 @@ public class MapSingleton {
     }
 
     public static MapSingleton getInstance() {
-        if(instace == null) {
+        if (instace == null) {
             instace = new MapSingleton();
         }
         return instace;

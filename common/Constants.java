@@ -1,9 +1,9 @@
 package common;
 
-import java.security.PublicKey;
 
-public class Constants {
-    public static final int XP = 250;
+public final class Constants {
+    private Constants() {
+    }
     public static final int XP_MULTIPLICATOR = 50;
     public static final int INITIAL_XP = 0;
     public static final int INITIAL_LEVEL = 0;
@@ -20,7 +20,7 @@ public class Constants {
     public static final int ROGUE_HP = 600;
     public static final int ROGUE_HP_INCREASE_PER_LEVEL = 40;
     public static final int XP_FORMULA_1 = 200;
-    public static final int XP_FORMULA_2= 40;
+    public static final int XP_FORMULA_2 = 40;
     public static final int FIREBLAST_BASE_DAMAGE = 350;
     public static final int FIREBLAST_DAMAGE_PER_LEVER = 50;
     public static final int IGNITE_BASE_DAMAGE = 150;
@@ -29,7 +29,8 @@ public class Constants {
     public static final int IGNITE_OVERTIME_DAMAGE_PER_LEVEL = 30;
     public static final int EXECUTE_BASE_DAMAGE = 200;
     public static final int EXECUTE_BASE_DAMAGE_PER_LEVEL = 30;
-    //TODO constanta pentru HP LIMIT EXECUTE - KNIGHT
+    public static final float PERCENTAGE_OF_HP_EXECUTE = 0.2f;
+    public static final float PERCENTAGE_OF_HP_EXECUTE_PER_LEVEL = 0.01f;
     public static final int SLAM_BASE_DAMAGE = 100;
     public static final int SLAM_BASE_DAMAGE_PER_LEVEL = 40;
     public static final float DRAIN_PERCENTAGE = 0.2f;
@@ -80,9 +81,15 @@ public class Constants {
     public static final int KNIGHT_PRIORITY = 1;
     public static final int PYROMANCER_PRIORITY = 2;
     public static final int ROGUE_PRIORITY = 3;
-
-
-
+    public static final int LEVEL_1 = 1;
+    public static final int LEVEL_2 = 2;
+    public static final int LEVEL_3 = 3;
+    public static final int LEVEL_4 = 4;
+    public static final int MATRIX_DIMENSION = 1000;
+    public static final float CRITICAL_DAMAGE = 1.5f;
+    public static final int CRITICAL_DIVIDER = 3;
+    public static final int PARALYSIS_OVERTIME = 3;
+    public static final int PARALYSIS_OVERTIME_WOODS = 6;
 
 
 

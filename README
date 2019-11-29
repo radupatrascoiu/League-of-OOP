@@ -1,0 +1,23 @@
+Patrascoiu Ion - Radu, 322 CD
+
+    In implementarea problemei am folosit design pattern-ul "Visitor", care
+se bazeaza pe conceptul de Double Dispatch, "Singleton", pentru crearea
+hartii si "Factory", pentru crearea jucatorilor. Mecanismul implementarii
+functioneaza in modul urmator: din clasa abstracta "Hero" se extind cele
+4 clase de eroi: "Knight", "Pyromancer", "Rogue" si "Wizard". Interfata "Skill"
+se va implementa in clasele ce reprezinta abilitatile eroilor, astfel acestea
+reprezinta visitorii pentru obiectele "Visitable": heroes. Fiecare abilitate
+va avea 4 metode de visit, una pentru fiecare erou in parte, astfel se va
+profita de verificarea dinamica a tipurilor. Fiecare hero ca avea o metoda
+play, in care se vor instantia abilitatile specifice si se vor pasa mai departe
+prin intermediul metodei "accept".
+    Damage overtime-ul este gandit intr-o clasa separata "Buff", care contine
+campurile "damageOverTime" - damage-ul primit pe runda, iar "time"
+timpul ramas pentru acest buff. In clasa "Effects" se contorizeaza damage-ul
+dat, critica si numarul de lovituri.
+    Am parsat fisierul de intrare cu ajutorul claselor GameInput si
+GameInputLoader, pe care le-am avut drept model de la tema 1. In clasa Main
+jocul incepe, se parcurg rundele, se verifica conditia de stun, se misca
+jucatorii in functie de input, se calculeaza damage overtime-ul, iar eroii care
+se afla in acelasi bloc, se lupta. La sfarsit de runda se calculeaza hp-ul, in
+functie de damage-ul primit. Apoi urmeaza scrierea in fisier.

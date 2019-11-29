@@ -9,27 +9,42 @@ public class Buff {
         this.time = 0;
     }
 
+    /**
+     * @return
+     */
     public int getDamageOverTime() {
         return damageOverTime;
     }
 
-    public void setDamageOverTime(int damageOverTime) {
+    /**
+     * @param damageOverTime
+     */
+    public void setDamageOverTime(final int damageOverTime) {
         this.damageOverTime = damageOverTime;
     }
 
+    /**
+     * @return
+     */
     public int getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    /**
+     * @param time
+     */
+    public void setTime(final int time) {
         this.time = time;
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
-        return "Buff{" +
-                "damageOverTime=" + damageOverTime +
-                ", time=" + time +
-                '}';
+        return "Buff{"
+                + "damageOverTime=" + damageOverTime
+                + ", time=" + time
+                + '}';
     }
 }

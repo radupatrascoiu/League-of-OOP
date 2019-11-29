@@ -1,6 +1,5 @@
 package skills.PyromancerSkills;
 
-
 import common.Constants;
 import heroes.Knight;
 import heroes.Pyromancer;
@@ -13,36 +12,40 @@ public class Fireblast implements Skill {
     private int baseDamagePerLevel;
     private Pyromancer pyromancer;
 
-    public Fireblast(Pyromancer pyromancer) {
+    public Fireblast(final Pyromancer pyromancer) {
         this.pyromancer = pyromancer;
-        this.baseDamagePerLevel = Constants.FIREBLAST_DAMAGE_PER_LEVER *
-                this.pyromancer.getLevel();
-        this.baseDamage = Constants.FIREBLAST_BASE_DAMAGE +
-                this.baseDamagePerLevel;
+        this.baseDamagePerLevel = Constants.FIREBLAST_DAMAGE_PER_LEVER
+                * this.pyromancer.getLevel();
+        this.baseDamage = Constants.FIREBLAST_BASE_DAMAGE
+                + this.baseDamagePerLevel;
     }
 
+    /**
+     * @param pyromancerToAttack
+     */
     @Override
-    public void visit(Pyromancer pyromancer) {
-        float levelLandDamage = this.baseDamage *
-                this.pyromancer.getLandModifier();
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.FIREBLAST_VS_PYROMANCER_MODIFIER);
-        System.out.println("Fireblast Damage total dat = " + totalDamage);
+    public void visit(final Pyromancer pyromancerToAttack) {
+        float levelLandDamage = this.baseDamage
+                * this.pyromancer.getLandModifier();
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.FIREBLAST_VS_PYROMANCER_MODIFIER);
         this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
                 getEffects().getTotalDamage() + totalDamage);
-        pyromancer.increaseDamage(totalDamage, this.pyromancer);
+        pyromancerToAttack.increaseDamage(totalDamage, this.pyromancer);
 
     }
 
+    /**
+     * @param knight
+     */
     @Override
-    public void visit(Knight knight) {
-        float levelLandDamage = this.baseDamage *
-                this.pyromancer.getLandModifier();
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.FIREBLAST_VS_KNIGHT_MODIFIER);
-        System.out.println("Fireblast Damage total dat = " + totalDamage);
+    public void visit(final Knight knight) {
+        float levelLandDamage = this.baseDamage
+                * this.pyromancer.getLandModifier();
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.FIREBLAST_VS_KNIGHT_MODIFIER);
         this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
@@ -50,32 +53,33 @@ public class Fireblast implements Skill {
         knight.increaseDamage(totalDamage, this.pyromancer);
     }
 
+    /**
+     * @param wizard
+     */
     @Override
-    public void visit(Wizard wizard) {
-        float levelLandDamage = this.baseDamage *
-                this.pyromancer.getLandModifier();
+    public void visit(final Wizard wizard) {
+        float levelLandDamage = this.baseDamage
+                * this.pyromancer.getLandModifier();
 
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.FIREBLAST_VS_WIZARD_MODIFIER);
-        System.out.println("Fireblast Damage total dat = " + totalDamage);
-
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.FIREBLAST_VS_WIZARD_MODIFIER);
         this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
                 getEffects().getTotalDamage() + totalDamage);
-        System.out.println("damage fara race: " + levelLandDamage);
         wizard.increaseDamage(totalDamage, this.pyromancer);
 
     }
 
+    /**
+     * @param rogue
+     */
     @Override
-    public void visit(Rogue rogue) {
-        float levelLandDamage = this.baseDamage *
-                this.pyromancer.getLandModifier();
-        int totalDamage = Math.round(levelLandDamage *
-                Constants.FIREBLAST_VS_ROGUE_MODIFIER);
-        System.out.println("Fireblast Damage total dat = " + totalDamage);
-
+    public void visit(final Rogue rogue) {
+        float levelLandDamage = this.baseDamage
+                * this.pyromancer.getLandModifier();
+        int totalDamage = Math.round(levelLandDamage
+                * Constants.FIREBLAST_VS_ROGUE_MODIFIER);
         this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
@@ -84,6 +88,9 @@ public class Fireblast implements Skill {
 
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "Fireblast";

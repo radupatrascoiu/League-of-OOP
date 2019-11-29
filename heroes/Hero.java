@@ -8,8 +8,6 @@ import skills.Effects;
 import skills.Skill;
 import skills.Stun;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-
 public abstract class Hero {
     protected int xp;
     protected int level;
@@ -23,20 +21,26 @@ public abstract class Hero {
     protected Stun stun;
     protected boolean deathOvertime;
 
+
+    /**
+     * @return
+     */
     public Hero getAttacker() {
         return attacker;
     }
 
-    public void setAttacker(Hero attacker) {
+    /**
+     * @param attacker
+     */
+    public void setAttacker(final Hero attacker) {
         this.attacker = attacker;
     }
 
-    public Hero(LocationHistory locationHistory) {
+    public Hero(final LocationHistory locationHistory) {
         this.xp = Constants.INITIAL_XP;
         this.level = Constants.INITIAL_LEVEL;
         this.locationHistory = locationHistory;
         this.hp = 0;
-        this.priority = 100;
         effects = new Effects();
         this.damageReceived = 0;
         buff = new Buff();
@@ -44,177 +48,215 @@ public abstract class Hero {
         deathOvertime = false;
     }
 
+    /**
+     * @return
+     */
     public boolean isDeathOvertime() {
         return deathOvertime;
     }
 
-    public void setDeathOvertime(boolean deathOvertime) {
+    /**
+     * @param deathOvertime
+     */
+    public void setDeathOvertime(final boolean deathOvertime) {
         this.deathOvertime = deathOvertime;
     }
 
-    public void setHp(int hp) {
+    /**
+     * @param hp
+     */
+    public void setHp(final int hp) {
         this.hp = hp;
     }
 
+    /**
+     * @return
+     */
     public Stun getStun() {
         return stun;
     }
 
+    /**
+     * @return
+     */
     public Buff getBuff() {
         return buff;
     }
 
-    public int getDamageReceived() {
-        return damageReceived;
-    }
-
-    public void setDamageReceived(int damageReceived) {
+    /**
+     * @param damageReceived
+     */
+    public void setDamageReceived(final int damageReceived) {
         this.damageReceived = damageReceived;
     }
 
+    /**
+     * @return
+     */
     public Effects getEffects() {
         return effects;
     }
 
+    /**
+     * @return
+     */
     public int getPriority() {
         return priority;
     }
 
-    public abstract void play(Hero hero); // fac actiunea specifica jucatorului; imi dau seama ce visitor sa apelez
+    public abstract void play(Hero hero);
 
+    /**
+     * @return
+     */
     public LocationHistory getLocationHistory() {
         return locationHistory;
     }
 
-    public void setLocationHistory(LocationHistory locationHistory) {
-        this.locationHistory = locationHistory;
-    }
-
-    public void move(char moveChar) {
-        if(moveChar == 'L') {
-            locationHistory.setY(locationHistory.getY()-1);
-        } else if(moveChar == 'R') {
-            locationHistory.setY(locationHistory.getY()+1);
-        } else if(moveChar == 'U') {
-            locationHistory.setX(locationHistory.getX()-1);
-        } else if(moveChar == 'D') {
-            locationHistory.setX(locationHistory.getX()+1);
+    /**
+     * @param moveChar
+     */
+    public void move(final char moveChar) {
+        if (moveChar == 'L') {
+            locationHistory.setY(locationHistory.getY() - 1);
+        } else if (moveChar == 'R') {
+            locationHistory.setY(locationHistory.getY() + 1);
+        } else if (moveChar == 'U') {
+            locationHistory.setX(locationHistory.getX() - 1);
+        } else if (moveChar == 'D') {
+            locationHistory.setX(locationHistory.getX() + 1);
         }
     }
 
     public abstract float getLandModifier();
 
+    /**
+     * @return
+     */
     public int getHp() {
         return hp;
     }
 
+    /**
+     * @return
+     */
     public int getXp() {
         return xp;
     }
 
+    /**
+     * @return
+     */
     public int getMaxHp() {
         return 0;
     }
 
-    public void setXp(int xp) {
-        this.xp = xp;
-    }
-
+    /**
+     * @return
+     */
     public int getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    /**
+     * @param level
+     */
+    public void setLevel(final int level) {
         this.level = level;
     }
 
-    public void levelUp(Hero loser) {
+    /**
+     * @param loser
+     */
+    public void levelUp(final Hero loser) {
 
         this.increaseXp(loser);
 
-//        int xpLevelUp = Constants.XP + super.getLevel() * Constants.XP_MULTIPLICATOR;
-
         int xpLevelUp = this.getXp() + this.getLevel() * Constants.XP_MULTIPLICATOR;
-        System.out.println("XP = " + xpLevelUp);
 
-        if(xpLevelUp >= Constants.XP_LEVEL_1) {
+        if (xpLevelUp >= Constants.XP_LEVEL_1) {
             this.setDamageReceived(0);
-            setLevel(1);
-            if(this.hp <= 0) {
+            setLevel(Constants.LEVEL_1);
+            if (this.hp <= 0) {
                 return;
             }
             this.hp = this.getMaxHp();
 
         }
 
-        if(xpLevelUp >= Constants.XP_LEVEL_2) {
+        if (xpLevelUp >= Constants.XP_LEVEL_2) {
             this.setDamageReceived(0);
 
-            setLevel(2);
-            if(this.hp <= 0) {
+            setLevel(Constants.LEVEL_2);
+            if (this.hp <= 0) {
                 return;
             }
             this.hp = this.getMaxHp();
 
         }
 
-        if(xpLevelUp >= Constants.XP_LEVEL_3) {
+        if (xpLevelUp >= Constants.XP_LEVEL_3) {
             this.setDamageReceived(0);
 
-            setLevel(3);
-            if(this.hp <= 0) {
+            setLevel(Constants.LEVEL_3);
+            if (this.hp <= 0) {
                 return;
             }
             this.hp = this.getMaxHp();
 
         }
 
-        if(xpLevelUp >= Constants.XP_LEVEL_4) {
+        if (xpLevelUp >= Constants.XP_LEVEL_4) {
             this.setDamageReceived(0);
 
-            setLevel(4);
-            if(this.hp <= 0) {
+            setLevel(Constants.LEVEL_4);
+            if (this.hp <= 0) {
                 return;
             }
             this.hp = this.getMaxHp();
             System.out.println(this.hp);
             System.out.println(this.getBuff());
-            System.out.println("?????????????????????????????????????????????????");
         }
-
-        System.out.println("level actual = " + getLevel());
 
     }
 
-    public abstract void increaseDamage(int damageReceived, Hero hero);
+    public abstract void increaseDamage(int damageReceivedInBattle, Hero hero);
 
+    /**
+     *
+     */
     public void calculateHp() {
         this.hp -= damageReceived;
 
-        if(this.hp <= 0) {
-            System.out.println("Creste XP");
-            if(this.getAttacker() != null) {
+        if (this.hp <= 0) {
+            if (this.getAttacker() != null) {
                 this.getAttacker().levelUp(this);
                 this.setAttacker(null);
             }
         }
     }
 
-    public void increaseXp(Hero hero) {
+    /**
+     * @param hero
+     */
+    public void increaseXp(final Hero hero) {
         // this.hero va fi eroul care va castiga batalia
-        this.xp += Math.max(0, Constants.XP_FORMULA_1 -
-                (this.level - hero.getLevel()) * Constants.XP_FORMULA_2);
+        this.xp += Math.max(0, Constants.XP_FORMULA_1
+                - (this.level - hero.getLevel()) * Constants.XP_FORMULA_2);
     }
 
     public abstract void accept(Skill skill);
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
-        return "Hero{" +
-                "xp=" + xp +
-                ", level=" + level +
-                ", locationHistory=" + locationHistory +
-                '}';
+        return "Hero{"
+                + "xp=" + xp
+                + ", level=" + level
+                + ", locationHistory=" + locationHistory
+                + '}';
     }
 
     public abstract String displayRace();

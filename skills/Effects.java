@@ -1,5 +1,7 @@
 package skills;
 
+import common.Constants;
+
 public class Effects {
     private int levelLandDamage;
     private float criticalDamage;
@@ -9,39 +11,63 @@ public class Effects {
     public Effects() {
         this.levelLandDamage = 0;
         this.totalDamage = 0;
-        this.criticalDamage = 1.5f;
+        this.criticalDamage = Constants.CRITICAL_DAMAGE;
         this.numberHits = 0;
     }
 
+    /**
+     * @return
+     */
     public int getNumberHits() {
         return numberHits;
     }
 
-    public void setNumberHits(int numberHits) {
+    /**
+     * @param numberHits
+     */
+    public void setNumberHits(final int numberHits) {
         this.numberHits = numberHits;
     }
 
+    /**
+     * @return
+     */
     public int getLevelLandDamage() {
         return levelLandDamage;
     }
 
-    public void setLevelLandDamage(int levelLandDamage) {
+    /**
+     * @param levelLandDamage
+     */
+    public void setLevelLandDamage(final int levelLandDamage) {
         this.levelLandDamage = levelLandDamage;
     }
 
+    /**
+     * @return
+     */
     public float getCriticalDamage() {
         return criticalDamage;
     }
 
-    public void setCriticalDamage(int criticalDamage) {
+    /**
+     * @param criticalDamage
+     */
+    public void setCriticalDamage(final int criticalDamage) {
         this.criticalDamage = criticalDamage;
     }
 
+    /**
+     * @return
+     */
     public int getTotalDamage() {
         return totalDamage;
     }
 
-    public void setTotalDamage(int totalDamage) {
+    /**
+     * @param totalDamage
+     */
+    public void setTotalDamage(final int totalDamage) {
         this.totalDamage = totalDamage;
     }
 }
