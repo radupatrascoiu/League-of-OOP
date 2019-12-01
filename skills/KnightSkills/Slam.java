@@ -36,6 +36,7 @@ public class Slam implements Skill {
         this.knight.getEffects().setTotalDamage(this.knight.getEffects()
                 .getTotalDamage() + totalDamage);
 
+        // primeste stun o runda
         pyromancer.getStun().setStun(true);
         pyromancer.getStun().setTime(1);
 

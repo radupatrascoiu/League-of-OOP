@@ -51,6 +51,7 @@ public abstract class Hero {
     /**
      * @return
      */
+    // se verifica daca hero a murit de la damage overtime
     public boolean isDeathOvertime() {
         return deathOvertime;
     }
@@ -100,6 +101,7 @@ public abstract class Hero {
     /**
      * @return
      */
+    // prioritatea este folosita pentru a-l forta pe wizard sa atace al doilea
     public int getPriority() {
         return priority;
     }
@@ -147,9 +149,7 @@ public abstract class Hero {
     /**
      * @return
      */
-    public int getMaxHp() {
-        return 0;
-    }
+    public abstract int getMaxHp();
 
     /**
      * @return
@@ -170,58 +170,68 @@ public abstract class Hero {
      */
     public void levelUp(final Hero loser) {
 
-        this.increaseXp(loser);
+        if (this.getHp() > 0) {
+            this.increaseXp(loser);
 
-        int xpLevelUp = this.getXp() + this.getLevel() * Constants.XP_MULTIPLICATOR;
+            int xpLevelUp = this.getXp() + this.getLevel() * Constants.XP_MULTIPLICATOR;
 
-        if (xpLevelUp >= Constants.XP_LEVEL_1) {
-            this.setDamageReceived(0);
-            setLevel(Constants.LEVEL_1);
-            if (this.hp <= 0) {
-                return;
+            if (xpLevelUp >= Constants.XP_LEVEL_1) {
+                this.setDamageReceived(0);
+                setLevel(Constants.LEVEL_1);
+                if (this.hp <= 0) {
+                    return;
+                }
+                this.hp = this.getMaxHp();
+
             }
-            this.hp = this.getMaxHp();
 
-        }
+            if (xpLevelUp >= Constants.XP_LEVEL_2) {
+                this.setDamageReceived(0);
 
-        if (xpLevelUp >= Constants.XP_LEVEL_2) {
-            this.setDamageReceived(0);
+                setLevel(Constants.LEVEL_2);
+                if (this.hp <= 0) {
+                    return;
+                }
+                this.hp = this.getMaxHp();
 
-            setLevel(Constants.LEVEL_2);
-            if (this.hp <= 0) {
-                return;
             }
-            this.hp = this.getMaxHp();
 
-        }
+            if (xpLevelUp >= Constants.XP_LEVEL_3) {
+                this.setDamageReceived(0);
 
-        if (xpLevelUp >= Constants.XP_LEVEL_3) {
-            this.setDamageReceived(0);
+                setLevel(Constants.LEVEL_3);
+                if (this.hp <= 0) {
+                    return;
+                }
+                this.hp = this.getMaxHp();
 
-            setLevel(Constants.LEVEL_3);
-            if (this.hp <= 0) {
-                return;
             }
-            this.hp = this.getMaxHp();
 
-        }
+            if (xpLevelUp >= Constants.XP_LEVEL_4) {
+                this.setDamageReceived(0);
 
-        if (xpLevelUp >= Constants.XP_LEVEL_4) {
-            this.setDamageReceived(0);
-
-            setLevel(Constants.LEVEL_4);
-            if (this.hp <= 0) {
-                return;
+                setLevel(Constants.LEVEL_4);
+                if (this.hp <= 0) {
+                    return;
+                }
+                this.hp = this.getMaxHp();
             }
-            this.hp = this.getMaxHp();
-            System.out.println(this.hp);
-            System.out.println(this.getBuff());
         }
-
     }
 
-    public abstract void increaseDamage(int damageReceivedInBattle, Hero hero);
 
+    /**
+     * @param damageReceivedFromAttacker
+     * @param hero
+     */
+    // se calculeaza damage-ul primit intr-o runda, fara overtime
+    public void increaseDamage(final int damageReceivedFromAttacker, final Hero hero) {
+        if (hero.getHp() < 0 || this.getHp() < 0) {
+            return;
+        }
+        this.setAttacker(hero);
+        this.damageReceived += damageReceivedFromAttacker;
+    }
     /**
      *
      */

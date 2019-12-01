@@ -8,6 +8,7 @@ public final class HeroFactory {
     private HeroFactory() {
     }
 
+    // se creaza hero-ul specific inputului
     public static Hero getHero(final String heroType, final LocationHistory locationHistory) {
         if (heroType == null) {
             return null;

@@ -37,6 +37,7 @@ public class Backstab implements Skill {
         if (this.rogue.getLandModifier() != 1) {
             if (this.rogue.getEffects().getNumberHits()
                     % Constants.CRITICAL_DIVIDER == 0) {
+                // o data la 3 lovituri prinde critica
                 this.rogue.getEffects().setNumberHits(this.rogue.getEffects()
                         .getNumberHits() + 1);
                 criticalDamage = this.rogue.getEffects().getCriticalDamage();

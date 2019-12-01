@@ -43,18 +43,6 @@ public class Pyromancer extends Hero {
         hero.accept(this.fireblastAttack);
         hero.accept(this.igniteAttack);
     }
-
-
-    /**
-     * @param totalDmageReceived
-     * @param hero
-     */
-    @Override
-    public void increaseDamage(final int totalDmageReceived, final Hero hero) {
-        super.setAttacker(hero);
-        this.damageReceived += totalDmageReceived;
-    }
-
     /**
      * @return
      */

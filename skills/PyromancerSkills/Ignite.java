@@ -44,6 +44,7 @@ public class Ignite implements Skill {
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
                 getEffects().getTotalDamage() + totalDamage);
 
+        // primeste damage overtime pentru 2 runde
         pyromancerToAttack.getBuff().setDamageOverTime(Constants.IGNITE_OVERTIME_DAMAGE
                 + this.pyromancer.getLevel()
                 * Constants.IGNITE_OVERTIME_DAMAGE_PER_LEVEL);

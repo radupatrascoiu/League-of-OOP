@@ -4,6 +4,7 @@ public final class MapSingleton {
     private static MapSingleton instace = null;
     private char[][] map;
 
+    // singleton pentru harta
     private MapSingleton() {
     }
 

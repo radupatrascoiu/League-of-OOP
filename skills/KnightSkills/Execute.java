@@ -16,6 +16,7 @@ public class Execute implements Skill {
     private Knight knight;
 
     public Execute(final Knight knight) {
+        // se calculeaza damage-ul
         this.knight = knight;
         this.baseDamagePerLevel = Constants.EXECUTE_BASE_DAMAGE_PER_LEVEL
                 * this.knight.getLevel();
@@ -32,13 +33,10 @@ public class Execute implements Skill {
      */
     @Override
     public void visit(final Pyromancer pyromancer) {
-        if (pyromancer.getHp() < this.percentage * knight.getMaxHp()) {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                    + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        if (pyromancer.getHp() < this.percentage * pyromancer.getMaxHp()) {
 
             this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
                     getLevelLandDamage() + pyromancer.getHp()));
-
             this.knight.getEffects().setTotalDamage(this.knight.getEffects().
                     getTotalDamage() + pyromancer.getHp());
             pyromancer.increaseDamage(pyromancer.getHp(), this.knight);
@@ -47,10 +45,12 @@ public class Execute implements Skill {
                    * this.knight.getLandModifier();
             int totalDamage = Math.round(levelLandDamage
                     * Constants.EXECUTE_VS_PYROMANCER_MODIFIER);
+            // se seteaza damage-ul dat
             this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.
                     getEffects().getLevelLandDamage() + levelLandDamage));
             this.knight.getEffects().setTotalDamage(this.knight.getEffects().
                     getTotalDamage() + totalDamage);
+            // se mareste damage-ul primit
             pyromancer.increaseDamage(totalDamage, this.knight);
         }
     }
@@ -61,8 +61,6 @@ public class Execute implements Skill {
     @Override
     public void visit(final Knight knightToAttack) {
         if (knightToAttack.getHp() < this.percentage * knightToAttack.getMaxHp()) {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                    + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
                     getLevelLandDamage() + knightToAttack.getHp()));
 
@@ -70,7 +68,6 @@ public class Execute implements Skill {
                     getTotalDamage() + knightToAttack.getHp());
             knightToAttack.increaseDamage(knightToAttack.getHp(), this.knight);
         } else {
-
             float levelLandDamage = this.baseDamage
                     * this.knight.getLandModifier();
             int totalDamage = Math.round(levelLandDamage
@@ -90,15 +87,14 @@ public class Execute implements Skill {
      */
     @Override
     public void visit(final Wizard wizard) {
-//        if(wizard.getHp() < this.percentage * knight.getMaxHp()) {
-//            this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
-//                    getLevelLandDamage() + wizard.getHp()));
-//
-//            this.knight.getEffects().setTotalDamage(this.knight.getEffects().
-//                    getTotalDamage() + wizard.getHp());
-//            wizard.increaseDamage(wizard.getHp(), this.knight);
-//        } else
-//            {
+        if (wizard.getHp() < this.percentage * wizard.getMaxHp()) {
+            this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
+                    getLevelLandDamage() + wizard.getHp()));
+
+            this.knight.getEffects().setTotalDamage(this.knight.getEffects().
+                    getTotalDamage() + wizard.getHp());
+            wizard.increaseDamage(wizard.getHp(), this.knight);
+        } else {
             float levelLandDamage = this.baseDamage
                     * this.knight.getLandModifier();
             int totalDamage = Math.round(levelLandDamage
@@ -108,7 +104,7 @@ public class Execute implements Skill {
             this.knight.getEffects().setTotalDamage(this.knight.getEffects().
                     getTotalDamage() + totalDamage);
             wizard.increaseDamage(totalDamage, this.knight);
-//        }
+        }
     }
 
     /**
@@ -116,9 +112,7 @@ public class Execute implements Skill {
      */
     @Override
     public void visit(final Rogue rogue) {
-        if (rogue.getHp() < this.percentage * knight.getMaxHp()) {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                    + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        if (rogue.getHp() < this.percentage * rogue.getMaxHp()) {
             this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
                     getLevelLandDamage() + rogue.getHp()));
 

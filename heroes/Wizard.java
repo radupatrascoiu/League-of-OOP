@@ -36,17 +36,6 @@ public class Wizard extends Hero {
     public int getHp() {
         return this.hp;
     }
-
-    /**
-     * @param totalDamageReceived
-     * @param hero
-     */
-    @Override
-    public void increaseDamage(final int totalDamageReceived, final Hero hero) {
-        super.setAttacker(hero);
-        this.damageReceived += totalDamageReceived;
-    }
-
     /**
      * @return
      */

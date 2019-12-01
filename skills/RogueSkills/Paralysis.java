@@ -43,6 +43,7 @@ public class Paralysis implements Skill {
             pyromancer.getBuff().setTime(Constants.PARALYSIS_OVERTIME);
         }
 
+        // se seteaza stun si damage overtime, intre 3 si 6 runde
         pyromancer.getStun().setStun(true);
         pyromancer.getBuff().setDamageOverTime(totalDamage);
 

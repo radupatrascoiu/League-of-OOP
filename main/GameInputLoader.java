@@ -53,10 +53,11 @@ public class GameInputLoader {
                 char[] hero = fileSystem.nextWord().toCharArray();
                 heroes.add(hero[0]); // adaug in lista de eroi
 
+                // pozitia initiala
                 LocationHistory initialPosition = new LocationHistory(
                         fileSystem.nextInt(), fileSystem.nextInt());
-                // pozitia initiala
-                locationHistories.add(initialPosition); // adaug pozitia initala in lista de pozitii
+                // adaug pozitia initala in lista de pozitii
+                locationHistories.add(initialPosition);
             }
 
             numberOfRounds = fileSystem.nextInt();

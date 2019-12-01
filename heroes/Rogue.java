@@ -43,18 +43,6 @@ public class Rogue extends Hero {
         return Constants.ROGUE_HP + Constants.ROGUE_HP_INCREASE_PER_LEVEL
                 * super.getLevel();
     }
-
-
-    /**
-     * @param damageReceived
-     * @param hero
-     */
-    @Override
-    public void increaseDamage(final int damageReceived, final Hero hero) {
-        super.setAttacker(hero);
-        this.damageReceived += damageReceived;
-    }
-
     /**
      * @return
      */

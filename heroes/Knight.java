@@ -33,6 +33,7 @@ public class Knight extends Hero {
     /**
      * @return
      */
+    // se obtine bunusul in functie de land
     @Override
     public float getLandModifier() {
         if (MapSingleton.getInstance().getMap()[getLocationHistory().getX()]
@@ -46,6 +47,7 @@ public class Knight extends Hero {
     /**
      * @param hero
      */
+    // se apeleaza cele 2 atacuri pe eroul primit ca parametru
     @Override
     public void play(final Hero hero) {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
@@ -55,7 +57,6 @@ public class Knight extends Hero {
         this.slamAttack = new Slam(this);
         hero.accept(this.executeAttack);
         hero.accept(this.slamAttack);
-
     }
 
     /**
@@ -63,18 +64,7 @@ public class Knight extends Hero {
      */
     @Override
     public void accept(final Skill skill) {
-//        System.out.println("Knight accepta skillul " + skill);
         skill.visit(this);
-    }
-
-    /**
-     * @param damageReceived
-     * @param hero
-     */
-    @Override
-    public void increaseDamage(final int damageReceived, final Hero hero) {
-        super.setAttacker(hero);
-        this.damageReceived += damageReceived;
     }
 
     /**
