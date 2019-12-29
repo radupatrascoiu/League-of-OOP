@@ -1,2 +1,4 @@
 Starting audit...
+[ERROR] /home/radu_patrascoiu/Desktop/proiect_poo/LeagueOfOOP/src/main/Main.java:20:1: File contains tab characters (this is the first instance). [FileTabCharacter]
 Audit done.
+Checkstyle ends with 1 errors.

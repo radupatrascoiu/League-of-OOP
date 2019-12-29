@@ -11,7 +11,7 @@ BAD_CHECKSTYLE=0
 function cleanHomework
 {
 	find . -name "*.class" -type f -delete
-	#rm -rf "$RESOURCES_DIRECTORY/out"
+	rm -rf "$RESOURCES_DIRECTORY/out"
 }
 
 function compileHomework
@@ -32,7 +32,7 @@ function checkTest
     java main.Main "$RESOURCES_DIRECTORY/in/$1.in" "$RESOURCES_DIRECTORY/out/$1.out" > /dev/null
 
 	if [ $? -eq 0 ]; then
-        `diff -Bw -u --ignore-all-space $RESOURCES_DIRECTORY/out/$1.out $RESOURCES_DIRECTORY/res/$1.in.res &> /dev/null`
+        `diff -Bw -u --ignore-all-space "$RESOURCES_DIRECTORY/out/$1.out" "$RESOURCES_DIRECTORY/res/$1.in.res" &> /dev/null`
         DIFF_RESULT=$?
 
         if [ $DIFF_RESULT -eq 0 ]; then
@@ -72,7 +72,7 @@ function checkStyle
 
 function calculateScore
 {
-	GOOD_TESTS=$((60-GOOD_TESTS*6/10))
+	GOOD_TESTS=$((80-GOOD_TESTS*8/10))
 
 	GOOD_TESTS=`echo "scale=2; $GOOD_TESTS" | bc -l`
 	BAD_CHECKSTYLE=`echo "scale=2; $BAD_CHECKSTYLE" | bc -l`

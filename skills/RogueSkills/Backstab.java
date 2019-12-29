@@ -84,7 +84,6 @@ public class Backstab implements Skill {
      */
     @Override
     public void visit(final Wizard wizard) {
-        System.out.println(this.baseDamage);
 
         if (this.rogue.getLandModifier() != 1) {
             if (this.rogue.getEffects().getNumberHits() % Constants.CRITICAL_DIVIDER == 0) {
