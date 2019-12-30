@@ -2,7 +2,6 @@ package main;
 
 import common.Constants;
 import fileio.FileSystem;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,7 @@ public class GameInputLoader {
     /**
      * @return
      */
+    @SuppressWarnings("checkstyle:EmptyBlock")
     public GameInput load() {
 
         int numberOfLines = 0;
@@ -30,6 +30,9 @@ public class GameInputLoader {
         int numberOfRounds = 0;
         List<Character> heroes = new ArrayList<>();
         List<LocationHistory> locationHistories = new ArrayList<>();
+        List<Integer> numberOfAngelPerRound = new ArrayList<>();
+        List<String> angels = new ArrayList<>();
+        List<LocationHistory> locationsAngels = new ArrayList<>();
 
         try {
             FileSystem fileSystem = new FileSystem(inputPath, outputPath);
@@ -71,12 +74,27 @@ public class GameInputLoader {
                 }
             }
 
+            for (int i = 0; i < numberOfRounds; ++i) {
+                int numberOfAngels = fileSystem.nextInt();
+                numberOfAngelPerRound.add(numberOfAngels);
+                if (numberOfAngels != 0) {
+                    for (int j = 0; j < numberOfAngels; ++j) {
+                        String angel = fileSystem.nextWord();
+                        String[] aux = angel.split(",");
+                        angels.add(aux[0]);
+                        LocationHistory locationCurrentAngel = new LocationHistory(
+                                Integer.parseInt(aux[1]), Integer.parseInt(aux[2]));
+                        locationsAngels.add(locationCurrentAngel);
+                    }
+                }
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return new GameInput(map,
                 numberOfHeroes, heroes, locationHistories,
-                numberOfRounds, moves);
+                numberOfRounds, moves, numberOfAngelPerRound, angels, locationsAngels);
     }
 }

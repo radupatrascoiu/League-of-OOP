@@ -1,6 +1,7 @@
 package heroes;
 
 
+import angels.Angel;
 import common.Constants;
 import main.LocationHistory;
 import map.MapSingleton;
@@ -54,7 +55,7 @@ public class Wizard extends Hero {
      * @param hero
      */
     @Override
-    public void play(final Hero hero) {
+    public void play(final Hero hero, final Angel angel) {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
@@ -62,7 +63,9 @@ public class Wizard extends Hero {
         this.deflectAttack = new Deflect(this, hero);
         hero.accept(this.drainAttack);
         hero.accept(this.deflectAttack);
-
+        if(angel != null) {
+            hero.acceptAngel(angel);
+        }
     }
 
     /**
@@ -71,6 +74,11 @@ public class Wizard extends Hero {
     @Override
     public void accept(final Skill skill) {
         skill.visit(this);
+    }
+
+    @Override
+    public void acceptAngel(Angel angel) {
+        angel.visit(this);
     }
 
     /**

@@ -1,6 +1,7 @@
 package heroes;
 
 
+import angels.Angel;
 import common.Constants;
 import main.LocationHistory;
 import skills.Buff;
@@ -106,7 +107,7 @@ public abstract class Hero {
         return priority;
     }
 
-    public abstract void play(Hero hero);
+    public abstract void play(Hero hero, Angel angel);
 
     /**
      * @return
@@ -256,6 +257,8 @@ public abstract class Hero {
     }
 
     public abstract void accept(Skill skill);
+
+    public abstract void acceptAngel(Angel angel);
 
     /**
      * @return

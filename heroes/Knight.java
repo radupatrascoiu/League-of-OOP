@@ -1,6 +1,7 @@
 package heroes;
 
 
+import angels.Angel;
 import common.Constants;
 import main.LocationHistory;
 import map.MapSingleton;
@@ -49,7 +50,7 @@ public class Knight extends Hero {
      */
     // se apeleaza cele 2 atacuri pe eroul primit ca parametru
     @Override
-    public void play(final Hero hero) {
+    public void play(final Hero hero, final Angel angel) {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
@@ -57,6 +58,14 @@ public class Knight extends Hero {
         this.slamAttack = new Slam(this);
         hero.accept(this.executeAttack);
         hero.accept(this.slamAttack);
+        if(angel != null) {
+            hero.acceptAngel(angel);
+        }
+    }
+
+    @Override
+    public void acceptAngel(Angel angel) {
+        angel.visit(this);
     }
 
     /**

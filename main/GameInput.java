@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,6 +12,9 @@ public class GameInput {
     private List<Character> heroes;
     private List<LocationHistory> locationHistories;
     private int numberOfRounds;
+    private List<Integer> numberOfAngelPerRound = new ArrayList<>();
+    private List<String> angels = new ArrayList<>();
+    private List<LocationHistory> locationsAngels = new ArrayList<>();
 
     /**
      * @param map
@@ -23,13 +27,18 @@ public class GameInput {
     public GameInput(final char[][] map, final int numberOfHeroes,
                      final List<Character> heroes,
                      final List<LocationHistory> locationHistories,
-                     final int numberOfRounds, final char[][] moves) {
+                     final int numberOfRounds, final char[][] moves,
+                     final List<Integer> numberOfAngelPerRound, final List<String> angels,
+                     final List<LocationHistory> locationsAngels) {
         this.map = map;
         this.numberOfHeroes = numberOfHeroes;
         this.heroes = heroes;
         this.locationHistories = locationHistories;
         this.numberOfRounds = numberOfRounds;
         this.moves = moves;
+        this.numberOfAngelPerRound = numberOfAngelPerRound;
+        this.angels = angels;
+        this.locationsAngels = locationsAngels;
     }
 
     /**
@@ -72,6 +81,27 @@ public class GameInput {
      */
     public char[][] getMoves() {
         return moves;
+    }
+
+    /**
+     * @return
+     */
+    public List<Integer> getNumberOfAngelPerRound() {
+        return numberOfAngelPerRound;
+    }
+
+    /**
+     * @return
+     */
+    public List<String> getAngels() {
+        return angels;
+    }
+
+    /**
+     * @return
+     */
+    public List<LocationHistory> getLocationsAngels() {
+        return locationsAngels;
     }
 
     /**

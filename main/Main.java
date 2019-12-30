@@ -27,6 +27,9 @@ public final class Main {
         int numberOfRounds = gameInput.getNumberOfRounds();
         char[][] moves = gameInput.getMoves();
         List<Hero> heroesList = new ArrayList<>();
+        System.out.println(gameInput.getNumberOfAngelPerRound());
+        System.out.println(gameInput.getAngels());
+        System.out.println(gameInput.getLocationsAngels());
 
         for (int i = 0; i < numberOfHeroes; ++i) {
             heroesList.add(HeroFactory.getHero(heroes.get(i).toString(), locationHistories.get(i)));
@@ -67,11 +70,11 @@ public final class Main {
                     if (GameLogic.existsConflict(heroesList.get(j), heroesList.get(k)) && j != k) {
                         if (heroesList.get(j).getPriority() >= heroesList.get(k).getPriority()) {
                             // wizard va fi fortat sa atace al doilea
-                            heroesList.get(j).play(heroesList.get(k));
-                            heroesList.get(k).play(heroesList.get(j));
+                            heroesList.get(j).play(heroesList.get(k), null);
+                            heroesList.get(k).play(heroesList.get(j), null);
                         } else {
-                            heroesList.get(k).play(heroesList.get(j));
-                            heroesList.get(j).play(heroesList.get(k));
+                            heroesList.get(k).play(heroesList.get(j), null);
+                            heroesList.get(j).play(heroesList.get(k), null);
                         }
                     }
                 }
