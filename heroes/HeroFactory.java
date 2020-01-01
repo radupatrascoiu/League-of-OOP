@@ -1,6 +1,4 @@
 package heroes;
-
-
 import main.LocationHistory;
 
 public final class HeroFactory {
@@ -15,13 +13,13 @@ public final class HeroFactory {
         }
 
         if (heroType.equalsIgnoreCase("K")) {
-            return new heroes.Knight(locationHistory);
+            return new Knight(locationHistory);
         } else if (heroType.equalsIgnoreCase("P")) {
-            return new heroes.Pyromancer(locationHistory);
+            return new Pyromancer(locationHistory);
         } else if (heroType.equalsIgnoreCase("R")) {
-            return new heroes.Rogue(locationHistory);
+            return new Rogue(locationHistory);
         } else if (heroType.equalsIgnoreCase("W")) {
-            return new heroes.Wizard(locationHistory);
+            return new Wizard(locationHistory);
         }
 
         return null;

@@ -1,13 +1,11 @@
 package main;
 
-
-
-import fileio.implementations.FileWriter;
+import angels.Angel;
+import angels.AngelFactory;
+import greatmagician.GreatMagician;
 import heroes.Hero;
 import heroes.HeroFactory;
 import map.MapSingleton;
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,13 @@ public final class Main {
     private Main() {
     }
 
+    private static String[] savedArgs;
+    public static String[] getArgs() {
+        return savedArgs;
+    }
+
     public static void main(final String[] args) throws IOException {
+        savedArgs = args;
 	    GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
 	    GameInput gameInput = gameInputLoader.load();
         MapSingleton map = MapSingleton.getInstance();
@@ -27,14 +31,20 @@ public final class Main {
         int numberOfRounds = gameInput.getNumberOfRounds();
         char[][] moves = gameInput.getMoves();
         List<Hero> heroesList = new ArrayList<>();
-        System.out.println(gameInput.getNumberOfAngelPerRound());
-        System.out.println(gameInput.getAngels());
-        System.out.println(gameInput.getLocationsAngels());
+        List<Integer> numberOfAngelPerRound = gameInput.getNumberOfAngelPerRound();
+        List<Angel> angels = new ArrayList<>();
 
-        for (int i = 0; i < numberOfHeroes; ++i) {
+        for (int i = 0; i < numberOfHeroes; ++i) { // creare eroi
             heroesList.add(HeroFactory.getHero(heroes.get(i).toString(), locationHistories.get(i)));
+            heroesList.get(i).setPosition(i);
         }
+
+        int index = 0;
+
+
         for (int i = 0; i < numberOfRounds; ++i) {
+            GameInputWriter.write(args[1], "~~ Round " + (i+1) + " ~~");
+
             for (int  j = 0; j < numberOfHeroes; ++j) {
                 // se verifica daca eroul are stun
                 if (heroesList.get(j).getStun().isStun()) {
@@ -70,11 +80,11 @@ public final class Main {
                     if (GameLogic.existsConflict(heroesList.get(j), heroesList.get(k)) && j != k) {
                         if (heroesList.get(j).getPriority() >= heroesList.get(k).getPriority()) {
                             // wizard va fi fortat sa atace al doilea
-                            heroesList.get(j).play(heroesList.get(k), null);
-                            heroesList.get(k).play(heroesList.get(j), null);
+                            heroesList.get(j).play(heroesList.get(k));
+                            heroesList.get(k).play(heroesList.get(j));
                         } else {
-                            heroesList.get(k).play(heroesList.get(j), null);
-                            heroesList.get(j).play(heroesList.get(k), null);
+                            heroesList.get(k).play(heroesList.get(j));
+                            heroesList.get(j).play(heroesList.get(k));
                         }
                     }
                 }
@@ -93,32 +103,57 @@ public final class Main {
                 heroesList.get(j).getEffects().setTotalDamage(0);
                 heroesList.get(j).getEffects().setLevelLandDamage(0);
             }
-        }
 
-        // scrierea in fisier
-        FileWriter fileWriter = new FileWriter(args[1]);
-        for (int i = 0; i < numberOfHeroes; ++i) {
-
-            fileWriter.writeWord(heroesList.get(i).displayRace());
-            fileWriter.writeWord(" ");
-            if (heroesList.get(i).getHp() <= 0) {
-                fileWriter.writeWord("dead");
-            } else {
-                fileWriter.writeInt(heroesList.get(i).getLevel());
-                fileWriter.writeWord(" ");
-                fileWriter.writeInt(heroesList.get(i).getXp());
-                fileWriter.writeWord(" ");
-                fileWriter.writeInt(heroesList.get(i).getHp());
-                fileWriter.writeWord(" ");
-                fileWriter.writeInt(heroesList.get(i).getLocationHistory().getX());
-                fileWriter.writeWord(" ");
-                fileWriter.writeInt(heroesList.get(i).getLocationHistory().getY());
+            if(numberOfAngelPerRound.get(i) != 0) {
+                for (int j = index; j < numberOfAngelPerRound.get(i) + index; ++j) { // creare ingeri
+                    angels.add(AngelFactory.getAngel(gameInput.getAngels().get(j), gameInput.
+                            getLocationsAngels().get(j)));
+                    angels.get(j).notifyUpdate(GreatMagician.getAngelSpawnNotification(), null, angels.get(j));
+                }
             }
-            fileWriter.writeNewLine();
+
+            for(int j = index; j < numberOfAngelPerRound.get(i)+index; ++j) {
+                for(int k = 0; k < numberOfHeroes; ++k) {
+                    if(GameLogic.existsConflict(angels.get(j), heroesList.get(k))) {
+                        if(heroesList.get(k).getHp() > 0 ||
+                                heroesList.get(k).getHp() <= 0 &&
+                                        angels.get(j).isAbilityToRevive()) {
+                            heroesList.get(k).acceptAngel(angels.get(j));
+                        }
+                    }
+                }
+            }
+
+            index += numberOfAngelPerRound.get(i);
+//            angels.removeAll(angels);
+            GameInputWriter.write(args[1], "\n");
+            GameInputWriter.write(args[1], "\n");
         }
-        fileWriter.writeNewLine();
 
-        fileWriter.close();
+        GameInputWriter.write(args[1], "~~ Results ~~");
+        GameInputWriter.write(args[1], "\n");
 
+            for (int i = 0; i < numberOfHeroes; ++i) {
+
+                GameInputWriter.write(args[1], heroesList.get(i).displayRace());
+                GameInputWriter.write(args[1]," ");
+                if (heroesList.get(i).getHp() <= 0) {
+                    GameInputWriter.write(args[1],"dead");
+                } else {
+                    GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).getLevel()));
+                    GameInputWriter.write(args[1], " ");
+                    GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).getXp()));
+                    GameInputWriter.write(args[1]," ");
+                    GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).getHp()));
+                    GameInputWriter.write(args[1]," ");
+                    GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).
+                            getLocationHistory().getX()));
+                    GameInputWriter.write(args[1]," ");
+                    GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).
+                            getLocationHistory().getY()));
+                }
+                GameInputWriter.write(args[1], "\n");
+            }
+        GameInputWriter.write(args[1], "\n");
     }
 }

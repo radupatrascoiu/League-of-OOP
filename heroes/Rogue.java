@@ -8,6 +8,8 @@ import skills.RogueSkills.Backstab;
 import skills.RogueSkills.Paralysis;
 import skills.Skill;
 
+import java.io.IOException;
+
 public class Rogue extends Hero {
 
     private Backstab backstabAttack;
@@ -25,7 +27,7 @@ public class Rogue extends Hero {
      * @param hero
      */
     @Override
-    public void play(final Hero hero, final Angel angel) {
+    public void play(final Hero hero) {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
@@ -33,10 +35,6 @@ public class Rogue extends Hero {
         this.paralysisAttack = new Paralysis(this);
         hero.accept(this.backstabAttack);
         hero.accept(this.paralysisAttack);
-        if(angel != null) {
-            hero.acceptAngel(angel);
-        }
-
     }
 
     /**
@@ -69,7 +67,7 @@ public class Rogue extends Hero {
     }
 
     @Override
-    public void acceptAngel(Angel angel) {
+    public void acceptAngel(Angel angel) throws IOException {
         angel.visit(this);
     }
 

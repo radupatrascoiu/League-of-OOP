@@ -9,6 +9,8 @@ import skills.KnightSkills.Execute;
 import skills.KnightSkills.Slam;
 import skills.Skill;
 
+import java.io.IOException;
+
 public class Knight extends Hero {
 
     private Execute executeAttack;
@@ -50,7 +52,7 @@ public class Knight extends Hero {
      */
     // se apeleaza cele 2 atacuri pe eroul primit ca parametru
     @Override
-    public void play(final Hero hero, final Angel angel) {
+    public void play(final Hero hero) {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
@@ -58,13 +60,13 @@ public class Knight extends Hero {
         this.slamAttack = new Slam(this);
         hero.accept(this.executeAttack);
         hero.accept(this.slamAttack);
-        if(angel != null) {
-            hero.acceptAngel(angel);
-        }
+//        if(angel != null) {
+//            hero.acceptAngel(angel);
+//        }
     }
 
     @Override
-    public void acceptAngel(Angel angel) {
+    public void acceptAngel(Angel angel) throws IOException {
         angel.visit(this);
     }
 
@@ -81,11 +83,7 @@ public class Knight extends Hero {
      */
     @Override
     public String toString() {
-        return "Knight{"
-                + "hp=" + hp
-                + ", location: x = " + getLocationHistory().getX()
-                + ", y = " + getLocationHistory().getY()
-                + '}';
+        return "Knight " + this.getPosition();
     }
 
     /**

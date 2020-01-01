@@ -81,6 +81,7 @@ public final class Constants {
     public static final int KNIGHT_PRIORITY = 1;
     public static final int PYROMANCER_PRIORITY = 2;
     public static final int ROGUE_PRIORITY = 3;
+    public static final int LEVEL_0 = 0;
     public static final int LEVEL_1 = 1;
     public static final int LEVEL_2 = 2;
     public static final int LEVEL_3 = 3;
@@ -90,7 +91,5 @@ public final class Constants {
     public static final int CRITICAL_DIVIDER = 3;
     public static final int PARALYSIS_OVERTIME = 3;
     public static final int PARALYSIS_OVERTIME_WOODS = 6;
-
-
 
 }

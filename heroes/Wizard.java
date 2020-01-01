@@ -9,6 +9,8 @@ import skills.Skill;
 import skills.WizardSkills.Deflect;
 import skills.WizardSkills.Drain;
 
+import java.io.IOException;
+
 public class Wizard extends Hero {
 
     private Drain drainAttack;
@@ -55,7 +57,7 @@ public class Wizard extends Hero {
      * @param hero
      */
     @Override
-    public void play(final Hero hero, final Angel angel) {
+    public void play(final Hero hero) {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
@@ -63,9 +65,6 @@ public class Wizard extends Hero {
         this.deflectAttack = new Deflect(this, hero);
         hero.accept(this.drainAttack);
         hero.accept(this.deflectAttack);
-        if(angel != null) {
-            hero.acceptAngel(angel);
-        }
     }
 
     /**
@@ -77,7 +76,7 @@ public class Wizard extends Hero {
     }
 
     @Override
-    public void acceptAngel(Angel angel) {
+    public void acceptAngel(Angel angel) throws IOException {
         angel.visit(this);
     }
 

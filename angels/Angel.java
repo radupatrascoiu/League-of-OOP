@@ -1,16 +1,54 @@
 package angels;
 
-import heroes.Knight;
-import heroes.Pyromancer;
-import heroes.Rogue;
-import heroes.Wizard;
+import greatmagician.GreatMagician;
+import greatmagician.Notification;
+import heroes.*;
 import main.LocationHistory;
 
-public abstract class Angel {
-    protected LocationHistory locationHistory;
+import java.io.IOException;
 
-    public abstract void visit(Pyromancer pyromancer);
-    public abstract void visit(Knight knight);
-    public abstract void visit(Wizard wizard);
-    public abstract void visit(Rogue rogue);
+public abstract class Angel extends Subjects {
+    protected LocationHistory locationHistory;
+    protected boolean abilityToRevive;
+
+    public Angel(LocationHistory locationHistory) {
+        this.locationHistory = locationHistory;
+        this.abilityToRevive = false;
+    }
+
+    public LocationHistory getLocationHistory() {
+        return locationHistory;
+    }
+
+    public boolean isAbilityToRevive() {
+        return abilityToRevive;
+    }
+
+    public abstract void visit(Pyromancer pyromancer) throws IOException;
+    public abstract void visit(Knight knight) throws IOException;
+    public abstract void visit(Wizard wizard) throws IOException;
+    public abstract void visit(Rogue rogue) throws IOException;
+
+
+    public void register(Notification notification) {
+        GreatMagician.getNotifications().add(notification);
+    }
+
+    public void unregister(Notification notification) {
+        GreatMagician.getNotifications().remove(notification);
+    }
+
+    public void notifyObservers(Hero hero, Angel angel) throws IOException {
+        for(Notification notification :  GreatMagician.getNotifications()) {
+            notification.update(hero, angel);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Angel{" +
+                "locationHistory=" + locationHistory +
+                ", abilityToRevive=" + abilityToRevive +
+                '}';
+    }
 }

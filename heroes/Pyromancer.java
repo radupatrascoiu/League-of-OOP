@@ -9,6 +9,8 @@ import skills.PyromancerSkills.Fireblast;
 import skills.PyromancerSkills.Ignite;
 import skills.Skill;
 
+import java.io.IOException;
+
 public class Pyromancer extends Hero {
 
     private Fireblast fireblastAttack;
@@ -35,7 +37,7 @@ public class Pyromancer extends Hero {
      * @param hero
      */
     @Override
-    public void play(final Hero hero, final Angel angel) {
+    public void play(final Hero hero) {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
@@ -43,9 +45,6 @@ public class Pyromancer extends Hero {
         this.igniteAttack = new Ignite(this);
         hero.accept(this.fireblastAttack);
         hero.accept(this.igniteAttack);
-        if(angel != null) {
-            hero.acceptAngel(angel);
-        }
     }
     /**
      * @return
@@ -69,7 +68,7 @@ public class Pyromancer extends Hero {
     }
 
     @Override
-    public void acceptAngel(Angel angel) {
+    public void acceptAngel(Angel angel) throws IOException {
         angel.visit(this);
     }
 
@@ -78,11 +77,7 @@ public class Pyromancer extends Hero {
      */
     @Override
     public String toString() {
-        return "Pyromancer{"
-                + "hp=" + hp
-                + ", location: x = " + getLocationHistory().getX()
-                + ", y = " + getLocationHistory().getY()
-                + '}';
+        return "Pyromancer " + this.position;
     }
 
     /**

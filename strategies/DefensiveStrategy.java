@@ -1,4 +1,4 @@
 package strategies;
 
-public class DefensiveStrategy {
+public class DefensiveStrategy implements Strategy{
 }

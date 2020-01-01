@@ -2,14 +2,22 @@ package heroes;
 
 
 import angels.Angel;
+import angels.Subjects;
 import common.Constants;
+import greatmagician.GreatMagician;
+import greatmagician.Notification;
 import main.LocationHistory;
 import skills.Buff;
 import skills.Effects;
 import skills.Skill;
 import skills.Stun;
+import strategies.Strategy;
 
-public abstract class Hero {
+import java.awt.*;
+import java.io.IOException;
+import java.net.PortUnreachableException;
+
+public abstract class Hero extends Subjects implements Strategy {
     protected int xp;
     protected int level;
     protected int hp;
@@ -21,7 +29,8 @@ public abstract class Hero {
     protected Buff buff;
     protected Stun stun;
     protected boolean deathOvertime;
-
+    protected GreatMagician greatMagician;
+    protected int position;
 
     /**
      * @return
@@ -42,11 +51,13 @@ public abstract class Hero {
         this.level = Constants.INITIAL_LEVEL;
         this.locationHistory = locationHistory;
         this.hp = 0;
-        effects = new Effects();
+        this.effects = new Effects();
         this.damageReceived = 0;
-        buff = new Buff();
-        stun = new Stun(false, 0);
-        deathOvertime = false;
+        this.buff = new Buff();
+        this.stun = new Stun(false, 0);
+        this.deathOvertime = false;
+        this.greatMagician = GreatMagician.getInstance();
+        this.position = -1;
     }
 
     /**
@@ -62,6 +73,14 @@ public abstract class Hero {
      */
     public void setDeathOvertime(final boolean deathOvertime) {
         this.deathOvertime = deathOvertime;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     /**
@@ -107,7 +126,7 @@ public abstract class Hero {
         return priority;
     }
 
-    public abstract void play(Hero hero, Angel angel);
+    public abstract void play(Hero hero);
 
     /**
      * @return
@@ -233,13 +252,19 @@ public abstract class Hero {
         this.setAttacker(hero);
         this.damageReceived += damageReceivedFromAttacker;
     }
+
+    public void increaseHp(final int hpReceived) {
+        this.hp += hpReceived;
+    }
+
     /**
      *
      */
-    public void calculateHp() {
+    public void calculateHp() throws IOException {
         this.hp -= damageReceived;
 
         if (this.hp <= 0) {
+            notifyUpdate(GreatMagician.getHeroKillNotification(), this, null);
             if (this.getAttacker() != null) {
                 this.getAttacker().levelUp(this);
                 this.setAttacker(null);
@@ -256,21 +281,35 @@ public abstract class Hero {
                 - (this.level - hero.getLevel()) * Constants.XP_FORMULA_2);
     }
 
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+    public void levelUp() throws IOException {
+        if(this.getLevel() == Constants.LEVEL_0) {
+            this.setXp(Constants.XP_LEVEL_1);
+            this.setLevel(Constants.LEVEL_1);
+            this.hp = this.getMaxHp();
+        } else if(this.getLevel() == Constants.LEVEL_1) {
+            this.setXp(Constants.XP_LEVEL_2);
+            this.setLevel(Constants.LEVEL_2);
+            this.hp = this.getMaxHp();
+        } else if(this.getLevel() == Constants.LEVEL_2) {
+            this.setXp(Constants.XP_LEVEL_3);
+            this.setLevel(Constants.XP_LEVEL_3);
+            this.hp = this.getMaxHp();
+        } else if(this.getLevel() == Constants.LEVEL_3) {
+            this.setXp(Constants.XP_LEVEL_4);
+            this.setLevel(Constants.LEVEL_4);
+            this.hp = this.getMaxHp();
+        }
+
+        this.notifyUpdate(GreatMagician.getLevelUpNotification(), this, null);
+    }
+
     public abstract void accept(Skill skill);
 
-    public abstract void acceptAngel(Angel angel);
-
-    /**
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "Hero{"
-                + "xp=" + xp
-                + ", level=" + level
-                + ", locationHistory=" + locationHistory
-                + '}';
-    }
+    public abstract void acceptAngel(Angel angel) throws IOException;
 
     public abstract String displayRace();
 }
