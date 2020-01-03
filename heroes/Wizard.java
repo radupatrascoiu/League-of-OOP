@@ -3,11 +3,14 @@ package heroes;
 
 import angels.Angel;
 import common.Constants;
+import common.StrategyConstans;
 import main.LocationHistory;
 import map.MapSingleton;
 import skills.Skill;
 import skills.WizardSkills.Deflect;
 import skills.WizardSkills.Drain;
+import strategies.DefensiveStrategy;
+import strategies.OffensiveStrategy;
 
 import java.io.IOException;
 
@@ -52,6 +55,16 @@ public class Wizard extends Hero {
         return 1;
     }
 
+    @Override
+    public void applyStrategy() {
+        if(this.hp > this.getMaxHp()/4 && this.hp < this.getMaxHp()/2) {
+            this.setStrategy(new OffensiveStrategy());
+            this.strategy.execute(this, StrategyConstans.WIZARD_OFFENSIVE_HP, StrategyConstans.WIZARD_OFFENSIVE_COEFFICIENTS);
+        } else if(this.hp < this.getMaxHp()/4) {
+            this.setStrategy(new DefensiveStrategy());
+            this.strategy.execute(this, StrategyConstans.WIZARD_DEFENSIVE_HP, StrategyConstans.WIZARD_DEFENSIVE_COEFFICIENTS);
+        }
+    }
 
     /**
      * @param hero
@@ -61,6 +74,7 @@ public class Wizard extends Hero {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
+
         this.drainAttack = new Drain(this, hero);
         this.deflectAttack = new Deflect(this, hero);
         hero.accept(this.drainAttack);
@@ -85,11 +99,7 @@ public class Wizard extends Hero {
      */
     @Override
     public String toString() {
-        return "Wizard{"
-                + "hp=" + hp
-                + ", location: x = " + getLocationHistory().getX()
-                + ", y = " + getLocationHistory().getY()
-                + '}';
+        return "Wizard " + this.position;
     }
 
     /**

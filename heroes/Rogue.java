@@ -2,11 +2,14 @@ package heroes;
 
 import angels.Angel;
 import common.Constants;
+import common.StrategyConstans;
 import main.LocationHistory;
 import map.MapSingleton;
 import skills.RogueSkills.Backstab;
 import skills.RogueSkills.Paralysis;
 import skills.Skill;
+import strategies.DefensiveStrategy;
+import strategies.OffensiveStrategy;
 
 import java.io.IOException;
 
@@ -31,6 +34,7 @@ public class Rogue extends Hero {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
+
         this.backstabAttack = new Backstab(this);
         this.paralysisAttack = new Paralysis(this);
         hero.accept(this.backstabAttack);
@@ -58,6 +62,17 @@ public class Rogue extends Hero {
         return 1;
     }
 
+    @Override
+    public void applyStrategy() {
+        if(this.hp > this.getMaxHp()/7 && this.hp < this.getMaxHp()/5) {
+            this.setStrategy(new OffensiveStrategy());
+            this.strategy.execute(this, StrategyConstans.ROGUE_OFFENSIVE_HP, StrategyConstans.ROGUE_OFFENSIVE_COEFFICIENTS);
+        } else if(this.hp < this.getMaxHp()/7) {
+            this.setStrategy(new DefensiveStrategy());
+            this.strategy.execute(this, StrategyConstans.ROGUE_DEFENSIVE_HP, StrategyConstans.ROGUE_DEFENSIVE_COEFFICIENTS);
+        }
+    }
+
     /**
      * @param skill
      */
@@ -76,11 +91,7 @@ public class Rogue extends Hero {
      */
     @Override
     public String toString() {
-        return "Rogue{"
-                + "hp=" + hp
-                + ", location: x = " + getLocationHistory().getX()
-                + ", y = " + getLocationHistory().getY()
-                + '}';
+        return "Rogue " + this.position;
     }
 
     /**

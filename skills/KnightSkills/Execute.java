@@ -44,7 +44,9 @@ public class Execute implements Skill {
             float levelLandDamage = this.baseDamage
                    * this.knight.getLandModifier();
             int totalDamage = Math.round(levelLandDamage
-                    * Constants.EXECUTE_VS_PYROMANCER_MODIFIER);
+                    * (Constants.EXECUTE_VS_PYROMANCER_MODIFIER + knight.getCoefficientsStrategy()
+                    + knight.getCoefficientsAngels()));
+            System.out.println("Execute total damage = " + totalDamage);
             // se seteaza damage-ul dat
             this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.
                     getEffects().getLevelLandDamage() + levelLandDamage));
@@ -70,8 +72,9 @@ public class Execute implements Skill {
         } else {
             float levelLandDamage = this.baseDamage
                     * this.knight.getLandModifier();
+            // modificatorul de race nu exista => nu am AngelModifier
             int totalDamage = Math.round(levelLandDamage
-                    * Constants.EXECUTE_VS_KNIGHT_MODIFIER);
+                    * (Constants.EXECUTE_VS_KNIGHT_MODIFIER + knight.getCoefficientsStrategy()));
             this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.
                     getEffects().
                     getLevelLandDamage() + levelLandDamage));
@@ -98,7 +101,8 @@ public class Execute implements Skill {
             float levelLandDamage = this.baseDamage
                     * this.knight.getLandModifier();
             int totalDamage = Math.round(levelLandDamage
-                    * Constants.EXECUTE_VS_WIZARD_MODIFIER);
+                    * (Constants.EXECUTE_VS_WIZARD_MODIFIER + knight.getCoefficientsStrategy()
+                    + knight.getCoefficientsAngels()));
             this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
                     getLevelLandDamage() + levelLandDamage));
             this.knight.getEffects().setTotalDamage(this.knight.getEffects().
@@ -123,7 +127,8 @@ public class Execute implements Skill {
             float levelLandDamage = this.baseDamage
                     * this.knight.getLandModifier();
             int totalDamage = Math.round(levelLandDamage
-                    * Constants.EXECUTE_VS_ROGUE_MODIFIER);
+                    * (Constants.EXECUTE_VS_ROGUE_MODIFIER + knight.getCoefficientsStrategy()
+                    + knight.getCoefficientsAngels()));
             this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
                     getLevelLandDamage() + levelLandDamage));
             this.knight.getEffects().setTotalDamage(this.knight.getEffects().

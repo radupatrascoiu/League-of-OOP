@@ -3,11 +3,14 @@ package heroes;
 
 import angels.Angel;
 import common.Constants;
+import common.StrategyConstans;
 import main.LocationHistory;
 import map.MapSingleton;
 import skills.PyromancerSkills.Fireblast;
 import skills.PyromancerSkills.Ignite;
 import skills.Skill;
+import strategies.DefensiveStrategy;
+import strategies.OffensiveStrategy;
 
 import java.io.IOException;
 
@@ -41,6 +44,10 @@ public class Pyromancer extends Hero {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
+//        if(!this.getStun().isStun()) {
+//            this.applyStrategy();
+//        }
+
         this.fireblastAttack = new Fireblast(this);
         this.igniteAttack = new Ignite(this);
         hero.accept(this.fireblastAttack);
@@ -57,6 +64,17 @@ public class Pyromancer extends Hero {
         }
 
         return 1f;
+    }
+
+    @Override
+    public void applyStrategy() {
+        if(this.hp > this.getMaxHp()/4 && this.hp < this.getMaxHp()/3) {
+            this.setStrategy(new OffensiveStrategy());
+            this.strategy.execute(this, StrategyConstans.PYROMANCER_OFFENSIVE_HP, StrategyConstans.PYROMANCER_OFFENSIVE_COEFFICIENTS);
+        } else if(this.hp < this.getMaxHp()/4) {
+            this.setStrategy(new DefensiveStrategy());
+            this.strategy.execute(this, StrategyConstans.PYROMANCER_DEFENSIVE_HP, StrategyConstans.PYROMANCER_DEFENSIVE_COEFFICIENTS);
+        }
     }
 
     /**

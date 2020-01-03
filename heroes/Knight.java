@@ -3,11 +3,14 @@ package heroes;
 
 import angels.Angel;
 import common.Constants;
+import common.StrategyConstans;
 import main.LocationHistory;
 import map.MapSingleton;
 import skills.KnightSkills.Execute;
 import skills.KnightSkills.Slam;
 import skills.Skill;
+import strategies.DefensiveStrategy;
+import strategies.OffensiveStrategy;
 
 import java.io.IOException;
 
@@ -47,6 +50,18 @@ public class Knight extends Hero {
         return 1;
     }
 
+    @Override
+    public void applyStrategy() {
+        System.out.println(this.hp);
+        if(this.hp > this.getMaxHp()/3 && this.hp < this.getMaxHp()/2) {
+            this.setStrategy(new OffensiveStrategy());
+            this.strategy.execute(this, StrategyConstans.KNIGHT_OFFENSIVE_HP, StrategyConstans.KNIGHT_OFFENSIVE_COEFFICIENTS);
+        } else if(this.hp < this.getMaxHp()/3) {
+            this.setStrategy(new DefensiveStrategy());
+            this.strategy.execute(this, StrategyConstans.KNIGHT_DEFENSIVE_HP, StrategyConstans.KNIGHT_DEFENSIVE_COEFFICIENTS);
+        }
+    }
+
     /**
      * @param hero
      */
@@ -56,13 +71,11 @@ public class Knight extends Hero {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
+
         this.executeAttack = new Execute(this);
         this.slamAttack = new Slam(this);
         hero.accept(this.executeAttack);
         hero.accept(this.slamAttack);
-//        if(angel != null) {
-//            hero.acceptAngel(angel);
-//        }
     }
 
     @Override

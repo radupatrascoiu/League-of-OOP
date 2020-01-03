@@ -29,7 +29,8 @@ public class Paralysis implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.rogue.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.PARALYSIS_VS_PYROMANCER_MODIFIER);
+                * (Constants.PARALYSIS_VS_PYROMANCER_MODIFIER + rogue.getCoefficientsStrategy() +
+                rogue.getCoefficientsAngels()));
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
@@ -58,7 +59,8 @@ public class Paralysis implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.rogue.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.PARALYSIS_VS_KNIGHT_MODIFIER);
+                * (Constants.PARALYSIS_VS_KNIGHT_MODIFIER + rogue.getCoefficientsStrategy() +
+                rogue.getCoefficientsAngels()));
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
@@ -86,7 +88,8 @@ public class Paralysis implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.rogue.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.PARALYSIS_VS_WIZARD_MODIFIER);
+                * (Constants.PARALYSIS_VS_WIZARD_MODIFIER + rogue.getCoefficientsStrategy() +
+                rogue.getCoefficientsAngels()));
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
@@ -114,7 +117,8 @@ public class Paralysis implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.rogue.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.PARALYSIS_VS_ROGUE_MODIFIER);
+                * (Constants.PARALYSIS_VS_ROGUE_MODIFIER + rogue.getCoefficientsStrategy() +
+                rogue.getCoefficientsAngels()));
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().

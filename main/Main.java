@@ -72,6 +72,8 @@ public final class Main {
                 } else {
                     heroesList.get(j).getBuff().setDamageOverTime(0);
                 }
+
+                heroesList.get(j).applyStrategy();
             }
 
             for (int j = 0; j < numberOfHeroes; ++j) {
@@ -80,9 +82,11 @@ public final class Main {
                     if (GameLogic.existsConflict(heroesList.get(j), heroesList.get(k)) && j != k) {
                         if (heroesList.get(j).getPriority() >= heroesList.get(k).getPriority()) {
                             // wizard va fi fortat sa atace al doilea
+                            System.out.println("Ataca primul");
                             heroesList.get(j).play(heroesList.get(k));
                             heroesList.get(k).play(heroesList.get(j));
                         } else {
+                            System.out.println("Ataca al doilea");
                             heroesList.get(k).play(heroesList.get(j));
                             heroesList.get(j).play(heroesList.get(k));
                         }
@@ -90,7 +94,8 @@ public final class Main {
                 }
             }
 
-            for (int j = 0; j < numberOfHeroes; ++j) {
+
+            for (int j = numberOfHeroes-1; j >= 0; j--) {
 
                 if (!heroesList.get(j).isDeathOvertime() || heroesList.get(j).getHp() > 0) {
                     // se calculeaza hp-ul doar daca este in viata
@@ -108,16 +113,16 @@ public final class Main {
                 for (int j = index; j < numberOfAngelPerRound.get(i) + index; ++j) { // creare ingeri
                     angels.add(AngelFactory.getAngel(gameInput.getAngels().get(j), gameInput.
                             getLocationsAngels().get(j)));
-                    angels.get(j).notifyUpdate(GreatMagician.getAngelSpawnNotification(), null, angels.get(j));
                 }
             }
 
             for(int j = index; j < numberOfAngelPerRound.get(i)+index; ++j) {
+                angels.get(j).notifyUpdate(GreatMagician.getAngelSpawnNotification(), null, angels.get(j));
                 for(int k = 0; k < numberOfHeroes; ++k) {
                     if(GameLogic.existsConflict(angels.get(j), heroesList.get(k))) {
                         if(heroesList.get(k).getHp() > 0 ||
-                                heroesList.get(k).getHp() <= 0 &&
-                                        angels.get(j).isAbilityToRevive()) {
+                                (heroesList.get(k).getHp() <= 0 &&
+                                        angels.get(j).isAbilityToRevive())) {
                             heroesList.get(k).acceptAngel(angels.get(j));
                         }
                     }

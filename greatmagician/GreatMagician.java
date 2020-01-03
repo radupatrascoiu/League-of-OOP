@@ -11,6 +11,7 @@ public class GreatMagician {
     private static AngelKillNotification angelKillNotification;
     private static AngelReviveNotification angelReviveNotification;
     private static AngelSpawnNotification angelSpawnNotification;
+    private static AngelXpNotification angelXpNotification;
     private static HeroKillNotification heroKillNotification;
     private static LevelUpNotification levelUpNotification;
 
@@ -25,6 +26,7 @@ public class GreatMagician {
         angelKillNotification = new AngelKillNotification();
         angelReviveNotification = new AngelReviveNotification();
         angelSpawnNotification = new AngelSpawnNotification();
+        angelXpNotification = new AngelXpNotification();
         heroKillNotification = new HeroKillNotification();
         levelUpNotification = new LevelUpNotification();
 
@@ -33,6 +35,7 @@ public class GreatMagician {
         notifications.add(angelKillNotification);
         notifications.add(angelReviveNotification);
         notifications.add(angelSpawnNotification);
+        notifications.add(angelXpNotification);
         notifications.add(heroKillNotification);
         notifications.add(levelUpNotification);
 
@@ -40,12 +43,6 @@ public class GreatMagician {
             return new GreatMagician();
         }
 
-        return greatMagician;
-    }
-
-
-
-    public static GreatMagician getGreatMagician() {
         return greatMagician;
     }
 
@@ -71,6 +68,10 @@ public class GreatMagician {
 
     public static AngelSpawnNotification getAngelSpawnNotification() {
         return angelSpawnNotification;
+    }
+
+    public static AngelXpNotification getAngelXpNotification() {
+        return angelXpNotification;
     }
 
     public static HeroKillNotification getHeroKillNotification() {

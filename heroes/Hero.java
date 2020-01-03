@@ -5,7 +5,6 @@ import angels.Angel;
 import angels.Subjects;
 import common.Constants;
 import greatmagician.GreatMagician;
-import greatmagician.Notification;
 import main.LocationHistory;
 import skills.Buff;
 import skills.Effects;
@@ -13,11 +12,9 @@ import skills.Skill;
 import skills.Stun;
 import strategies.Strategy;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.PortUnreachableException;
 
-public abstract class Hero extends Subjects implements Strategy {
+public abstract class Hero extends Subjects {
     protected int xp;
     protected int level;
     protected int hp;
@@ -31,6 +28,9 @@ public abstract class Hero extends Subjects implements Strategy {
     protected boolean deathOvertime;
     protected GreatMagician greatMagician;
     protected int position;
+    protected Strategy strategy;
+    protected float coefficientsStrategy;
+    protected float coefficientsAngels;
 
     /**
      * @return
@@ -58,6 +58,24 @@ public abstract class Hero extends Subjects implements Strategy {
         this.deathOvertime = false;
         this.greatMagician = GreatMagician.getInstance();
         this.position = -1;
+        this.coefficientsStrategy = 0;
+        this.coefficientsAngels = 0;
+    }
+
+    public float getCoefficientsStrategy() {
+        return coefficientsStrategy;
+    }
+
+    public void setCoefficientsStrategy(float coefficientsStrategy) {
+        this.coefficientsStrategy = coefficientsStrategy;
+    }
+
+    public float getCoefficientsAngels() {
+        return coefficientsAngels;
+    }
+
+    public void setCoefficientsAngels(float coefficientsAngels) {
+        this.coefficientsAngels = coefficientsAngels;
     }
 
     /**
@@ -191,7 +209,9 @@ public abstract class Hero extends Subjects implements Strategy {
     public void levelUp(final Hero loser) {
 
         if (this.getHp() > 0) {
-            this.increaseXp(loser);
+            if(loser != null) {
+                this.increaseXp(loser);
+            }
 
             int xpLevelUp = this.getXp() + this.getLevel() * Constants.XP_MULTIPLICATOR;
 
@@ -257,6 +277,10 @@ public abstract class Hero extends Subjects implements Strategy {
         this.hp += hpReceived;
     }
 
+    public void decreaseHp(final int hpReduced) {
+        this.hp -= hpReduced;
+    }
+
     /**
      *
      */
@@ -279,6 +303,11 @@ public abstract class Hero extends Subjects implements Strategy {
         // this.hero va fi eroul care va castiga batalia
         this.xp += Math.max(0, Constants.XP_FORMULA_1
                 - (this.level - hero.getLevel()) * Constants.XP_FORMULA_2);
+    }
+
+    public void increaseXp(int xpReceived) {
+        this.xp += xpReceived;
+        this.levelUp(null);
     }
 
     public void setXp(int xp) {
@@ -306,6 +335,12 @@ public abstract class Hero extends Subjects implements Strategy {
 
         this.notifyUpdate(GreatMagician.getLevelUpNotification(), this, null);
     }
+
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public abstract void applyStrategy();
 
     public abstract void accept(Skill skill);
 

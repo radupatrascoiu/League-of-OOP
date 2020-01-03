@@ -30,7 +30,9 @@ public class Slam implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.knight.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.SLAM_VS_PYROMANCER_MODIFIER);
+                * (Constants.SLAM_VS_PYROMANCER_MODIFIER + knight.getCoefficientsStrategy() +
+                + knight.getCoefficientsAngels()));
+        System.out.println("Slam total damage = " + totalDamage);
         this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.knight.getEffects().setTotalDamage(this.knight.getEffects()
@@ -52,7 +54,8 @@ public class Slam implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.knight.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.SLAM_VS_KNIGHT_MODIFIER);
+                * (Constants.SLAM_VS_KNIGHT_MODIFIER + knight.getCoefficientsStrategy() +
+                + knight.getCoefficientsAngels()));
         this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.knight.getEffects().setTotalDamage(this.knight.getEffects().
@@ -73,7 +76,8 @@ public class Slam implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.knight.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.SLAM_VS_WIZARD_MODIFIER);
+                * (Constants.SLAM_VS_WIZARD_MODIFIER - knight.getCoefficientsStrategy()
+                + knight.getCoefficientsAngels()));
 
         this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
                 getLevelLandDamage() + levelLandDamage));
@@ -94,7 +98,8 @@ public class Slam implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.knight.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.SLAM_VS_ROGUE_MODIFIER);
+                * (Constants.SLAM_VS_ROGUE_MODIFIER + knight.getCoefficientsStrategy()
+                + knight.getCoefficientsAngels()));
         this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
                 getLevelLandDamage() + levelLandDamage));
         this.knight.getEffects().setTotalDamage(this.knight.getEffects().

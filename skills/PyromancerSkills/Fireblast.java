@@ -28,7 +28,8 @@ public class Fireblast implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.pyromancer.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.FIREBLAST_VS_PYROMANCER_MODIFIER);
+                * (Constants.FIREBLAST_VS_PYROMANCER_MODIFIER + pyromancer.getCoefficientsStrategy() +
+                pyromancer.getCoefficientsAngels()));
         this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
@@ -44,8 +45,11 @@ public class Fireblast implements Skill {
     public void visit(final Knight knight) {
         float levelLandDamage = this.baseDamage
                 * this.pyromancer.getLandModifier();
+
         int totalDamage = Math.round(levelLandDamage
-                * Constants.FIREBLAST_VS_KNIGHT_MODIFIER);
+                * (Constants.FIREBLAST_VS_KNIGHT_MODIFIER + pyromancer.getCoefficientsStrategy() +
+                pyromancer.getCoefficientsAngels()));
+        System.out.println("Fireblast total damage = " + totalDamage);
         this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
@@ -62,7 +66,8 @@ public class Fireblast implements Skill {
                 * this.pyromancer.getLandModifier();
 
         int totalDamage = Math.round(levelLandDamage
-                * Constants.FIREBLAST_VS_WIZARD_MODIFIER);
+                * (Constants.FIREBLAST_VS_WIZARD_MODIFIER + pyromancer.getCoefficientsStrategy() +
+                pyromancer.getCoefficientsAngels()));
         this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.
@@ -79,7 +84,8 @@ public class Fireblast implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.pyromancer.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * Constants.FIREBLAST_VS_ROGUE_MODIFIER);
+                * (Constants.FIREBLAST_VS_ROGUE_MODIFIER + pyromancer.getCoefficientsStrategy() +
+                pyromancer.getCoefficientsAngels()));
         this.pyromancer.getEffects().setLevelLandDamage(Math.round(this.pyromancer.
                 getEffects().getLevelLandDamage() + levelLandDamage));
         this.pyromancer.getEffects().setTotalDamage(this.pyromancer.

@@ -7,8 +7,7 @@ import main.Main;
 
 import java.io.IOException;
 
-public class AngelReviveNotification extends Notification{
-
+public class AngelXpNotification extends Notification {
     @Override
     public void update(Hero hero, Angel angel) throws IOException {
         GameInputWriter.write(Main.getArgs()[1], "\n");

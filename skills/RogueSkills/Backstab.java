@@ -45,7 +45,9 @@ public class Backstab implements Skill {
         }
 
         int totalDamage = Math.round(levelLandDamage
-                * Constants.BACKSTAB_VS_PYROMANCER_MODIFIER * criticalDamage);
+                * (Constants.BACKSTAB_VS_PYROMANCER_MODIFIER + rogue.getCoefficientsStrategy() +
+                rogue.getCoefficientsAngels()));
+        totalDamage = Math.round(totalDamage * criticalDamage);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
         this.rogue.getEffects().setTotalDamage(this.rogue.getEffects().
@@ -70,7 +72,8 @@ public class Backstab implements Skill {
         }
 
         int totalDamage = Math.round(levelLandDamage
-                * Constants.BACKSTAB_VS_KNIGHT_MODIFIER);
+                * (Constants.BACKSTAB_VS_KNIGHT_MODIFIER + rogue.getCoefficientsStrategy() +
+                rogue.getCoefficientsAngels()));
         totalDamage = Math.round(totalDamage * criticalDamage);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
@@ -97,7 +100,8 @@ public class Backstab implements Skill {
                 * this.rogue.getLandModifier() * criticalDamage;
 
         int totalDamage = Math.round(levelLandDamage
-                * Constants.BACKSTAB_VS_WIZARD_MODIFIER);
+                * (Constants.BACKSTAB_VS_WIZARD_MODIFIER + rogue.getCoefficientsStrategy() +
+                rogue.getCoefficientsAngels()));
         totalDamage = Math.round(totalDamage * criticalDamage);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
@@ -123,7 +127,8 @@ public class Backstab implements Skill {
         }
 
         int totalDamage = Math.round(levelLandDamage
-                * Constants.BACKSTAB_VS_ROGUE_MODIFIER);
+                * (Constants.BACKSTAB_VS_ROGUE_MODIFIER + rogue.getCoefficientsStrategy() +
+                rogue.getCoefficientsAngels()));
         totalDamage = Math.round(totalDamage * criticalDamage);
         this.rogue.getEffects().setLevelLandDamage(Math.round(this.rogue.getEffects().
                 getLevelLandDamage() + levelLandDamage));
