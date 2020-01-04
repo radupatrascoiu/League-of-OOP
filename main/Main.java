@@ -21,8 +21,8 @@ public final class Main {
 
     public static void main(final String[] args) throws IOException {
         savedArgs = args;
-	    GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
-	    GameInput gameInput = gameInputLoader.load();
+        GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
+        GameInput gameInput = gameInputLoader.load();
         MapSingleton map = MapSingleton.getInstance();
         map.init(gameInput.getMap()); // generare harta
         int numberOfHeroes = gameInput.getNumberOfHeroes();
@@ -43,7 +43,7 @@ public final class Main {
 
 
         for (int i = 0; i < numberOfRounds; ++i) {
-            GameInputWriter.write(args[1], "~~ Round " + (i+1) + " ~~");
+            GameInputWriter.write(args[1], "~~ Round " + (i + 1) + " ~~");
 
             for (int  j = 0; j < numberOfHeroes; ++j) {
 
@@ -61,7 +61,7 @@ public final class Main {
                     heroesList.get(j).getBuff().setDamageOverTime(0);
                 }
 
-                if(!heroesList.get(j).getStun().isStun()) {
+                if (!heroesList.get(j).getStun().isStun()) {
                     heroesList.get(j).applyStrategy();
                 }
 
@@ -98,7 +98,7 @@ public final class Main {
             }
 
 
-            for (int j = numberOfHeroes-1; j >= 0; j--) {
+            for (int j = numberOfHeroes - 1; j >= 0; j--) {
 
                 if (!heroesList.get(j).isDeathOvertime() || heroesList.get(j).getHp() >= 0) {
                     // se calculeaza hp-ul doar daca este in viata
@@ -112,20 +112,22 @@ public final class Main {
                 heroesList.get(j).getEffects().setLevelLandDamage(0);
             }
 
-            if(numberOfAngelPerRound.get(i) != 0) {
-                for (int j = index; j < numberOfAngelPerRound.get(i) + index; ++j) { // creare ingeri
+            if (numberOfAngelPerRound.get(i) != 0) {
+                for (int j = index; j < numberOfAngelPerRound.get(i) + index; ++j) {
+                    // creare ingeri
                     angels.add(AngelFactory.getAngel(gameInput.getAngels().get(j), gameInput.
                             getLocationsAngels().get(j)));
                 }
             }
 
-            for(int j = index; j < numberOfAngelPerRound.get(i)+index; ++j) {
-                angels.get(j).notifyUpdate(GreatMagician.getAngelSpawnNotification(), null, angels.get(j));
-                for(int k = 0; k < numberOfHeroes; ++k) {
-                    if(GameLogic.existsConflict(angels.get(j), heroesList.get(k))) {
-                        if(heroesList.get(k).getHp() > 0 ||
-                                (heroesList.get(k).getHp() <= 0 &&
-                                        angels.get(j).isAbilityToRevive())) {
+            for (int j = index; j < numberOfAngelPerRound.get(i) + index; ++j) {
+                angels.get(j).notifyUpdate(GreatMagician.getAngelSpawnNotification(), null,
+                        angels.get(j));
+                for (int k = 0; k < numberOfHeroes; ++k) {
+                    if (GameLogic.existsConflict(angels.get(j), heroesList.get(k))) {
+                        if (heroesList.get(k).getHp() > 0
+                                || (heroesList.get(k).getHp() <= 0
+                                        && angels.get(j).isAbilityToRevive())) {
                             heroesList.get(k).acceptAngel(angels.get(j));
                         }
                     }
@@ -144,19 +146,19 @@ public final class Main {
             for (int i = 0; i < numberOfHeroes; ++i) {
 
                 GameInputWriter.write(args[1], heroesList.get(i).displayRace());
-                GameInputWriter.write(args[1]," ");
+                GameInputWriter.write(args[1], " ");
                 if (heroesList.get(i).getHp() <= 0) {
-                    GameInputWriter.write(args[1],"dead");
+                    GameInputWriter.write(args[1], "dead");
                 } else {
                     GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).getLevel()));
                     GameInputWriter.write(args[1], " ");
                     GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).getXp()));
-                    GameInputWriter.write(args[1]," ");
+                    GameInputWriter.write(args[1], " ");
                     GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).getHp()));
-                    GameInputWriter.write(args[1]," ");
+                    GameInputWriter.write(args[1], " ");
                     GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).
                             getLocationHistory().getX()));
-                    GameInputWriter.write(args[1]," ");
+                    GameInputWriter.write(args[1], " ");
                     GameInputWriter.write(args[1], String.valueOf(heroesList.get(i).
                             getLocationHistory().getY()));
                 }

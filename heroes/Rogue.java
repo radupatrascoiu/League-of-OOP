@@ -62,14 +62,20 @@ public class Rogue extends Hero {
         return 1;
     }
 
+    /**
+     *
+     */
     @Override
     public void applyStrategy() {
-        if(this.hp > this.getMaxHp()/7 && this.hp < this.getMaxHp()/5) {
+        if (this.hp > this.getMaxHp() / StrategyConstans.ROGUE_FORMULA_1
+                && this.hp < this.getMaxHp() / StrategyConstans.ROGUE_FORMULA_2) {
             this.setStrategy(new OffensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.ROGUE_OFFENSIVE_HP, 0.4f);
-        } else if(this.hp < this.getMaxHp()/7) {
+            this.strategy.execute(this, StrategyConstans.ROGUE_OFFENSIVE_HP,
+                    StrategyConstans.ROGUE_OFFENSIVE_COEFFICIENTS);
+        } else if (this.hp < this.getMaxHp() / StrategyConstans.ROGUE_FORMULA_1) {
             this.setStrategy(new DefensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.ROGUE_DEFENSIVE_HP, 0.1f);
+            this.strategy.execute(this, StrategyConstans.ROGUE_DEFENSIVE_HP,
+                    StrategyConstans.ROGUE_DEFENSIVE_COEFFICIENTS);
         }
     }
 
@@ -81,8 +87,12 @@ public class Rogue extends Hero {
         skill.visit(this);
     }
 
+    /**
+     * @param angel
+     * @throws IOException
+     */
     @Override
-    public void acceptAngel(Angel angel) throws IOException {
+    public void acceptAngel(final Angel angel) throws IOException {
         angel.visit(this);
     }
 

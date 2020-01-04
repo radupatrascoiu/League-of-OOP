@@ -1,5 +1,6 @@
 package angels;
 
+import common.DraculaConstants;
 import greatmagician.GreatMagician;
 import heroes.Knight;
 import heroes.Pyromancer;
@@ -11,53 +12,76 @@ import java.io.IOException;
 
 public class Dracula extends Angel {
 
-    public Dracula(LocationHistory locationHistory) {
+    public Dracula(final LocationHistory locationHistory) {
         super(locationHistory);
     }
 
+    /**
+     * @param pyromancer
+     * @throws IOException
+     */
     @Override
-    public void visit(Pyromancer pyromancer) throws IOException {
-        pyromancer.setCoefficientsAngels(pyromancer.getCoefficientsAngels() - 0.3f);
-        pyromancer.decreaseHp(40);
+    public void visit(final Pyromancer pyromancer) throws IOException {
+        pyromancer.setCoefficientsAngels(pyromancer.getCoefficientsAngels()
+                - DraculaConstants.PYROMANCER_COEFFICIENT);
+        pyromancer.decreaseHp(DraculaConstants.PYROMANCER_HP);
         notifyUpdate(GreatMagician.getAngelHitNotification(), pyromancer, this);
-        if(pyromancer.getHp() <= 0) {
+        if (pyromancer.getHp() <= 0) {
             notifyUpdate(GreatMagician.getAngelKillNotification(), pyromancer, this);
         }
 
     }
 
+    /**
+     * @param knight
+     * @throws IOException
+     */
     @Override
-    public void visit(Knight knight) throws IOException {
-        knight.setCoefficientsAngels(knight.getCoefficientsAngels() - 0.2f);
-        knight.decreaseHp(60);
+    public void visit(final Knight knight) throws IOException {
+        knight.setCoefficientsAngels(knight.getCoefficientsAngels()
+                - DraculaConstants.KNIGHT_COEFFICIENT);
+        knight.decreaseHp(DraculaConstants.KNIGHT_HP);
         notifyUpdate(GreatMagician.getAngelHitNotification(), knight, this);
-        if(knight.getHp() <= 0) {
+        if (knight.getHp() <= 0) {
             notifyUpdate(GreatMagician.getAngelKillNotification(), knight, this);
         }
     }
 
+    /**
+     * @param wizard
+     * @throws IOException
+     */
     @Override
-    public void visit(Wizard wizard) throws IOException {
-        wizard.setCoefficientsAngels(wizard.getCoefficientsAngels() - 0.4f);
-        wizard.decreaseHp(20);
+    public void visit(final Wizard wizard) throws IOException {
+        wizard.setCoefficientsAngels(wizard.getCoefficientsAngels()
+                - DraculaConstants.WIZARD_COEFFICIENT);
+        wizard.decreaseHp(DraculaConstants.WIZARD_HP);
         notifyUpdate(GreatMagician.getAngelHitNotification(), wizard, this);
-        if(wizard.getHp() <= 0) {
+        if (wizard.getHp() <= 0) {
             notifyUpdate(GreatMagician.getAngelKillNotification(), wizard, this);
         }
 
     }
 
+    /**
+     * @param rogue
+     * @throws IOException
+     */
     @Override
-    public void visit(Rogue rogue) throws IOException {
-        rogue.setCoefficientsAngels(rogue.getCoefficientsAngels() - 0.1f);
-        rogue.decreaseHp(35);
+    public void visit(final Rogue rogue) throws IOException {
+        rogue.setCoefficientsAngels(rogue.getCoefficientsAngels()
+                - DraculaConstants.ROGUE_COEFFICIENT);
+        rogue.decreaseHp(DraculaConstants.ROGUE_HP);
         notifyUpdate(GreatMagician.getAngelHitNotification(), rogue, this);
-        if(rogue.getHp() <= 0) {
+        if (rogue.getHp() <= 0) {
             notifyUpdate(GreatMagician.getAngelKillNotification(), rogue, this);
         }
 
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "Dracula";

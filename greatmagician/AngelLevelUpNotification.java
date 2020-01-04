@@ -7,15 +7,21 @@ import main.Main;
 
 import java.io.IOException;
 
-public class AngelLevelUpNotification extends Notification{
+public class AngelLevelUpNotification extends Notification {
 
+    /**
+     * @param hero
+     * @param angel
+     * @throws IOException
+     */
     @Override
-    public void update(Hero hero, Angel angel) throws IOException {
-            if(angel != null) {
+    public void update(final Hero hero, final Angel angel) throws IOException {
+            if (angel != null) {
                 GameInputWriter.write(Main.getArgs()[1], "\n");
                 GameInputWriter.write(Main.getArgs()[1], angel + " helped " + hero);
                 GameInputWriter.write(Main.getArgs()[1], "\n");
-                GameInputWriter.write(Main.getArgs()[1], hero + " reached level " + hero.getLevel());
+                GameInputWriter.write(Main.getArgs()[1], hero + " reached level "
+                        + hero.getLevel());
             }
     }
 }

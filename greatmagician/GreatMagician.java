@@ -3,7 +3,7 @@ package greatmagician;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GreatMagician {
+public final class GreatMagician {
     private static GreatMagician greatMagician = null;
     private static List<Notification> notifications;
     private static AngelHelpNotification angelHelpNotification;
@@ -42,7 +42,7 @@ public class GreatMagician {
         notifications.add(angelLevelUpNotification);
         notifications.add(heroLevelUpNotification);
 
-        if(greatMagician == null) {
+        if (greatMagician == null) {
             return new GreatMagician();
         }
 

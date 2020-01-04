@@ -12,38 +12,57 @@ import java.io.IOException;
 
 public class DarkAngel extends Angel {
 
-    public DarkAngel(LocationHistory locationHistory) {
+    public DarkAngel(final LocationHistory locationHistory) {
         super(locationHistory);
     }
 
+    /**
+     * @param pyromancer
+     * @throws IOException
+     */
     @Override
-    public void visit(Pyromancer pyromancer) throws IOException {
+    public void visit(final Pyromancer pyromancer) throws IOException {
         pyromancer.decreaseHp(DarkAngelConstants.PYROMANCER_HP);
         notifyUpdate(GreatMagician.getAngelHitNotification(), pyromancer, this);
 
     }
 
+    /**
+     * @param knight
+     * @throws IOException
+     */
     @Override
-    public void visit(Knight knight) throws IOException {
+    public void visit(final Knight knight) throws IOException {
         knight.decreaseHp(DarkAngelConstants.KNIGHT_HP);
         notifyUpdate(GreatMagician.getAngelHitNotification(), knight, this);
 
     }
 
+    /**
+     * @param wizard
+     * @throws IOException
+     */
     @Override
-    public void visit(Wizard wizard) throws IOException {
+    public void visit(final Wizard wizard) throws IOException {
         wizard.decreaseHp(DarkAngelConstants.WIZARD_HP);
         notifyUpdate(GreatMagician.getAngelHitNotification(), wizard, this);
 
     }
 
+    /**
+     * @param rogue
+     * @throws IOException
+     */
     @Override
-    public void visit(Rogue rogue) throws IOException {
+    public void visit(final Rogue rogue) throws IOException {
         rogue.decreaseHp(DarkAngelConstants.ROGUE_HP);
         notifyUpdate(GreatMagician.getAngelHitNotification(), rogue, this);
 
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "DarkAngel";

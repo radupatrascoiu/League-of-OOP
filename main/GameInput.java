@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,9 +11,9 @@ public class GameInput {
     private List<Character> heroes;
     private List<LocationHistory> locationHistories;
     private int numberOfRounds;
-    private List<Integer> numberOfAngelPerRound = new ArrayList<>();
-    private List<String> angels = new ArrayList<>();
-    private List<LocationHistory> locationsAngels = new ArrayList<>();
+    private List<Integer> numberOfAngelPerRound;
+    private List<String> angels;
+    private List<LocationHistory> locationsAngels;
 
     /**
      * @param map

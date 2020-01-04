@@ -63,14 +63,20 @@ public class Pyromancer extends Hero {
         return 1f;
     }
 
+    /**
+     *
+     */
     @Override
     public void applyStrategy() {
-        if(this.hp > this.getMaxHp()/4 && this.hp < this.getMaxHp()/3) {
+        if (this.hp > this.getMaxHp() / StrategyConstans.PYROMANCER_FORMULA_1
+                && this.hp < this.getMaxHp() / StrategyConstans.PYROMANCER_FORMULA_2) {
             this.setStrategy(new OffensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.PYROMANCER_OFFENSIVE_HP, 0.7f);
-        } else if(this.hp < this.getMaxHp()/4) {
+            this.strategy.execute(this, StrategyConstans.PYROMANCER_OFFENSIVE_HP,
+                    StrategyConstans.PYROMANCER_OFFENSIVE_COEFFICIENTS);
+        } else if (this.hp < this.getMaxHp() / StrategyConstans.PYROMANCER_FORMULA_1) {
             this.setStrategy(new DefensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.PYROMANCER_DEFENSIVE_HP, 0.3f);
+            this.strategy.execute(this, StrategyConstans.PYROMANCER_DEFENSIVE_HP,
+                    StrategyConstans.PYROMANCER_DEFENSIVE_COEFFICIENTS);
         }
     }
 
@@ -82,8 +88,12 @@ public class Pyromancer extends Hero {
         skill.visit(this);
     }
 
+    /**
+     * @param angel
+     * @throws IOException
+     */
     @Override
-    public void acceptAngel(Angel angel) throws IOException {
+    public void acceptAngel(final Angel angel) throws IOException {
         angel.visit(this);
     }
 

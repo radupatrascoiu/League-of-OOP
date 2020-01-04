@@ -50,14 +50,20 @@ public class Knight extends Hero {
         return 1;
     }
 
+    /**
+     *
+     */
     @Override
     public void applyStrategy() {
-        if(this.hp > this.getMaxHp()/3 && this.hp < this.getMaxHp()/2) {
+        if (this.hp > this.getMaxHp() / StrategyConstans.KNIGHT_FORMULA_1
+                && this.hp < this.getMaxHp() / StrategyConstans.KNIGHT_FORMULA_2) {
             this.setStrategy(new OffensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.KNIGHT_OFFENSIVE_HP, 0.5f);
-        } else if(this.hp < this.getMaxHp()/3) {
+            this.strategy.execute(this, StrategyConstans.KNIGHT_OFFENSIVE_HP,
+                    StrategyConstans.KNIGHT_OFFENSIVE_COEFFICIENTS);
+        } else if (this.hp < this.getMaxHp() / StrategyConstans.KNIGHT_FORMULA_1) {
             this.setStrategy(new DefensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.KNIGHT_DEFENSIVE_HP, 0.2f);
+            this.strategy.execute(this, StrategyConstans.KNIGHT_DEFENSIVE_HP,
+                    StrategyConstans.KNIGHT_DEFENSIVE_COEFFICIENTS);
         }
     }
 
@@ -77,8 +83,12 @@ public class Knight extends Hero {
         hero.accept(this.slamAttack);
     }
 
+    /**
+     * @param angel
+     * @throws IOException
+     */
     @Override
-    public void acceptAngel(Angel angel) throws IOException {
+    public void acceptAngel(final Angel angel) throws IOException {
         angel.visit(this);
     }
 

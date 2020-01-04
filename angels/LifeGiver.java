@@ -12,13 +12,17 @@ import java.io.IOException;
 
 public class LifeGiver extends Angel {
 
-    public LifeGiver(LocationHistory locationHistory) {
+    public LifeGiver(final LocationHistory locationHistory) {
         super(locationHistory);
     }
 
+    /**
+     * @param pyromancer
+     * @throws IOException
+     */
     @Override
-    public void visit(Pyromancer pyromancer) throws IOException {
-        if(pyromancer.getHp() + LifeGiverConstants.PYROMANCER_HP >= pyromancer.getMaxHp()) {
+    public void visit(final Pyromancer pyromancer) throws IOException {
+        if (pyromancer.getHp() + LifeGiverConstants.PYROMANCER_HP >= pyromancer.getMaxHp()) {
             pyromancer.setHp(pyromancer.getMaxHp());
         } else {
             pyromancer.increaseHp(LifeGiverConstants.PYROMANCER_HP);
@@ -27,9 +31,13 @@ public class LifeGiver extends Angel {
 
     }
 
+    /**
+     * @param knight
+     * @throws IOException
+     */
     @Override
-    public void visit(Knight knight) throws IOException {
-        if(knight.getHp() + LifeGiverConstants.KNIGHT_HP >= knight.getMaxHp()) {
+    public void visit(final Knight knight) throws IOException {
+        if (knight.getHp() + LifeGiverConstants.KNIGHT_HP >= knight.getMaxHp()) {
             knight.setHp(knight.getMaxHp());
         } else {
             knight.increaseHp(LifeGiverConstants.KNIGHT_HP);
@@ -38,9 +46,13 @@ public class LifeGiver extends Angel {
 
     }
 
+    /**
+     * @param wizard
+     * @throws IOException
+     */
     @Override
-    public void visit(Wizard wizard) throws IOException {
-        if(wizard.getHp() + LifeGiverConstants.WIZARD_HP >= wizard.getMaxHp()) {
+    public void visit(final Wizard wizard) throws IOException {
+        if (wizard.getHp() + LifeGiverConstants.WIZARD_HP >= wizard.getMaxHp()) {
             wizard.setHp(wizard.getMaxHp());
         } else {
             wizard.increaseHp(LifeGiverConstants.WIZARD_HP);
@@ -49,9 +61,13 @@ public class LifeGiver extends Angel {
 
     }
 
+    /**
+     * @param rogue
+     * @throws IOException
+     */
     @Override
-    public void visit(Rogue rogue) throws IOException {
-        if(rogue.getHp() + LifeGiverConstants.ROGUE_HP >= rogue.getMaxHp()) {
+    public void visit(final Rogue rogue) throws IOException {
+        if (rogue.getHp() + LifeGiverConstants.ROGUE_HP >= rogue.getMaxHp()) {
             rogue.setHp(rogue.getMaxHp());
         } else {
             rogue.increaseHp(LifeGiverConstants.ROGUE_HP);
@@ -60,6 +76,9 @@ public class LifeGiver extends Angel {
 
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "LifeGiver";

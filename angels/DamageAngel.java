@@ -1,5 +1,6 @@
 package angels;
 
+import common.DamageAngelConstants;
 import greatmagician.GreatMagician;
 import heroes.Knight;
 import heroes.Pyromancer;
@@ -12,37 +13,60 @@ import java.io.IOException;
 public class DamageAngel extends Angel {
 
 
-    public DamageAngel(LocationHistory locationHistory) {
+    public DamageAngel(final LocationHistory locationHistory) {
         super(locationHistory);
     }
 
+    /**
+     * @param pyromancer
+     * @throws IOException
+     */
     @Override
-    public void visit(Pyromancer pyromancer) throws IOException {
-        pyromancer.setCoefficientsAngels(pyromancer.getCoefficientsAngels() + 0.2f);
+    public void visit(final Pyromancer pyromancer) throws IOException {
+        pyromancer.setCoefficientsAngels(pyromancer.getCoefficientsAngels()
+                + DamageAngelConstants.PYROMANCER_COEFFICIENT);
         notifyUpdate(GreatMagician.getAngelHelpNotification(), pyromancer, this);
 
     }
 
+    /**
+     * @param knight
+     * @throws IOException
+     */
     @Override
-    public void visit(Knight knight) throws IOException {
-        knight.setCoefficientsAngels(knight.getCoefficientsAngels() + 0.15f);
+    public void visit(final Knight knight) throws IOException {
+        knight.setCoefficientsAngels(knight.getCoefficientsAngels()
+                + DamageAngelConstants.KNIGHT_COEFFICIENT);
         notifyUpdate(GreatMagician.getAngelHelpNotification(), knight, this);
     }
 
+    /**
+     * @param wizard
+     * @throws IOException
+     */
     @Override
-    public void visit(Wizard wizard) throws IOException {
-        wizard.setCoefficientsAngels(wizard.getCoefficientsAngels() + 0.4f);
+    public void visit(final Wizard wizard) throws IOException {
+        wizard.setCoefficientsAngels(wizard.getCoefficientsAngels()
+                + DamageAngelConstants.WIZARD_COEFFICIENT);
         notifyUpdate(GreatMagician.getAngelHelpNotification(), wizard, this);
 
     }
 
+    /**
+     * @param rogue
+     * @throws IOException
+     */
     @Override
-    public void visit(Rogue rogue) throws IOException {
-        rogue.setCoefficientsAngels(rogue.getCoefficientsAngels() + 0.3f);
+    public void visit(final Rogue rogue) throws IOException {
+        rogue.setCoefficientsAngels(rogue.getCoefficientsAngels()
+                + DamageAngelConstants.ROGUE_COEFFICIENT);
         notifyUpdate(GreatMagician.getAngelHelpNotification(), rogue, this);
 
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "DamageAngel";

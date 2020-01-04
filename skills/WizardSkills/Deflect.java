@@ -34,8 +34,8 @@ public class Deflect implements Skill {
         int levelLandDamage = Math.round(this.baseDamage
                 * this.wizard.getLandModifier());
         int totalDamage = Math.round(levelLandDamage
-                * (Constants.DEFLECT_VS_PYROMANCER_MODIFIER + wizard.getCoefficientsStrategy() +
-                wizard.getCoefficientsAngels()));
+                * (Constants.DEFLECT_VS_PYROMANCER_MODIFIER + wizard.getCoefficientsStrategy()
+                + wizard.getCoefficientsAngels()));
         this.wizard.getEffects().setLevelLandDamage(this.wizard.getEffects().
                 getLevelLandDamage() + levelLandDamage);
         this.wizard.getEffects().setTotalDamage(this.wizard.getEffects().
@@ -51,8 +51,8 @@ public class Deflect implements Skill {
         int levelLandDamage = Math.round(this.baseDamage
                 * this.wizard.getLandModifier());
         int totalDamage = Math.round(levelLandDamage
-                * (Constants.DEFLECT_VS_KNIGHT_MODIFIER + wizard.getCoefficientsStrategy() +
-                wizard.getCoefficientsAngels()));
+                * (Constants.DEFLECT_VS_KNIGHT_MODIFIER + wizard.getCoefficientsStrategy()
+                + wizard.getCoefficientsAngels()));
         System.out.println(wizard.getCoefficientsStrategy());
         this.wizard.getEffects().setLevelLandDamage(this.wizard.getEffects().
                 getLevelLandDamage() + levelLandDamage);
@@ -78,8 +78,8 @@ public class Deflect implements Skill {
         float levelLandDamage = this.baseDamage
                 * this.wizard.getLandModifier();
         int totalDamage = Math.round(levelLandDamage
-                * (Constants.DEFLECT_VS_ROGUE_MODIFIER + wizard.getCoefficientsStrategy() +
-                wizard.getCoefficientsAngels()));
+                * (Constants.DEFLECT_VS_ROGUE_MODIFIER + wizard.getCoefficientsStrategy()
+                + wizard.getCoefficientsAngels()));
 
         this.wizard.getEffects().setLevelLandDamage(Math.round(this.wizard.
                 getEffects().getLevelLandDamage() + levelLandDamage));

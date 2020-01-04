@@ -9,8 +9,13 @@ import java.io.IOException;
 
 public class AngelHelpNotification extends Notification {
 
+    /**
+     * @param hero
+     * @param angel
+     * @throws IOException
+     */
     @Override
-    public void update(Hero hero, Angel angel) throws IOException {
+    public void update(final Hero hero, final Angel angel) throws IOException {
         GameInputWriter.write(Main.getArgs()[1], "\n");
         GameInputWriter.write(Main.getArgs()[1], angel + " helped " + hero);
     }

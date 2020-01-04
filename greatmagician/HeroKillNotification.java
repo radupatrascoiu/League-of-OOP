@@ -9,12 +9,17 @@ import java.io.IOException;
 
 public class HeroKillNotification extends Notification {
 
+    /**
+     * @param hero
+     * @param angel
+     * @throws IOException
+     */
     @Override
-    public void update(Hero hero, Angel angel) throws IOException {
-        if(hero.getAttacker() != null) {
+    public void update(final Hero hero, final Angel angel) throws IOException {
+        if (hero.getAttacker() != null) {
             GameInputWriter.write(Main.getArgs()[1], "\n");
-            GameInputWriter.write(Main.getArgs()[1], "Player " + hero + " was killed by " +
-                    hero.getAttacker());
+            GameInputWriter.write(Main.getArgs()[1], "Player " + hero + " was killed by "
+                    + hero.getAttacker());
         }
     }
 }

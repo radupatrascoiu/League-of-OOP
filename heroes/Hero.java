@@ -62,19 +62,19 @@ public abstract class Hero extends Subjects {
         this.coefficientsAngels = 0;
     }
 
-    public float getCoefficientsStrategy() {
+    public final float getCoefficientsStrategy() {
         return coefficientsStrategy;
     }
 
-    public void setCoefficientsStrategy(float coefficientsStrategy) {
+    public final void setCoefficientsStrategy(final float coefficientsStrategy) {
         this.coefficientsStrategy = coefficientsStrategy;
     }
 
-    public float getCoefficientsAngels() {
+    public final float getCoefficientsAngels() {
         return coefficientsAngels;
     }
 
-    public void setCoefficientsAngels(float coefficientsAngels) {
+    public final void setCoefficientsAngels(final float coefficientsAngels) {
         this.coefficientsAngels = coefficientsAngels;
     }
 
@@ -93,11 +93,11 @@ public abstract class Hero extends Subjects {
         this.deathOvertime = deathOvertime;
     }
 
-    public void setPosition(int position) {
+    public final void setPosition(final int position) {
         this.position = position;
     }
 
-    public int getPosition() {
+    public final int getPosition() {
         return position;
     }
 
@@ -208,31 +208,31 @@ public abstract class Hero extends Subjects {
      */
     public void levelUp(final Hero loser) throws IOException {
 
-        if(this.hp > 0) {
+        if (this.hp > 0) {
             int aux = 0;
-            if(loser != null) {
+            if (loser != null) {
                 this.increaseXp(loser);
             }
 
             int xpLevelUp = this.getXp() + this.getLevel() * Constants.XP_MULTIPLICATOR;
-            if (xpLevelUp > 250) {
+            if (xpLevelUp > Constants.STANDARD_XP) {
                 aux++;
             }
 
-            xpLevelUp -= 250;
+            xpLevelUp -= Constants.STANDARD_XP;
             while (xpLevelUp > 0) {
-                xpLevelUp -= 50;
+                xpLevelUp -= Constants.LEVEL_XP;
                 aux++;
             }
 
-            if(aux > this.level) {
+            if (aux > this.level) {
                 System.out.println(aux);
                 while (this.level != aux) {
-                    this.setLevel(this.level+1);
+                    this.setLevel(this.level + 1);
                     notifyUpdate(GreatMagician.getHeroLevelUpNotification(), this, null);
                 }
                 this.level = aux;
-                if(this.hp <= 0) {
+                if (this.hp <= 0) {
                     return;
                 }
 
@@ -242,14 +242,14 @@ public abstract class Hero extends Subjects {
         }
     }
 
-    public void increaseXp(int xpReceived) throws IOException {
-        if(this.hp > 0) {
+    public final void increaseXp(final int xpReceived) throws IOException {
+        if (this.hp > 0) {
             this.xp += xpReceived;
             boolean ok = false;
             int initial = this.getLevel();
-            int aux = this.getLevel()-1;
+            int aux = this.getLevel() - 1;
             while (true) {
-                if(this.xp >= (250 + aux*50)) {
+                if (this.xp >= (Constants.STANDARD_XP + aux * Constants.LEVEL_XP)) {
                     aux++;
                     setLevel(aux);
                     this.setDamageReceived(0);
@@ -260,14 +260,14 @@ public abstract class Hero extends Subjects {
                 }
             }
 
-            if(ok && aux != initial) { // TODO
+            if (ok && aux != initial) { // TODO
                 notifyUpdate(GreatMagician.getHeroLevelUpNotification(), this, null);
             }
 
         }
     }
 
-    public void levelUp() throws IOException {
+    public final void levelUp() throws IOException {
         int aux = 0;
         while (aux != this.getLevel()) {
             aux++;
@@ -275,8 +275,8 @@ public abstract class Hero extends Subjects {
 
         System.out.println(aux);
 
-        this.setXp(250+aux*50);
-        this.setLevel(aux+1);
+        this.setXp(Constants.STANDARD_XP + aux * Constants.LEVEL_XP);
+        this.setLevel(aux + 1);
         this.hp = this.getMaxHp();
         this.notifyUpdate(GreatMagician.getAngelLevelUpNotification(), this, null);
     }
@@ -294,11 +294,11 @@ public abstract class Hero extends Subjects {
         this.damageReceived += damageReceivedFromAttacker;
     }
 
-    public void increaseHp(final int hpReceived) {
+    public final void increaseHp(final int hpReceived) {
         this.hp += hpReceived;
     }
 
-    public void decreaseHp(final int hpReduced) {
+    public final void decreaseHp(final int hpReduced) {
         this.hp -= hpReduced;
     }
 
@@ -312,7 +312,7 @@ public abstract class Hero extends Subjects {
             notifyUpdate(GreatMagician.getHeroKillNotification(), this, null);
             if (this.getAttacker() != null) {
 
-                if(this.getAttacker().getHp() < 0){
+                if (this.getAttacker().getHp() < 0) {
                     this.setXp(0);
                 } else {
                     this.getAttacker().levelUp(this);
@@ -333,11 +333,11 @@ public abstract class Hero extends Subjects {
                 - (this.level - hero.getLevel()) * Constants.XP_FORMULA_2);
     }
 
-    public void setXp(int xp) {
+    public final void setXp(final int xp) {
         this.xp = xp;
     }
 
-    public void setStrategy(Strategy strategy) {
+    public final void setStrategy(final Strategy strategy) {
         this.strategy = strategy;
     }
 

@@ -1,7 +1,5 @@
 package skills;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-
 public class Stun {
     private boolean stun;
     private int time;

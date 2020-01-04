@@ -7,10 +7,6 @@ public final class Constants {
     public static final int XP_MULTIPLICATOR = 50;
     public static final int INITIAL_XP = 0;
     public static final int INITIAL_LEVEL = 0;
-    public static final int XP_LEVEL_1 = 250;
-    public static final int XP_LEVEL_2 = 300;
-    public static final int XP_LEVEL_3 = 350;
-    public static final int XP_LEVEL_4 = 400;
     public static final int PYROMANCER_HP = 500;
     public static final int PYROMANCER_HP_INCREASE_PER_LEVEL = 50;
     public static final int KNIGHT_HP = 900;
@@ -81,15 +77,12 @@ public final class Constants {
     public static final int KNIGHT_PRIORITY = 1;
     public static final int PYROMANCER_PRIORITY = 2;
     public static final int ROGUE_PRIORITY = 3;
-    public static final int LEVEL_0 = 0;
-    public static final int LEVEL_1 = 1;
-    public static final int LEVEL_2 = 2;
-    public static final int LEVEL_3 = 3;
-    public static final int LEVEL_4 = 4;
     public static final int MATRIX_DIMENSION = 1000;
     public static final float CRITICAL_DAMAGE = 1.5f;
     public static final int CRITICAL_DIVIDER = 3;
     public static final int PARALYSIS_OVERTIME = 3;
     public static final int PARALYSIS_OVERTIME_WOODS = 6;
+    public static final int STANDARD_XP = 250;
+    public static final int LEVEL_XP = 50;
 
 }

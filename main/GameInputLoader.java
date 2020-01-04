@@ -18,7 +18,6 @@ public class GameInputLoader {
     /**
      * @return
      */
-    @SuppressWarnings("checkstyle:EmptyBlock")
     public GameInput load() {
 
         int numberOfLines = 0;

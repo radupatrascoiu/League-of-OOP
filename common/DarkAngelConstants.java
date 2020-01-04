@@ -1,7 +1,7 @@
 package common;
 
-public class DarkAngelConstants {
-    private DarkAngelConstants(){
+public final class DarkAngelConstants {
+    private DarkAngelConstants() {
     }
 
     public static final int KNIGHT_HP = 40;
