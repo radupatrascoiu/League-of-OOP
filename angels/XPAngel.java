@@ -17,28 +17,28 @@ public class XPAngel extends Angel {
 
     @Override
     public void visit(Pyromancer pyromancer) throws IOException {
-        pyromancer.increaseXp(50);
         notifyUpdate(GreatMagician.getAngelXpNotification(), pyromancer, this);
+        pyromancer.increaseXp(50);
     }
 
     @Override
     public void visit(Knight knight) throws IOException {
-        knight.increaseXp(45);
         notifyUpdate(GreatMagician.getAngelXpNotification(), knight, this);
+        knight.increaseXp(45);
 
     }
 
     @Override
     public void visit(Wizard wizard) throws IOException {
-        wizard.increaseXp(60);
         notifyUpdate(GreatMagician.getAngelXpNotification(), wizard, this);
+        wizard.increaseXp(60);
 
     }
 
     @Override
     public void visit(Rogue rogue) throws IOException {
-        rogue.increaseXp(40);
         notifyUpdate(GreatMagician.getAngelXpNotification(), rogue, this);
+        rogue.increaseXp(40);
 
     }
 

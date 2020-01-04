@@ -18,6 +18,7 @@ public class TheDoomer extends Angel {
     @Override
     public void visit(Pyromancer pyromancer) throws IOException {
         pyromancer.setHp(0);
+        pyromancer.setAttacker(null);
         notifyUpdate(GreatMagician.getAngelHitNotification(), pyromancer, this);
         notifyUpdate(GreatMagician.getAngelKillNotification(), pyromancer, null);
     }
@@ -25,6 +26,7 @@ public class TheDoomer extends Angel {
     @Override
     public void visit(Knight knight) throws IOException {
         knight.setHp(0);
+        knight.setAttacker(null);
         notifyUpdate(GreatMagician.getAngelHitNotification(), knight, this);
         notifyUpdate(GreatMagician.getAngelKillNotification(), knight, null);
     }
@@ -32,6 +34,7 @@ public class TheDoomer extends Angel {
     @Override
     public void visit(Wizard wizard) throws IOException {
         wizard.setHp(0);
+        wizard.setAttacker(null);
         notifyUpdate(GreatMagician.getAngelHitNotification(), wizard, this);
         notifyUpdate(GreatMagician.getAngelKillNotification(), wizard, null);
     }
@@ -39,6 +42,7 @@ public class TheDoomer extends Angel {
     @Override
     public void visit(Rogue rogue) throws IOException {
         rogue.setHp(0);
+        rogue.setAttacker(null);
         notifyUpdate(GreatMagician.getAngelHitNotification(), rogue, this);
         notifyUpdate(GreatMagician.getAngelKillNotification(), rogue, null);
     }

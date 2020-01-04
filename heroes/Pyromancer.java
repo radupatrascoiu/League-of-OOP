@@ -44,9 +44,6 @@ public class Pyromancer extends Hero {
         if (this.getHp() <= 0 || hero.getHp() <= 0) {
             return;
         }
-//        if(!this.getStun().isStun()) {
-//            this.applyStrategy();
-//        }
 
         this.fireblastAttack = new Fireblast(this);
         this.igniteAttack = new Ignite(this);
@@ -70,10 +67,10 @@ public class Pyromancer extends Hero {
     public void applyStrategy() {
         if(this.hp > this.getMaxHp()/4 && this.hp < this.getMaxHp()/3) {
             this.setStrategy(new OffensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.PYROMANCER_OFFENSIVE_HP, StrategyConstans.PYROMANCER_OFFENSIVE_COEFFICIENTS);
+            this.strategy.execute(this, StrategyConstans.PYROMANCER_OFFENSIVE_HP, 0.7f);
         } else if(this.hp < this.getMaxHp()/4) {
             this.setStrategy(new DefensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.PYROMANCER_DEFENSIVE_HP, StrategyConstans.PYROMANCER_DEFENSIVE_COEFFICIENTS);
+            this.strategy.execute(this, StrategyConstans.PYROMANCER_DEFENSIVE_HP, 0.3f);
         }
     }
 

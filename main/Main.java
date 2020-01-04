@@ -46,18 +46,6 @@ public final class Main {
             GameInputWriter.write(args[1], "~~ Round " + (i+1) + " ~~");
 
             for (int  j = 0; j < numberOfHeroes; ++j) {
-                // se verifica daca eroul are stun
-                if (heroesList.get(j).getStun().isStun()) {
-                    heroesList.get(j).getStun().setTime(heroesList.get(j).getStun().getTime() - 1);
-                    if (heroesList.get(j).getStun().getTime() == 0) {
-                        heroesList.get(j).getStun().setStun(false);
-                    }
-                } else {
-                    // daca are hp, se muta
-                    if (heroesList.get(j).getHp() > 0) {
-                        heroesList.get(j).move(moves[i][j]);
-                    }
-                }
 
                 // se verifica damage-ul overtime
                 if (heroesList.get(j).getBuff().getTime() != 0) {
@@ -73,7 +61,22 @@ public final class Main {
                     heroesList.get(j).getBuff().setDamageOverTime(0);
                 }
 
-                heroesList.get(j).applyStrategy();
+                if(!heroesList.get(j).getStun().isStun()) {
+                    heroesList.get(j).applyStrategy();
+                }
+
+                // se verifica daca eroul are stun
+                if (heroesList.get(j).getStun().isStun()) {
+                    heroesList.get(j).getStun().setTime(heroesList.get(j).getStun().getTime() - 1);
+                    if (heroesList.get(j).getStun().getTime() == 0) {
+                        heroesList.get(j).getStun().setStun(false);
+                    }
+                } else {
+                    // daca are hp, se muta
+                    if (heroesList.get(j).getHp() > 0) {
+                        heroesList.get(j).move(moves[i][j]);
+                    }
+                }
             }
 
             for (int j = 0; j < numberOfHeroes; ++j) {
@@ -82,11 +85,11 @@ public final class Main {
                     if (GameLogic.existsConflict(heroesList.get(j), heroesList.get(k)) && j != k) {
                         if (heroesList.get(j).getPriority() >= heroesList.get(k).getPriority()) {
                             // wizard va fi fortat sa atace al doilea
-                            System.out.println("Ataca primul");
+//                            System.out.println("Ataca primul");
                             heroesList.get(j).play(heroesList.get(k));
                             heroesList.get(k).play(heroesList.get(j));
                         } else {
-                            System.out.println("Ataca al doilea");
+//                            System.out.println("Ataca al doilea");
                             heroesList.get(k).play(heroesList.get(j));
                             heroesList.get(j).play(heroesList.get(k));
                         }
@@ -97,7 +100,7 @@ public final class Main {
 
             for (int j = numberOfHeroes-1; j >= 0; j--) {
 
-                if (!heroesList.get(j).isDeathOvertime() || heroesList.get(j).getHp() > 0) {
+                if (!heroesList.get(j).isDeathOvertime() || heroesList.get(j).getHp() >= 0) {
                     // se calculeaza hp-ul doar daca este in viata
                     heroesList.get(j).calculateHp();
                 } else {
@@ -159,6 +162,6 @@ public final class Main {
                 }
                 GameInputWriter.write(args[1], "\n");
             }
-        GameInputWriter.write(args[1], "\n");
+//        GameInputWriter.write(args[1], "\n");
     }
 }

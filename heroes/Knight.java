@@ -52,13 +52,12 @@ public class Knight extends Hero {
 
     @Override
     public void applyStrategy() {
-        System.out.println(this.hp);
         if(this.hp > this.getMaxHp()/3 && this.hp < this.getMaxHp()/2) {
             this.setStrategy(new OffensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.KNIGHT_OFFENSIVE_HP, StrategyConstans.KNIGHT_OFFENSIVE_COEFFICIENTS);
+            this.strategy.execute(this, StrategyConstans.KNIGHT_OFFENSIVE_HP, 0.5f);
         } else if(this.hp < this.getMaxHp()/3) {
             this.setStrategy(new DefensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.KNIGHT_DEFENSIVE_HP, StrategyConstans.KNIGHT_DEFENSIVE_COEFFICIENTS);
+            this.strategy.execute(this, StrategyConstans.KNIGHT_DEFENSIVE_HP, 0.2f);
         }
     }
 

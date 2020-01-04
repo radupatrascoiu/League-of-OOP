@@ -13,5 +13,7 @@ public class AngelReviveNotification extends Notification{
     public void update(Hero hero, Angel angel) throws IOException {
         GameInputWriter.write(Main.getArgs()[1], "\n");
         GameInputWriter.write(Main.getArgs()[1], angel + " helped " + hero);
+        GameInputWriter.write(Main.getArgs()[1], "\n");
+        GameInputWriter.write(Main.getArgs()[1], "Player " + hero + " was brought to life by an angel");
     }
 }

@@ -206,59 +206,80 @@ public abstract class Hero extends Subjects {
     /**
      * @param loser
      */
-    public void levelUp(final Hero loser) {
+    public void levelUp(final Hero loser) throws IOException {
 
-        if (this.getHp() > 0) {
+        if(this.hp > 0) {
+            int aux = 0;
             if(loser != null) {
                 this.increaseXp(loser);
             }
 
             int xpLevelUp = this.getXp() + this.getLevel() * Constants.XP_MULTIPLICATOR;
-
-            if (xpLevelUp >= Constants.XP_LEVEL_1) {
-                this.setDamageReceived(0);
-                setLevel(Constants.LEVEL_1);
-                if (this.hp <= 0) {
-                    return;
-                }
-                this.hp = this.getMaxHp();
-
+            if (xpLevelUp > 250) {
+                aux++;
             }
 
-            if (xpLevelUp >= Constants.XP_LEVEL_2) {
-                this.setDamageReceived(0);
-
-                setLevel(Constants.LEVEL_2);
-                if (this.hp <= 0) {
-                    return;
-                }
-                this.hp = this.getMaxHp();
-
+            xpLevelUp -= 250;
+            while (xpLevelUp > 0) {
+                xpLevelUp -= 50;
+                aux++;
             }
 
-            if (xpLevelUp >= Constants.XP_LEVEL_3) {
-                this.setDamageReceived(0);
-
-                setLevel(Constants.LEVEL_3);
-                if (this.hp <= 0) {
+            if(aux > this.level) {
+                System.out.println(aux);
+                while (this.level != aux) {
+                    this.setLevel(this.level+1);
+                    notifyUpdate(GreatMagician.getHeroLevelUpNotification(), this, null);
+                }
+                this.level = aux;
+                if(this.hp <= 0) {
                     return;
                 }
+
                 this.hp = this.getMaxHp();
-
-            }
-
-            if (xpLevelUp >= Constants.XP_LEVEL_4) {
                 this.setDamageReceived(0);
-
-                setLevel(Constants.LEVEL_4);
-                if (this.hp <= 0) {
-                    return;
-                }
-                this.hp = this.getMaxHp();
             }
         }
     }
 
+    public void increaseXp(int xpReceived) throws IOException {
+        if(this.hp > 0) {
+            this.xp += xpReceived;
+            boolean ok = false;
+            int initial = this.getLevel();
+            int aux = this.getLevel()-1;
+            while (true) {
+                if(this.xp >= (250 + aux*50)) {
+                    aux++;
+                    setLevel(aux);
+                    this.setDamageReceived(0);
+                    this.hp = this.getMaxHp();
+                    ok = true;
+                } else {
+                    break;
+                }
+            }
+
+            if(ok && aux != initial) { // TODO
+                notifyUpdate(GreatMagician.getHeroLevelUpNotification(), this, null);
+            }
+
+        }
+    }
+
+    public void levelUp() throws IOException {
+        int aux = 0;
+        while (aux != this.getLevel()) {
+            aux++;
+        }
+
+        System.out.println(aux);
+
+        this.setXp(250+aux*50);
+        this.setLevel(aux+1);
+        this.hp = this.getMaxHp();
+        this.notifyUpdate(GreatMagician.getAngelLevelUpNotification(), this, null);
+    }
 
     /**
      * @param damageReceivedFromAttacker
@@ -290,7 +311,13 @@ public abstract class Hero extends Subjects {
         if (this.hp <= 0) {
             notifyUpdate(GreatMagician.getHeroKillNotification(), this, null);
             if (this.getAttacker() != null) {
-                this.getAttacker().levelUp(this);
+
+                if(this.getAttacker().getHp() < 0){
+                    this.setXp(0);
+                } else {
+                    this.getAttacker().levelUp(this);
+                }
+
                 this.setAttacker(null);
             }
         }
@@ -301,39 +328,13 @@ public abstract class Hero extends Subjects {
      */
     public void increaseXp(final Hero hero) {
         // this.hero va fi eroul care va castiga batalia
+
         this.xp += Math.max(0, Constants.XP_FORMULA_1
                 - (this.level - hero.getLevel()) * Constants.XP_FORMULA_2);
     }
 
-    public void increaseXp(int xpReceived) {
-        this.xp += xpReceived;
-        this.levelUp(null);
-    }
-
     public void setXp(int xp) {
         this.xp = xp;
-    }
-
-    public void levelUp() throws IOException {
-        if(this.getLevel() == Constants.LEVEL_0) {
-            this.setXp(Constants.XP_LEVEL_1);
-            this.setLevel(Constants.LEVEL_1);
-            this.hp = this.getMaxHp();
-        } else if(this.getLevel() == Constants.LEVEL_1) {
-            this.setXp(Constants.XP_LEVEL_2);
-            this.setLevel(Constants.LEVEL_2);
-            this.hp = this.getMaxHp();
-        } else if(this.getLevel() == Constants.LEVEL_2) {
-            this.setXp(Constants.XP_LEVEL_3);
-            this.setLevel(Constants.XP_LEVEL_3);
-            this.hp = this.getMaxHp();
-        } else if(this.getLevel() == Constants.LEVEL_3) {
-            this.setXp(Constants.XP_LEVEL_4);
-            this.setLevel(Constants.LEVEL_4);
-            this.hp = this.getMaxHp();
-        }
-
-        this.notifyUpdate(GreatMagician.getLevelUpNotification(), this, null);
     }
 
     public void setStrategy(Strategy strategy) {

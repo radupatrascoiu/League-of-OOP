@@ -59,10 +59,10 @@ public class Wizard extends Hero {
     public void applyStrategy() {
         if(this.hp > this.getMaxHp()/4 && this.hp < this.getMaxHp()/2) {
             this.setStrategy(new OffensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.WIZARD_OFFENSIVE_HP, StrategyConstans.WIZARD_OFFENSIVE_COEFFICIENTS);
+            this.strategy.execute(this, StrategyConstans.WIZARD_OFFENSIVE_HP, 0.6f);
         } else if(this.hp < this.getMaxHp()/4) {
             this.setStrategy(new DefensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.WIZARD_DEFENSIVE_HP, StrategyConstans.WIZARD_DEFENSIVE_COEFFICIENTS);
+            this.strategy.execute(this, StrategyConstans.WIZARD_DEFENSIVE_HP, 0.2f);
         }
     }
 

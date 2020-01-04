@@ -66,10 +66,10 @@ public class Rogue extends Hero {
     public void applyStrategy() {
         if(this.hp > this.getMaxHp()/7 && this.hp < this.getMaxHp()/5) {
             this.setStrategy(new OffensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.ROGUE_OFFENSIVE_HP, StrategyConstans.ROGUE_OFFENSIVE_COEFFICIENTS);
+            this.strategy.execute(this, StrategyConstans.ROGUE_OFFENSIVE_HP, 0.4f);
         } else if(this.hp < this.getMaxHp()/7) {
             this.setStrategy(new DefensiveStrategy());
-            this.strategy.execute(this, StrategyConstans.ROGUE_DEFENSIVE_HP, StrategyConstans.ROGUE_DEFENSIVE_COEFFICIENTS);
+            this.strategy.execute(this, StrategyConstans.ROGUE_DEFENSIVE_HP, 0.1f);
         }
     }
 

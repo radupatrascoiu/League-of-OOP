@@ -20,6 +20,9 @@ public class Dracula extends Angel {
         pyromancer.setCoefficientsAngels(pyromancer.getCoefficientsAngels() - 0.3f);
         pyromancer.decreaseHp(40);
         notifyUpdate(GreatMagician.getAngelHitNotification(), pyromancer, this);
+        if(pyromancer.getHp() <= 0) {
+            notifyUpdate(GreatMagician.getAngelKillNotification(), pyromancer, this);
+        }
 
     }
 
@@ -28,6 +31,9 @@ public class Dracula extends Angel {
         knight.setCoefficientsAngels(knight.getCoefficientsAngels() - 0.2f);
         knight.decreaseHp(60);
         notifyUpdate(GreatMagician.getAngelHitNotification(), knight, this);
+        if(knight.getHp() <= 0) {
+            notifyUpdate(GreatMagician.getAngelKillNotification(), knight, this);
+        }
     }
 
     @Override
@@ -35,6 +41,9 @@ public class Dracula extends Angel {
         wizard.setCoefficientsAngels(wizard.getCoefficientsAngels() - 0.4f);
         wizard.decreaseHp(20);
         notifyUpdate(GreatMagician.getAngelHitNotification(), wizard, this);
+        if(wizard.getHp() <= 0) {
+            notifyUpdate(GreatMagician.getAngelKillNotification(), wizard, this);
+        }
 
     }
 
@@ -43,6 +52,9 @@ public class Dracula extends Angel {
         rogue.setCoefficientsAngels(rogue.getCoefficientsAngels() - 0.1f);
         rogue.decreaseHp(35);
         notifyUpdate(GreatMagician.getAngelHitNotification(), rogue, this);
+        if(rogue.getHp() <= 0) {
+            notifyUpdate(GreatMagician.getAngelKillNotification(), rogue, this);
+        }
 
     }
 

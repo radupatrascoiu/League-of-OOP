@@ -46,6 +46,7 @@ public class Execute implements Skill {
             int totalDamage = Math.round(levelLandDamage
                     * (Constants.EXECUTE_VS_PYROMANCER_MODIFIER + knight.getCoefficientsStrategy()
                     + knight.getCoefficientsAngels()));
+            System.out.println("Coeficient = " + knight.getCoefficientsStrategy());
             System.out.println("Execute total damage = " + totalDamage);
             // se seteaza damage-ul dat
             this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.
@@ -90,23 +91,20 @@ public class Execute implements Skill {
      */
     @Override
     public void visit(final Wizard wizard) {
-        if (wizard.getHp() < this.percentage * wizard.getMaxHp()) {
-            this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
-                    getLevelLandDamage() + wizard.getHp()));
 
-            this.knight.getEffects().setTotalDamage(this.knight.getEffects().
-                    getTotalDamage() + wizard.getHp());
+        float levelLandDamage = this.baseDamage
+                * this.knight.getLandModifier();
+        int totalDamage = Math.round(levelLandDamage
+                * (Constants.EXECUTE_VS_WIZARD_MODIFIER + knight.getCoefficientsStrategy()
+                + knight.getCoefficientsAngels()));
+        this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
+                getLevelLandDamage() + levelLandDamage));
+        this.knight.getEffects().setTotalDamage(this.knight.getEffects().
+                getTotalDamage() + totalDamage);
+
+        if (wizard.getHp() < this.percentage * wizard.getMaxHp()) {
             wizard.increaseDamage(wizard.getHp(), this.knight);
         } else {
-            float levelLandDamage = this.baseDamage
-                    * this.knight.getLandModifier();
-            int totalDamage = Math.round(levelLandDamage
-                    * (Constants.EXECUTE_VS_WIZARD_MODIFIER + knight.getCoefficientsStrategy()
-                    + knight.getCoefficientsAngels()));
-            this.knight.getEffects().setLevelLandDamage(Math.round(this.knight.getEffects().
-                    getLevelLandDamage() + levelLandDamage));
-            this.knight.getEffects().setTotalDamage(this.knight.getEffects().
-                    getTotalDamage() + totalDamage);
             wizard.increaseDamage(totalDamage, this.knight);
         }
     }

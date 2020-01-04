@@ -7,7 +7,7 @@ import main.Main;
 
 import java.io.IOException;
 
-public class LevelUpNotification extends Notification{
+public class AngelLevelUpNotification extends Notification{
 
     @Override
     public void update(Hero hero, Angel angel) throws IOException {

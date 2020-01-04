@@ -19,7 +19,7 @@ public class LevelUpAngel extends Angel {
     public void visit(Pyromancer pyromancer) throws IOException {
         pyromancer.levelUp();
         pyromancer.setCoefficientsAngels(pyromancer.getCoefficientsAngels() + 0.2f);
-        notifyUpdate(GreatMagician.getLevelUpNotification(), pyromancer, this);
+        notifyUpdate(GreatMagician.getAngelLevelUpNotification(), pyromancer, this);
 
     }
 
@@ -27,7 +27,7 @@ public class LevelUpAngel extends Angel {
     public void visit(Knight knight) throws IOException {
         knight.levelUp();
         knight.setCoefficientsAngels(knight.getCoefficientsAngels() + 0.1f);
-        notifyUpdate(GreatMagician.getLevelUpNotification(), knight, this);
+        notifyUpdate(GreatMagician.getAngelLevelUpNotification(), knight, this);
 
     }
 
@@ -35,7 +35,7 @@ public class LevelUpAngel extends Angel {
     public void visit(Wizard wizard) throws IOException {
         wizard.levelUp();
         wizard.setCoefficientsAngels(wizard.getCoefficientsAngels() + 0.25f);
-        notifyUpdate(GreatMagician.getLevelUpNotification(), wizard, this);
+        notifyUpdate(GreatMagician.getAngelLevelUpNotification(), wizard, this);
 
     }
 
@@ -43,7 +43,7 @@ public class LevelUpAngel extends Angel {
     public void visit(Rogue rogue) throws IOException {
         rogue.levelUp();
         rogue.setCoefficientsAngels(rogue.getCoefficientsAngels() + 0.15f);
-        notifyUpdate(GreatMagician.getLevelUpNotification(), rogue, this);
+        notifyUpdate(GreatMagician.getAngelLevelUpNotification(), rogue, this);
 
     }
 

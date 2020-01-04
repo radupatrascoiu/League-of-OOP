@@ -31,7 +31,8 @@ public class Drain implements Skill {
     public void visit(final Pyromancer pyromancer) {
         float levelLandDamage = this.percentage * this.baseDamage
                 * this.wizard.getLandModifier();
-        this.percentage *= Constants.DRAIN_VS_PYROMANCER_MODIFIER;
+        this.percentage *= (Constants.DRAIN_VS_PYROMANCER_MODIFIER + wizard.getCoefficientsStrategy() +
+                wizard.getCoefficientsAngels());
         // se calculeaza din nou, pentru race modifier
         this.baseDamage = Math.round(this.baseDamage * this.percentage)
                 * this.wizard.getLandModifier();
@@ -51,7 +52,8 @@ public class Drain implements Skill {
         float levelLandDamage = this.percentage * this.baseDamage
                 * this.wizard.getLandModifier();
 
-        this.percentage *= Constants.DRAIN_VS_KNIGHT_MODIFIER;
+        this.percentage *= (Constants.DRAIN_VS_KNIGHT_MODIFIER + wizard.getCoefficientsStrategy() +
+                wizard.getCoefficientsAngels());
         // se calculeaza din nou, pentru race modifier
         this.baseDamage = Math.round(this.baseDamage * this.percentage
                 * this.wizard.getLandModifier());
@@ -71,7 +73,8 @@ public class Drain implements Skill {
         float levelLandDamage = this.percentage * this.baseDamage
                 * this.wizard.getLandModifier();
 
-        this.percentage *= Constants.DRAIN_VS_WIZARD_MODIFIER;
+        this.percentage *= (Constants.DRAIN_VS_WIZARD_MODIFIER + wizard.getCoefficientsStrategy() +
+                wizard.getCoefficientsAngels());
         // se calculeaza din nou, pentru race modifier
         this.baseDamage = Math.round(this.baseDamage * this.percentage
                 * this.wizard.getLandModifier());
@@ -91,7 +94,8 @@ public class Drain implements Skill {
         float levelLandDamage = this.percentage * this.baseDamage
                 * this.wizard.getLandModifier();
 
-        this.percentage *= Constants.DRAIN_VS_ROGUE_MODIFIER;
+        this.percentage *= (Constants.DRAIN_VS_ROGUE_MODIFIER + wizard.getCoefficientsStrategy() +
+                wizard.getCoefficientsAngels());
         // se calculeaza din nou, pentru race modifier
         this.baseDamage = Math.round(this.baseDamage * this.percentage
                 * this.wizard.getLandModifier());
