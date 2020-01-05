@@ -1,5 +1,7 @@
 Patrascoiu Ion - Radu, 322 CD
 
+Etapa 1:
+
     In implementarea problemei am folosit design pattern-ul "Visitor", care
 se bazeaza pe conceptul de Double Dispatch, "Singleton", pentru crearea
 hartii si "Factory", pentru crearea jucatorilor. Mecanismul implementarii
@@ -21,3 +23,27 @@ jocul incepe, se parcurg rundele, se verifica conditia de stun, se misca
 jucatorii in functie de input, se calculeaza damage overtime-ul, iar eroii care
 se afla in acelasi bloc, se lupta. La sfarsit de runda se calculeaza hp-ul, in
 functie de damage-ul primit. Apoi urmeaza scrierea in fisier.
+
+
+Etapa 2:
+
+    In aceasta etapa am folosit design pattern-ul "Visitor", pentru ingeri,
+"Observer" pentru a notifica Marele Magician de interactiunile dintre ingeri
+si eroi si "Strategy" pentru ca fiecare erou sa-si aleaga strategi in functie
+de conditiile jocului. Pentru Visitor, exista clasa abstracta Angel, din care
+vor fi extinse celelalte clase de ingeri. Astfel se vor suprascrie metodele
+de visit pentru fiecare erou in parte, folosind conceptul de Double Dispatch.
+    Pentru Observer, am folosit interfata Notification, care va avea o metoda
+"update", aceasta fiind suprascrisa de fiecare clasa de notificare(observer),
+care implementeaza interfata. Pe langa aceasta, am implementat clasa abstracta
+"Subjects", care va fi extinsa de "Hero", metoda "notifyUpdate" fiind apelata
+pentru interactiunile importante.
+    Pentru Strategy, am folosit interfata "Strategy", care va fi implementata
+de clasele "DefensiveStrategy" si "OffensiveStrategy", care vor fi alese la
+runtime de catre fiecare erou in parte, in functie de conditiile in care se
+afla.
+    De asemenea, am folosit Factory pentru ingeri si Singleton pentru Marele
+Magician. Flow ul jocului este asemenator cu cel din prima etapa, doar ca
+la inceputul unei runde, dupa ce a luat damage-ul overtime(daca exista),
+ficare erou alege o strategie, iar la finalul fiecarei runde, ingerii
+actioneaza asupra eroilor, Marele Magician fiind notificat de acest aspect.

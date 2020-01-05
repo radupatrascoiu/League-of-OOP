@@ -164,6 +164,6 @@ public final class Main {
                 }
                 GameInputWriter.write(args[1], "\n");
             }
-//        GameInputWriter.write(args[1], "\n");
+        GameInputWriter.write(args[1], "\n");
     }
 }

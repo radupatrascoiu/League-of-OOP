@@ -8,6 +8,7 @@ public final class AngelFactory {
 
     public static Angel getAngel(final String angelType,
                                  final LocationHistory locationHistory) {
+        // se creaza fiecare inger in functie de inputul primit
         if (angelType == null) {
             return null;
         }

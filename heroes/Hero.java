@@ -209,29 +209,28 @@ public abstract class Hero extends Subjects {
     public void levelUp(final Hero loser) throws IOException {
 
         if (this.hp > 0) {
-            int aux = 0;
+            int nextLevel = 0;
             if (loser != null) {
                 this.increaseXp(loser);
             }
 
             int xpLevelUp = this.getXp() + this.getLevel() * Constants.XP_MULTIPLICATOR;
             if (xpLevelUp > Constants.STANDARD_XP) {
-                aux++;
+                nextLevel++;
             }
 
             xpLevelUp -= Constants.STANDARD_XP;
             while (xpLevelUp > 0) {
                 xpLevelUp -= Constants.LEVEL_XP;
-                aux++;
+                nextLevel++;
             }
 
-            if (aux > this.level) {
-                System.out.println(aux);
-                while (this.level != aux) {
+            if (nextLevel > this.level) {
+                while (this.level != nextLevel) {
                     this.setLevel(this.level + 1);
                     notifyUpdate(GreatMagician.getHeroLevelUpNotification(), this, null);
                 }
-                this.level = aux;
+                this.level = nextLevel;
                 if (this.hp <= 0) {
                     return;
                 }
@@ -247,11 +246,11 @@ public abstract class Hero extends Subjects {
             this.xp += xpReceived;
             boolean ok = false;
             int initial = this.getLevel();
-            int aux = this.getLevel() - 1;
+            int nextLevel = this.getLevel() - 1;
             while (true) {
-                if (this.xp >= (Constants.STANDARD_XP + aux * Constants.LEVEL_XP)) {
-                    aux++;
-                    setLevel(aux);
+                if (this.xp >= (Constants.STANDARD_XP + nextLevel * Constants.LEVEL_XP)) {
+                    nextLevel++;
+                    setLevel(nextLevel);
                     this.setDamageReceived(0);
                     this.hp = this.getMaxHp();
                     ok = true;
@@ -260,23 +259,19 @@ public abstract class Hero extends Subjects {
                 }
             }
 
-            if (ok && aux != initial) { // TODO
+            if (ok && nextLevel != initial) {
                 notifyUpdate(GreatMagician.getHeroLevelUpNotification(), this, null);
             }
 
         }
     }
 
+    // eroul avanseaza direct la urmatorul nivel
     public final void levelUp() throws IOException {
-        int aux = 0;
-        while (aux != this.getLevel()) {
-            aux++;
-        }
+        int nextLevel = this.getLevel();
 
-        System.out.println(aux);
-
-        this.setXp(Constants.STANDARD_XP + aux * Constants.LEVEL_XP);
-        this.setLevel(aux + 1);
+        this.setXp(Constants.STANDARD_XP + nextLevel * Constants.LEVEL_XP);
+        this.setLevel(nextLevel + 1);
         this.hp = this.getMaxHp();
         this.notifyUpdate(GreatMagician.getAngelLevelUpNotification(), this, null);
     }

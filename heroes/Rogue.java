@@ -66,7 +66,7 @@ public class Rogue extends Hero {
      *
      */
     @Override
-    public void applyStrategy() {
+    public void applyStrategy() { // se alege strategia in functie de confitii
         if (this.hp > this.getMaxHp() / StrategyConstans.ROGUE_FORMULA_1
                 && this.hp < this.getMaxHp() / StrategyConstans.ROGUE_FORMULA_2) {
             this.setStrategy(new OffensiveStrategy());

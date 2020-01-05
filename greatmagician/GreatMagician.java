@@ -53,10 +53,6 @@ public final class GreatMagician {
         return heroLevelUpNotification;
     }
 
-    public static List<Notification> getNotifications() {
-        return notifications;
-    }
-
     public static AngelHelpNotification getAngelHelpNotification() {
         return angelHelpNotification;
     }

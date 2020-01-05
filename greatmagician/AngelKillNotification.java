@@ -7,7 +7,7 @@ import main.Main;
 
 import java.io.IOException;
 
-public class AngelKillNotification extends Notification {
+public class AngelKillNotification implements Notification {
 
     /**
      * @param hero

@@ -59,7 +59,7 @@ public class Wizard extends Hero {
      *
      */
     @Override
-    public void applyStrategy() {
+    public void applyStrategy() { // se alege strategia in functie de confitii
         if (this.hp > this.getMaxHp() / StrategyConstans.WIZARD_FORMULA_1
                 && this.hp < this.getMaxHp() / StrategyConstans.WIZARD_FORMULA_2) {
             this.setStrategy(new OffensiveStrategy());

@@ -5,6 +5,6 @@ import heroes.Hero;
 
 import java.io.IOException;
 
-public abstract class Notification {
-    public abstract void update(Hero hero, Angel angel) throws IOException;
+public interface Notification {
+    void update(Hero hero, Angel angel) throws IOException;
 }
